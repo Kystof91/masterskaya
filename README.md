@@ -34,3 +34,18 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+## Telegram Bot Integration
+
+This project includes a ContactForm that sends data to a Telegram bot. To set it up:
+
+1. Create a bot with @BotFather and get the token
+2. Get your chat ID (personal chat, group, or channel)
+3. Create a `.env.local` file with:
+   ```env
+   TELEGRAM_BOT_TOKEN=your_bot_token_here
+   TELEGRAM_CHAT_ID=your_chat_id_here
+   ```
+4. Restart the development server
+
+See `TELEGRAM_SETUP.md` for detailed instructions.
