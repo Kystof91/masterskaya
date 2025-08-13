@@ -1,3 +1,5 @@
+'use client';
+
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { 
@@ -8,26 +10,158 @@ import {
   BookOpen
 } from 'lucide-react';
 import Link from 'next/link';
-import { notFound } from 'next/navigation';
-import { articlesData, getArticleById, getRelatedArticles, Article } from '../data';
+import { useRouter } from 'next/navigation';
+import { articlesData, getArticleById as getStaticArticleById, getRelatedArticles as getStaticRelatedArticles, Article } from '../data';
 import Image from 'next/image';
+import { useState, useEffect } from 'react';
 
 interface BlogPostPageProps {
-  params: Promise<{
+  params: {
     id: string;
-  }>;
+  };
 }
 
-export default async function BlogPostPage({ params }: BlogPostPageProps) {
-  const { id } = await params;
+export default function BlogPostPage({ params }: BlogPostPageProps) {
+  const router = useRouter();
+  const { id } = params;
   const articleId = parseInt(id);
-  const article = getArticleById(articleId);
   
-  if (!article) {
-    notFound();
+  const [article, setArticle] = useState<Article | null>(null);
+  const [relatedArticles, setRelatedArticles] = useState<Article[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  // Функция для получения статьи через API
+  const getArticleFromAPI = async (id: number): Promise<Article | null> => {
+    try {
+      const response = await fetch(`/api/articles/${id}`);
+      
+      if (response.ok) {
+        return await response.json();
+      }
+    } catch (error) {
+      console.error('Ошибка получения статьи через API:', error);
+    }
+    
+    return null;
+  };
+
+  // Функция для получения связанных статей через API
+  const getRelatedArticlesFromAPI = async (currentArticle: Article): Promise<Article[]> => {
+    try {
+      const response = await fetch('/api/articles');
+      
+      if (response.ok) {
+        const allArticles = await response.json();
+        return allArticles
+          .filter((article: Article) => 
+            article.id !== currentArticle.id && 
+            (article.category === currentArticle.category || 
+             article.tags.some(tag => currentArticle.tags.includes(tag)))
+          )
+          .slice(0, 3);
+      }
+    } catch (error) {
+      console.error('Ошибка получения связанных статей через API:', error);
+    }
+    
+    return [];
+  };
+
+  // Загрузка статьи при монтировании
+  useEffect(() => {
+    const loadArticle = async () => {
+      try {
+        setLoading(true);
+        setError(null);
+        
+        console.log('Загружаем статью с ID:', articleId);
+        
+        // Сначала пытаемся получить статью через API
+        let foundArticle = await getArticleFromAPI(articleId);
+        console.log('Статья через API:', foundArticle ? 'найдена' : 'не найдена');
+        
+        // Если API не сработал, используем статические данные
+        if (!foundArticle) {
+          console.log('Пробуем статические данные...');
+          foundArticle = getStaticArticleById(articleId) || null;
+          console.log('Статья в статических данных:', foundArticle ? 'найдена' : 'не найдена');
+        }
+        
+        if (!foundArticle) {
+          console.log('Статья не найдена нигде, показываем 404');
+          setError('Статья не найдена');
+          setLoading(false);
+          return;
+        }
+        
+        console.log('Статья загружена:', foundArticle.title);
+        setArticle(foundArticle);
+        
+        // Получаем связанные статьи
+        try {
+          const related = await getRelatedArticlesFromAPI(foundArticle);
+          console.log('Связанные статьи через API:', related.length);
+          setRelatedArticles(related);
+        } catch (error) {
+          console.log('Ошибка получения связанных статей через API, используем статические');
+          const staticRelated = getStaticRelatedArticles(foundArticle);
+          setRelatedArticles(staticRelated);
+        }
+        
+      } catch (error) {
+        console.error('Ошибка загрузки статьи:', error);
+        setError('Ошибка загрузки статьи');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadArticle();
+  }, [articleId]);
+
+  // Показываем загрузку
+  if (loading) {
+    return (
+      <div className="min-h-screen">
+        <Header />
+        <div className="section-padding">
+          <div className="container-custom text-center">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
+            <p className="text-gray-600">Загрузка статьи...</p>
+          </div>
+        </div>
+        <Footer />
+      </div>
+    );
   }
-  
-  const relatedArticles = getRelatedArticles(article);
+
+  // Показываем ошибку
+  if (error || !article) {
+    return (
+      <div className="min-h-screen">
+        <Header />
+        <div className="section-padding">
+          <div className="container-custom text-center">
+            <div className="bg-red-50 border border-red-200 rounded-lg p-8">
+              <h1 className="text-2xl font-bold text-red-800 mb-4">Статья не найдена</h1>
+              <p className="text-red-600 mb-6">
+                {error || 'Запрашиваемая статья не существует или была удалена.'}
+              </p>
+              <Link 
+                href="/blog" 
+                className="inline-flex items-center text-primary hover:text-primary-hover font-medium"
+              >
+                <ArrowLeft className="w-4 h-4 mr-2" />
+                Вернуться к блогу
+              </Link>
+            </div>
+          </div>
+        </div>
+        <Footer />
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen">
@@ -39,7 +173,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           <nav className="flex items-center space-x-2 text-sm text-gray-600">
             <Link href="/" className="hover:text-primary">Главная</Link>
             <span>/</span>
-                          <Link href="/blog" className="hover:text-primary">Блог</Link>
+            <Link href="/blog" className="hover:text-primary">Блог</Link>
             <span>/</span>
             <span className="text-gray-900">{article.title}</span>
           </nav>
@@ -56,9 +190,9 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                 {/* Article Header */}
                 <div className="p-8 border-b border-gray-200">
                   <div className="flex items-center space-x-2 mb-4">
-                                    <span className="bg-primary-light text-primary px-3 py-1 rounded-full text-sm font-medium">
-                  {article.category}
-                </span>
+                    <span className="bg-primary-light text-primary px-3 py-1 rounded-full text-sm font-medium">
+                      {article.category}
+                    </span>
                   </div>
                   <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
                     {article.title}
@@ -153,9 +287,9 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                         </div>
                         <div className="p-6">
                           <div className="flex items-center space-x-2 mb-3">
-                                            <span className="bg-primary-light text-primary px-2 py-1 rounded text-xs font-medium">
-                  {relatedArticle.category}
-                </span>
+                            <span className="bg-primary-light text-primary px-2 py-1 rounded text-xs font-medium">
+                              {relatedArticle.category}
+                            </span>
                           </div>
                           <h3 className="text-xl font-semibold mb-4 line-clamp-2">
                             {relatedArticle.title}

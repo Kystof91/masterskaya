@@ -120,7 +120,7 @@ const ContactForm = () => {
               type="tel"
               id="phone"
               className="w-full px-3 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-black placeholder-gray-500"
-              placeholder="+7 (999) 123-45-67"
+                                placeholder="8-812-407-3-407"
               style={{ color: '#000000' }}
             />
           </div>
@@ -173,7 +173,7 @@ const ContactForm = () => {
           href="tel:88005550123"
           className="text-lg font-semibold text-blue-600 hover:text-blue-700"
         >
-          8-812-407-34-07
+                          8-812-407-3-407
         </a>
       </div>
     </div>

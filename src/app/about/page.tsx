@@ -1,6 +1,7 @@
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import ContactForm from '@/components/ContactForm';
+import DocumentsSection from '@/components/DocumentsSection';
 import { 
   Award, 
   Users, 
@@ -9,7 +10,6 @@ import {
   CheckCircle,
   Target
 } from 'lucide-react';
-import { Calendar,Star } from 'lucide-react';
 
 export default function AboutPage() {
   const team = [
@@ -208,77 +208,8 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* History Section */}
-      <section className="section-padding bg-gray-50">
-        <div className="container-custom">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
-                История центра
-              </h2>
-              <div className="space-y-6">
-                <div className="flex items-start space-x-4">
-                  <div className="w-12 h-12 bg-primary-light rounded-full flex items-center justify-center flex-shrink-0">
-                    <Calendar className="w-6 h-6 text-primary" />
-                  </div>
-                  <div>
-                    <h3 className="font-semibold mb-2">2009 год</h3>
-                    <p className="text-gray-600">Основание медицинского центра с целью помощи людям с зависимостями</p>
-                  </div>
-                </div>
-                <div className="flex items-start space-x-4">
-                  <div className="w-12 h-12 bg-primary-light rounded-full flex items-center justify-center flex-shrink-0">
-                    <Award className="w-6 h-6 text-primary" />
-                  </div>
-                  <div>
-                    <h3 className="font-semibold mb-2">2015 год</h3>
-                    <p className="text-gray-600">Получение лицензии на медицинскую деятельность и расширение услуг</p>
-                  </div>
-                </div>
-                <div className="flex items-start space-x-4">
-                  <div className="w-12 h-12 bg-primary-light rounded-full flex items-center justify-center flex-shrink-0">
-                    <Star className="w-6 h-6 text-primary" />
-                  </div>
-                  <div>
-                    <h3 className="font-semibold mb-2">2020 год</h3>
-                    <p className="text-gray-600">Внедрение современных методик лечения и открытие новых программ</p>
-                  </div>
-                </div>
-                <div className="flex items-start space-x-4">
-                  <div className="w-12 h-12 bg-primary-light rounded-full flex items-center justify-center flex-shrink-0">
-                    <Heart className="w-6 h-6 text-primary" />
-                  </div>
-                  <div>
-                    <h3 className="font-semibold mb-2">2024 год</h3>
-                    <p className="text-gray-600">Более 1500 успешно вылеченных пациентов и постоянное развитие</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="bg-white rounded-lg p-8 shadow-lg">
-              <h3 className="text-2xl font-semibold mb-6">Лицензии и сертификаты</h3>
-              <div className="space-y-4">
-                <div className="flex items-center space-x-3">
-                  <CheckCircle className="w-5 h-5 text-green-600" />
-                  <span>Лицензия на медицинскую деятельность</span>
-                </div>
-                <div className="flex items-center space-x-3">
-                  <CheckCircle className="w-5 h-5 text-green-600" />
-                  <span>Сертификат качества ISO 9001</span>
-                </div>
-                <div className="flex items-center space-x-3">
-                  <CheckCircle className="w-5 h-5 text-green-600" />
-                  <span>Аккредитация Министерства здравоохранения</span>
-                </div>
-                <div className="flex items-center space-x-3">
-                  <CheckCircle className="w-5 h-5 text-green-600" />
-                  <span>Сертификаты специалистов</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* Documents Section */}
+      <DocumentsSection />
 
       {/* Contact Form Section */}
       <section className="section-padding bg-white">

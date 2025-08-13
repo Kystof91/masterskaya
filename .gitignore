@@ -125,3 +125,17 @@ temp/
 .Trashes
 ehthumbs.db
 Thumbs.db
+
+# Uploaded files
+public/uploads/
+
+# Environment files with sensitive data
+.env
+.env.local
+.env.production
+.env.development
+.env.test
+
+# Auth configuration files
+auth.config.js
+auth.config.ts

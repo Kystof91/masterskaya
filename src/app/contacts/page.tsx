@@ -1,6 +1,7 @@
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import ContactForm from '@/components/ContactForm';
+import YandexMap from '@/components/YandexMap';
 import { 
   Phone, 
   Mail, 
@@ -21,10 +22,10 @@ export default function ContactsPage() {
     },
     {
       title: 'Email',
-      value: 'info@medcenter.ru',
+      value: 'masterskaya.clinic@yandex.ru',
       description: 'Ответим в течение часа',
       icon: Mail,
-      link: 'mailto:info@medcenter.ru'
+      link: 'mailto:masterskaya.clinic@yandex.ru'
     },
     {
       title: 'Адрес',
@@ -173,12 +174,8 @@ export default function ContactsPage() {
           </div>
           
           <div className="grid lg:grid-cols-2 gap-8">
-            <div className="bg-gray-200 rounded-lg h-64 flex items-center justify-center">
-              <div className="text-center">
-                <MapPin className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-                <p className="text-gray-600">Интерактивная карта</p>
-                <p className="text-sm text-gray-500">г. Санкт-Петербург, ул. Заставская, 33л</p>
-              </div>
+            <div className="bg-white rounded-lg shadow-lg p-4 h-96">
+              <YandexMap />
             </div>
             
             <div className="space-y-6">
@@ -195,9 +192,9 @@ export default function ContactsPage() {
                         <br />
                         1. Выйдите из метро и поверните налево.
                         <br />
-                        2. Продолжайте движение прямо, пока не дойдете до улицы Ташкентская.
+                        2. Продолжайте движение прямо, пока не дойдете до ул. Заставской.
                         <br />
-                        3. Поверните направо, пешком 250 метров вдоль Ташкентской улицы и идите до дома №2</p>
+                        3. Поверните направо, пешком 250 метров вдоль ул. Заставской и идите до дома №33л</p>
                     </div>
                   </div>
                   <div className="flex items-start space-x-3">
@@ -206,7 +203,7 @@ export default function ContactsPage() {
                     </div>
                     <div>
                       <h4 className="font-medium">На машине</h4>
-                      <p className="text-gray-600">В навигаторе укажите адрес: Ташкентская улица, дом 2. 
+                      <p className="text-gray-600">В навигаторе укажите адрес: ул. Заставская, дом 33л. 
                         <br />
                         Обратите внимание, что на этой улице одностороннее движение, поэтому следуйте указаниям навигатора для оптимального маршрута</p>
                     </div>

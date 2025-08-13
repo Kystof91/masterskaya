@@ -194,8 +194,7 @@ export default function MethodsPage() {
                 <p className="text-gray-600 mb-6">{method.details}</p>
                 
                 <Link href="/contacts" className="btn-primary inline-flex items-center">
-                  Получить консультацию
-                  <Phone className="w-4 h-4 ml-2" />
+                  Получить консультацию <Phone className="w-4 h-4 mx-auto" />
                 </Link>
               </div>
             ))}

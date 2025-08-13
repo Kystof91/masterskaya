@@ -231,8 +231,7 @@ export default function Home() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="/contacts" className="btn-primary">
-              Получить консультацию
-              <ArrowRight className="w-5 h-5 ml-2" />
+              Получить консультацию <ArrowRight className="w-5 h-5 mx-auto" />
             </Link>
             <a href="tel:88005550123" className="btn-secondary">
               <Phone className="w-5 h-5 mr-2" />
@@ -249,19 +248,21 @@ export default function Home() {
             <div className="text-center">
               <Phone className="w-12 h-12 text-blue-600 mx-auto mb-4" />
               <h3 className="text-xl font-semibold mb-2">Телефон</h3>
-              <p className="text-gray-600">8-800-555-0123</p>
+                                  <p className="text-gray-600">8-812-407-3-407</p>
               <p className="text-sm text-gray-500">Круглосуточно</p>
             </div>
             <div className="text-center">
               <Mail className="w-12 h-12 text-blue-600 mx-auto mb-4" />
               <h3 className="text-xl font-semibold mb-2">Email</h3>
-              <p className="text-gray-600">info@medcenter.ru</p>
+                                  <a href="mailto:masterskaya.clinic@yandex.ru" className="text-gray-600 hover:text-blue-600 transition-colors">
+                masterskaya.clinic@yandex.ru
+              </a>
               <p className="text-sm text-gray-500">Ответим в течение часа</p>
             </div>
             <div className="text-center">
               <MapPin className="w-12 h-12 text-blue-600 mx-auto mb-4" />
               <h3 className="text-xl font-semibold mb-2">Адрес</h3>
-              <p className="text-gray-600">г. Москва, ул. Примерная, 123</p>
+              <p className="text-gray-600">г. Санкт-Петербург, ул. Заставская, 33л</p>
               <p className="text-sm text-gray-500">Конфиденциально</p>
             </div>
           </div>

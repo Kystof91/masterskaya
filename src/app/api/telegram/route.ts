@@ -13,10 +13,10 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const botToken = '8401717371:AAHyHqkRd4bczZfJKoF4329S8koiq4Ng4Qk';
+    const botToken = '8427033239:AAHph4NRb6z-Ozjtlblnuq5b6tFigG17CBs';
     
 
-    const chatId = '396946800';
+    const chatId = '7991415381';
     
     // Формируем сообщение для Telegram
     const telegramMessage = `🔔 Новая заявка с сайта!

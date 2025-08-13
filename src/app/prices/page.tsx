@@ -382,8 +382,7 @@ export default function PricesPage() {
               href="/contacts" 
               className="btn-primary inline-flex items-center"
             >
-              Получить консультацию
-              <ChevronRight className="w-5 h-5 ml-2" />
+              Получить консультацию <ChevronRight className="w-5 h-5 mx-auto" />
             </Link>
           </div>
         </div>

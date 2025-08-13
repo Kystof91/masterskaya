@@ -213,7 +213,7 @@ export default function ReviewsPage() {
       </section>
 
       {/* Video Testimonials */}
-      <section className="section-padding bg-gray-50">
+      {/* <section className="section-padding bg-gray-50">
         <div className="container-custom">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
@@ -247,7 +247,7 @@ export default function ReviewsPage() {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Why Patients Choose Us */}
       <section className="section-padding">

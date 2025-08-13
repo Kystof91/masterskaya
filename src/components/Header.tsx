@@ -11,6 +11,7 @@ const Header = () => {
     { name: 'Главная', href: '/' },
     { name: 'О центре', href: '/about' },
     { name: 'Услуги', href: '/services' },
+    { name: 'Здоровье', href: '/health' },
     { name: 'Методики', href: '/methods' },
     { name: 'Цены', href: '/prices' },
     { name: 'Отзывы', href: '/reviews' },
@@ -50,7 +51,7 @@ const Header = () => {
           <div className="hidden lg:flex items-center space-x-4">
             <div className="flex items-center space-x-2 text-sm text-gray-600">
               <Phone className="w-4 h-4" />
-              <span>8-812-407-34-07</span>
+                                <span>8-812-407-3-407</span>
             </div>
             <div className="flex items-center space-x-2 text-sm text-gray-600">
               <MapPin className="w-4 h-4" />
@@ -84,7 +85,7 @@ const Header = () => {
               <div className="px-3 py-2 space-y-2">
                 <div className="flex items-center space-x-2 text-sm text-gray-600">
                   <Phone className="w-4 h-4" />
-                  <span>8-812-407-34-07</span>
+                  <span>8-812-407-3-407</span>
                 </div>
                 <div className="flex items-center space-x-2 text-sm text-gray-600">
                   <MapPin className="w-4 h-4" />
