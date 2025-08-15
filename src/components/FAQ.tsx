@@ -57,18 +57,18 @@ export default function FAQ({ items, title = "Часто задаваемые в
         </div>
 
         <div className="max-w-4xl mx-auto space-y-4">
-          {items.map((item, index) => (
-            <div key={index} className="bg-white rounded-lg shadow-sm border border-gray-200">
+          {items.map((item) => (
+            <div key={item.question} className="bg-white rounded-lg shadow-sm border border-gray-200">
               <button
-                onClick={() => toggleItem(index)}
+                onClick={() => toggleItem(items.indexOf(item))}
                 className="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-gray-50 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-inset"
-                aria-expanded={openItems.includes(index)}
-                aria-controls={`faq-answer-${index}`}
+                aria-expanded={openItems.includes(items.indexOf(item))}
+                aria-controls={`faq-answer-${items.indexOf(item)}`}
               >
                 <span className="text-lg font-medium text-gray-900 pr-4">
                   {item.question}
                 </span>
-                {openItems.includes(index) ? (
+                {openItems.includes(items.indexOf(item)) ? (
                   <ChevronUp className="w-5 h-5 text-gray-500 flex-shrink-0" />
                 ) : (
                   <ChevronDown className="w-5 h-5 text-gray-500 flex-shrink-0" />
@@ -76,13 +76,13 @@ export default function FAQ({ items, title = "Часто задаваемые в
               </button>
               
               <div
-                id={`faq-answer-${index}`}
+                id={`faq-answer-${items.indexOf(item)}`}
                 className={`px-6 pb-4 transition-all duration-300 ease-in-out ${
-                  openItems.includes(index) 
+                  openItems.includes(items.indexOf(item)) 
                     ? 'max-h-96 opacity-100' 
                     : 'max-h-0 opacity-0 overflow-hidden'
                 }`}
-                aria-hidden={!openItems.includes(index)}
+                aria-hidden={!openItems.includes(items.indexOf(item))}
               >
                 <div className="pt-2 border-t border-gray-200">
                   <p className="text-gray-600 leading-relaxed">

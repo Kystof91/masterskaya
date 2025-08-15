@@ -37,12 +37,12 @@ const SUSPICIOUS_USER_AGENTS = [
 ];
 
 // Функция для очистки и валидации данных
-export function validateAndSanitizeContactForm(data: any, request: NextRequest): ValidationResult {
+export function validateAndSanitizeContactForm(data: { name?: unknown; phone?: unknown; message?: unknown }, request: NextRequest): ValidationResult {
   const errors: string[] = [];
   
-  // Проверяем, что все поля присутствуют
-  if (!data.name || !data.phone || !data.message) {
-    errors.push('Все поля обязательны для заполнения');
+  // Проверяем, что все поля присутствуют и являются строками
+  if (typeof data.name !== 'string' || typeof data.phone !== 'string' || typeof data.message !== 'string') {
+    errors.push('Все поля обязательны для заполнения и должны быть строками');
     return { isValid: false, errors };
   }
   
@@ -122,10 +122,10 @@ export function validateAndSanitizeContactForm(data: any, request: NextRequest):
 }
 
 // Функция для логирования подозрительной активности
-export function logSuspiciousActivity(request: NextRequest, reason: string, data?: any) {
+export function logSuspiciousActivity(request: NextRequest, reason: string, data?: Record<string, unknown>) {
   const logData = {
     timestamp: new Date().toISOString(),
-    ip: request.ip || request.headers.get('x-forwarded-for') || 'unknown',
+    ip: request.headers.get('x-forwarded-for') || request.headers.get('x-real-ip') || 'unknown',
     userAgent: request.headers.get('user-agent') || 'unknown',
     referer: request.headers.get('referer') || 'unknown',
     reason,

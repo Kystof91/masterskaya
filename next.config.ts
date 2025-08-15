@@ -88,7 +88,6 @@ const nextConfig: NextConfig = {
 
   // Экспериментальные функции для SEO
   experimental: {
-    optimizeCss: true,
     optimizePackageImports: ['lucide-react'],
   },
 

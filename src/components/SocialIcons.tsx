@@ -1,4 +1,4 @@
-import { ExternalLink, MessageCircle } from 'lucide-react';
+import { MessageCircle } from 'lucide-react';
 
 interface SocialIconsProps {
   className?: string;

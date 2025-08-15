@@ -4,11 +4,10 @@ import {
   Calendar,
   Clock,
   User,
-  ArrowLeft,
   BookOpen
 } from 'lucide-react';
 import Link from 'next/link';
-import { getArticleById as getStaticArticleById, getRelatedArticles as getStaticRelatedArticles, Article } from '../data';
+import { getArticleById as getStaticArticleById, getRelatedArticles as getStaticRelatedArticles } from '../data';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
 
