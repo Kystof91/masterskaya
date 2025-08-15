@@ -48,18 +48,21 @@ export default function ContactsPage() {
       title: 'Кризисная помощь',
       description: 'Немедленная поддержка в сложных ситуациях',
       phone: '88124073407',
+      phone2: '+79117500700',
       available: 'Круглосуточно'
     },
     {
       title: 'Консультация специалиста',
       description: 'Бесплатная первичная консультация',
       phone: '88124073407',
+      phone2: '+79117500700',
       available: 'С 9:00 до 21:00'
     },
     {
       title: 'Семейная поддержка',
       description: 'Помощь родственникам зависимых',
       phone: '88124073407',
+      phone2: '+79117500700',
       available: 'С 10:00 до 20:00'
     }
   ];
@@ -146,11 +149,18 @@ export default function ContactsPage() {
                       href={`tel:${service.phone.replace(/\s/g, '')}`}
                       className="text-primary hover:text-primary-hover font-semibold text-lg flex items-center justify-center space-x-2 mb-2"
                     >
-                            <Phone className="w-5 h-5" />
-                            <span>{service.phone}</span>
-                          </a>
-                          <span className="text-base text-gray-500 block">{service.available}</span>
-                        </div>
+                      <Phone className="w-5 h-5" />
+                      <span>{service.phone}</span>
+                    </a>
+                    <a 
+                      href={`tel:${service.phone2.replace(/\s/g, '')}`}
+                      className="text-primary hover:text-primary-hover font-semibold text-lg flex items-center justify-center space-x-2 mb-2"
+                    >
+                      <Phone className="w-5 h-5" />
+                      <span>{service.phone2}</span>
+                    </a>
+                    <span className="text-base text-gray-500 block">{service.available}</span>
+                  </div>
                       </div>
                     ))}
                   </div>

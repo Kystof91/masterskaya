@@ -11,7 +11,8 @@ import {
   CheckCircle,
   Star,
   MapPin,
-  Mail
+  Mail,
+  Gift
 } from 'lucide-react';
 import Link from 'next/link';
 import ContactForm from '@/components/ContactForm';
@@ -67,6 +68,30 @@ export default function Home() {
     }
   ];
 
+  const promotions = [
+    {
+      title: 'Первая консультация бесплатно',
+      description: 'Получите бесплатную консультацию специалиста и индивидуальный план лечения',
+      discount: 'БЕСПЛАТНО',
+      color: 'bg-green-100 text-green-800',
+      icon: '🎯'
+    },
+    {
+      title: 'Скидка 20% на курс лечения',
+      description: 'При записи на полный курс лечения зависимостей действует специальная скидка',
+      discount: '-20%',
+      color: 'bg-red-100 text-red-800',
+      icon: '💊'
+    },
+    {
+      title: 'Семейная терапия со скидкой',
+      description: 'Специальное предложение для семей, проходящих терапию вместе',
+      discount: '-15%',
+      color: 'bg-blue-100 text-blue-800',
+      icon: '👨‍👩‍👧‍👦'
+    }
+  ];
+
   const testimonials = [
     {
       name: 'Александр М.',
@@ -100,13 +125,18 @@ export default function Home() {
               <p className="text-xl mb-8 text-blue-100">
                 Анонимно, конфиденциально, эффективно. Мы поможем вам вернуться к здоровой жизни.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4">
+              <p className="text-sm mb-6 text-blue-200">
+                Медицинская лицензия №Л041-01148-78/02897906
+              </p>
+              <div className="flex flex-col gap-4">
                 <Link href="/contacts" className="btn-primary text-center">
                   Получить консультацию
                 </Link>
                 <a href="tel:88124073407" className="btn-secondary text-center">
-                  <Phone className="w-5 h-5 inline mr-2" />
                   8-812-407-3-407
+                </a>
+                <a href="tel:+79117500700" className="btn-secondary text-center">
+                  +7-911-750-07-00
                 </a>
               </div>
             </div>
@@ -192,6 +222,67 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Promotions Section */}
+      <section className="section-padding bg-gradient-to-r from-blue-50 to-indigo-50">
+        <div className="container-custom">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+              Специальные предложения
+            </h2>
+            <p className="text-2xl text-gray-600">
+              Выгодные условия для наших пациентов
+            </p>
+          </div>
+          
+          <div className="grid md:grid-cols-3 gap-6">
+            <div className="bg-white rounded-lg p-6 shadow-lg border-l-4 border-green-500 hover:shadow-xl transition-shadow">
+              <div className="flex items-center mb-4">
+                <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mr-4">
+                  <Gift className="w-6 h-6 text-green-600" />
+                </div>
+                <h3 className="text-2xl font-semibold text-green-700">Бесплатная консультация</h3>
+              </div>
+              <p className="text-lg text-gray-600 mb-4">
+                Консультация психиатра-нарколога бесплатно для всех пациентов
+              </p>
+              <div className="text-base text-green-600 font-medium">
+                Экономия: до 3000₽
+              </div>
+            </div>
+
+            <div className="bg-white rounded-lg p-6 shadow-lg border-l-4 border-blue-500 hover:shadow-xl transition-shadow">
+              <div className="flex items-center mb-4">
+                <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mr-4">
+                  <Gift className="w-6 h-6 text-blue-600" />
+                </div>
+                <h3 className="text-2xl font-semibold text-blue-700">Скидка участникам СВО</h3>
+              </div>
+              <p className="text-lg text-gray-600 mb-4">
+                Скидка 20% на амбулаторную детоксикацию для участников специальной военной операции
+              </p>
+              <div className="text-base text-blue-600 font-medium">
+                Скидка: 20%
+              </div>
+            </div>
+
+            <div className="bg-white rounded-lg p-6 shadow-lg border-l-4 border-purple-500 hover:shadow-xl transition-shadow">
+              <div className="flex items-center mb-4">
+                <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mr-4">
+                  <Gift className="w-6 h-6 text-purple-600" />
+                </div>
+                <h3 className="text-2xl font-semibold text-purple-700">Прерывание запоя</h3>
+              </div>
+              <p className="text-lg text-gray-600 mb-4">
+                Прерывание запоя, детокс капельница от 1900₽ (амбулаторно в медцентре)
+              </p>
+              <div className="text-base text-purple-600 font-medium">
+                Цена: от 1900₽
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Testimonials Section */}
       <section className="section-padding bg-gray-50">
         <div className="container-custom">
@@ -229,13 +320,15 @@ export default function Home() {
           <p className="text-xl mb-8 text-blue-100">
             Оставьте заявку прямо сейчас и получите бесплатную консультацию
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/contacts" className="btn-primary">
-              Получить консультацию <ArrowRight className="w-5 h-5 mx-auto" />
+          <div className="flex flex-col gap-4 justify-center items-center">
+            <Link href="/contacts" className="btn-primary text-center w-1/2">
+              Получить консультацию
             </Link>
-            <a href="tel:88005550123" className="btn-secondary">
-              <Phone className="w-5 h-5 mr-2" />
+            <a href="tel:88124073407" className="btn-secondary text-center w-1/2">
               Позвонить сейчас
+            </a>
+            <a href="tel:+79117500700" className="btn-secondary text-center w-1/2">
+              +7-911-750-07-00
             </a>
           </div>
         </div>
@@ -248,7 +341,8 @@ export default function Home() {
             <div className="text-center">
               <Phone className="w-12 h-12 text-blue-600 mx-auto mb-4" />
               <h3 className="text-xl font-semibold mb-2">Телефон</h3>
-                                  <p className="text-gray-600">8-812-407-3-407</p>
+              <p className="text-gray-600">8-812-407-3-407</p>
+              <p className="text-gray-600">+7-911-750-07-00</p>
               <p className="text-sm text-gray-500">Круглосуточно</p>
             </div>
             <div className="text-center">

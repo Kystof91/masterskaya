@@ -298,6 +298,10 @@ export default async function ProcedurePage({ params }: { params: Promise<{ id: 
                     <span className="text-gray-600">8-812-407-3-407</span>
                   </div>
                   <div className="flex items-center">
+                    <Phone className="w-4 h-4 text-gray-400 mr-2" />
+                    <a href="tel:+79117500700" className="text-gray-600 hover:text-blue-600 transition-colors">+7-911-750-07-00</a>
+                  </div>
+                  <div className="flex items-center">
                     <MapPin className="w-4 h-4 text-gray-400 mr-2" />
                     <span className="text-gray-600">г. Санкт-Петербург</span>
                   </div>
@@ -325,6 +329,10 @@ export default async function ProcedurePage({ params }: { params: Promise<{ id: 
               <Phone className="w-5 h-5 mr-2" />
               Позвонить сейчас<br />
               <span className="text-black">8-812-407-3-407</span>
+            </a>
+            <a href="tel:+79117500700" className="btn-secondary">
+              <Phone className="w-5 h-5 mr-2" />
+              +7-911-750-07-00
             </a>
           </div>
         </div>

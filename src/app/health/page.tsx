@@ -1,6 +1,6 @@
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import { ArrowRight, Droplets, Heart, Shield, Zap, Star, Clock, CheckCircle } from 'lucide-react';
+import { ArrowRight, Droplets, Heart, Shield, Zap, Star, Clock, CheckCircle, Phone } from 'lucide-react';
 import Link from 'next/link';
 
 export default function HealthPage() {
@@ -217,6 +217,10 @@ export default function HealthPage() {
             <a href="tel:88124073407" className="btn-secondary">
               Позвонить сейчас<br />
               <span className="text-black">8-812-407-3-407</span>
+            </a>
+            <a href="tel:+79117500700" className="btn-secondary">
+              <Phone className="w-5 h-5 mr-2" />
+              +7-911-750-07-00
             </a>
           </div>
         </div>

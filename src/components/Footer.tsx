@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { Phone, Mail, MapPin, Clock, Shield, Heart } from 'lucide-react';
+import SocialIcons from './SocialIcons';
 
 const Footer = () => {
   return (
@@ -94,6 +95,12 @@ const Footer = () => {
                 </a>
               </div>
               <div className="flex items-center space-x-2">
+                <Phone className="w-4 h-4" />
+                <a href="tel:+79117500700" className="hover:text-white transition-colors">
+                  +7-911-750-07-00
+                </a>
+              </div>
+              <div className="flex items-center space-x-2">
                 <Mail className="w-4 h-4" />
                 <a href="mailto:masterskaya.clinic@yandex.ru" className="hover:text-white transition-colors">
                   masterskaya.clinic@yandex.ru
@@ -106,6 +113,9 @@ const Footer = () => {
               <div className="flex items-center space-x-2">
                 <Clock className="w-4 h-4" />
                 <span>Круглосуточно</span>
+              </div>
+              <div className="pt-2">
+                <SocialIcons iconSize={22} variant="light" />
               </div>
             </div>
           </div>
@@ -120,7 +130,7 @@ const Footer = () => {
                 © 2025 Медицинский Центр. Все права защищены.
               </span>
             </div>
-            <div className="flex space-x-6 text-sm text-gray-300">
+            {/* <div className="flex space-x-6 text-sm text-gray-300">
               <Link href="/privacy" className="hover:text-white transition-colors">
                 Политика конфиденциальности
               </Link>
@@ -130,7 +140,7 @@ const Footer = () => {
               <Link href="/licenses" className="hover:text-white transition-colors">
                 Лицензии
               </Link>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
