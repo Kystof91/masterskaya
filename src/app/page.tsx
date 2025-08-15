@@ -145,7 +145,7 @@ export default function Home() {
       
       {/* Breadcrumbs */}
       <div className="container-custom pt-6">
-        <Breadcrumbs items={[]} />
+        <Breadcrumbs items={[]} showHome={false} />
       </div>
       
       {/* Structured Data */}

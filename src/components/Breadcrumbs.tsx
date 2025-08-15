@@ -9,13 +9,13 @@ interface BreadcrumbItem {
 
 interface BreadcrumbsProps {
   items: BreadcrumbItem[];
+  showHome?: boolean;
 }
 
-export default function Breadcrumbs({ items }: BreadcrumbsProps) {
-  const allItems = [
-    { name: 'Главная', href: '/' },
-    ...items
-  ];
+export default function Breadcrumbs({ items, showHome = true }: BreadcrumbsProps) {
+  const allItems = showHome 
+    ? [{ name: 'Главная', href: '/' }, ...items]
+    : items;
 
   const structuredData = {
     items: allItems
@@ -30,7 +30,7 @@ export default function Breadcrumbs({ items }: BreadcrumbsProps) {
             {index > 0 && (
               <ChevronRight className="w-4 h-4 mx-2 text-gray-400" />
             )}
-            {index === 0 ? (
+            {showHome && index === 0 ? (
               <Link 
                 href={item.href}
                 className="flex items-center space-x-1 hover:text-blue-600 transition-colors"
