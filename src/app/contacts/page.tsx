@@ -30,7 +30,7 @@ export default function ContactsPage() {
     {
       title: 'Адрес',
       value: 'г. Санкт-Петербург, ул. Заставская, 33л',
-      description: 'Конфиденциально',
+      description: '(ул. Ташкентская, 2) • Конфиденциально',
       icon: MapPin,
       link: '#'
     },
@@ -183,7 +183,7 @@ export default function ContactsPage() {
                 <h3 className="text-xl font-semibold mb-4">Как добраться</h3>
                 <div className="space-y-3">
                   <div className="flex items-start space-x-3">
-                    <div className="w-6 h-6 bg-primary text-white rounded-full flex items-center justify-center text-sm font-bold mt-0.5">
+                    <div className="w-6 h-6 bg-primary text-white rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0">
                       1
                     </div>
                     <div>
@@ -198,12 +198,12 @@ export default function ContactsPage() {
                     </div>
                   </div>
                   <div className="flex items-start space-x-3">
-                    <div className="w-6 h-6 bg-primary text-white rounded-full flex items-center justify-center text-sm font-bold mt-0.5">
+                    <div className="w-6 h-6 bg-primary text-white rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0">
                       2
                     </div>
                     <div>
                       <h4 className="font-medium">На машине</h4>
-                      <p className="text-gray-600">В навигаторе укажите адрес: ул. Заставская, дом 33л. 
+                      <p className="text-gray-600">В навигаторе укажите адрес: ул. Заставская, дом 33л (или ул. Ташкентская, дом 2). 
                         <br />
                         Обратите внимание, что на этой улице одностороннее движение, поэтому следуйте указаниям навигатора для оптимального маршрута</p>
                     </div>

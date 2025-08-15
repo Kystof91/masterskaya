@@ -1,3 +1,5 @@
+'use client';
+
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import ContactForm from '@/components/ContactForm';
@@ -8,35 +10,57 @@ import {
   Shield, 
   Heart, 
   CheckCircle,
-  Target
+  Target,
+  ChevronLeft,
+  ChevronRight
 } from 'lucide-react';
+import { useState } from 'react';
+
+interface TeamMember {
+  name: string;
+  position: string;
+  experience: string;
+  description: string;
+  photo?: string;
+}
 
 export default function AboutPage() {
-  const team = [
+  const [currentSlide, setCurrentSlide] = useState(0);
+  
+  const team: TeamMember[] = [
     {
-      name: 'Доктор Иванов А.П.',
-      position: 'Главный врач-нарколог',
+      name: 'Колосов Денис Александрович',
+      position: 'Врач - остеопат',
+      experience: '30 лет опыта',
+      description: 'Врач-остеопат,мануальный терапевт,реабилитолог,врач ЛФК и спортивной медицины,массажист,тренер.',
+      photo: '/kolosov.jpg'
+    },
+    {
+      name: 'Пискунова Антонина Сергеевна',
+      position: 'Врач - Психиатр',
       experience: '15 лет опыта',
-      description: 'Специалист высшей категории, автор научных работ по лечению зависимостей'
+      description: 'Врач - нарколог, психотерапевт',
+      photo: ''
     },
     {
-      name: 'Петрова Е.В.',
-      position: 'Психолог-психотерапевт',
-      experience: '12 лет опыта',
-      description: 'Сертифицированный специалист по семейной терапии и групповой работе'
-    },
-    {
-      name: 'Сидоров М.К.',
-      position: 'Врач-психиатр',
+      name: 'Абалян Олег Александрович',
+      position: 'Психолог-эксперт по зависимостям',
       experience: '10 лет опыта',
-      description: 'Эксперт в области диагностики и лечения психических расстройств'
+      description: 'Специалист по работе с зависимым и созависимымм',
+      photo: '/abalan.jpg'
     },
     {
-      name: 'Козлова А.С.',
-      position: 'Медицинская сестра',
-      experience: '8 лет опыта',
-      description: 'Специалист по уходу за пациентами и медицинским процедурам'
-    }
+      name: 'Карин Роман Александрович',
+      position: 'Психолог',
+      experience: '17 лет опыта',
+      description: 'Специалист по работе с зависимым и созависимымм'
+    },
+    {
+      name: 'Пенежина  Вера Сергеевна',
+      position: 'Врач - терапевт',
+      experience: '10 лет опыта',
+      description: 'Врач - терапевт, врач - гериатр'
+    },
   ];
 
   const achievements = [
@@ -84,6 +108,20 @@ export default function AboutPage() {
       icon: Target
     }
   ];
+
+  const totalSlides = Math.ceil(team.length / 2);
+
+  const nextSlide = () => {
+    setCurrentSlide((prev) => (prev + 1) % totalSlides);
+  };
+
+  const prevSlide = () => {
+    setCurrentSlide((prev) => (prev - 1 + totalSlides) % totalSlides);
+  };
+
+  const goToSlide = (slideIndex: number) => {
+    setCurrentSlide(slideIndex);
+  };
 
   return (
     <div className="min-h-screen">
@@ -192,18 +230,76 @@ export default function AboutPage() {
             </p>
           </div>
           
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {team.map((member, index) => (
-              <div key={index} className="bg-white rounded-lg p-6 shadow-lg card-hover">
-                <div className="w-16 h-16 bg-primary-light rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Users className="w-8 h-8 text-primary" />
-                </div>
-                <h3 className="text-lg font-semibold text-center mb-2">{member.name}</h3>
-                <p className="text-primary text-center mb-2">{member.position}</p>
-                <p className="text-sm text-gray-500 text-center mb-3">{member.experience}</p>
-                <p className="text-gray-600 text-sm text-center">{member.description}</p>
+          {/* Carousel Container */}
+          <div className="relative max-w-4xl mx-auto">
+            {/* Carousel Track */}
+            <div className="overflow-hidden">
+              <div 
+                className="flex transition-transform duration-500 ease-in-out"
+                style={{ transform: `translateX(-${currentSlide * 100}%)` }}
+              >
+                {Array.from({ length: totalSlides }, (_, slideIndex) => (
+                  <div key={slideIndex} className="w-full flex-shrink-0">
+                    <div className="grid md:grid-cols-2 gap-6">
+                      {team.slice(slideIndex * 2, slideIndex * 2 + 2).map((member, index) => (
+                        <div key={slideIndex * 2 + index} className="bg-white rounded-lg p-6 shadow-lg card-hover">
+                          <div className="w-48 h-60 mx-auto mb-4">
+                            {member.photo ? (
+                              <img
+                                src={member.photo}
+                                alt={member.name}
+                                className="w-full h-full object-cover rounded-lg"
+                              />
+                            ) : (
+                              <div className="w-full h-full bg-primary-light rounded-lg flex items-center justify-center">
+                                <Users className="w-16 h-16 text-primary" />
+                              </div>
+                            )}
+                          </div>
+                          <h3 className="text-lg font-semibold text-center mb-2">{member.name}</h3>
+                          <p className="text-primary text-center mb-2">{member.position}</p>
+                          <p className="text-sm text-gray-500 text-center mb-3">{member.experience}</p>
+                          <p className="text-gray-600 text-sm text-center">{member.description}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                ))}
               </div>
-            ))}
+            </div>
+
+            {/* Navigation Buttons */}
+            <button
+              onClick={prevSlide}
+              className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-12 bg-white rounded-full p-3 shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-110"
+              aria-label="Предыдущий слайд"
+            >
+              <ChevronLeft className="w-6 h-6 text-primary" />
+            </button>
+            
+            <button
+              onClick={nextSlide}
+              className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-12 bg-white rounded-full p-3 shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-110"
+              aria-label="Следующий слайд"
+            >
+              <ChevronRight className="w-6 h-6 text-primary" />
+            </button>
+
+            {/* Dots Indicator */}
+            <div className="flex justify-center mt-8 space-x-2">
+              {Array.from({ length: totalSlides }, (_, index) => (
+                <button
+                  key={index}
+                  onClick={() => goToSlide(index)}
+                  className={`w-3 h-3 rounded-full transition-all duration-200 ${
+                    index === currentSlide 
+                      ? 'bg-primary scale-125' 
+                      : 'bg-gray-300 hover:bg-gray-400'
+                  }`}
+                  aria-label={`Перейти к слайду ${index + 1}`}
+                />
+              ))}
+            </div>
           </div>
         </div>
       </section>

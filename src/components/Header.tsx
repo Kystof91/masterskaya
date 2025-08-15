@@ -25,10 +25,10 @@ const Header = () => {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-2">
-            <img src="/logo.svg" alt="Логотип клиники" className="w-10 h-10" />
-            <div>
-              <h1 className="text-xl font-bold text-gray-900">Мастерская</h1>
-              <p className="text-sm text-gray-600">Лечение зависимостей</p>
+            <img src="/logotip.png" alt="Логотип клиники" className="w-16 h-12" />
+            <div className="text-center">
+              <h1 className="text-xl font-bold" style={{color: '#B39A7C'}}>Мастерская</h1>
+              <p className="text-sm" style={{color: '#B8A895'}}>Лечение зависимостей</p>
             </div>
           </Link>
 

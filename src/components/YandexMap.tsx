@@ -70,17 +70,17 @@ export default function YandexMap() {
       window.ymaps.ready(() => {
         // Создаем карту
         const map = new window.ymaps.Map(mapRef.current!, {
-          center: [59.8918, 30.3173], // Примерные координаты ул. Заставская, 33л
+          center: [59.891652, 30.315590], // Точные координаты ул. Ташкентская, 2
           zoom: 16,
           controls: ['zoomControl', 'fullscreenControl']
         });
 
         // Добавляем метку
-        const placemark = new window.ymaps.Placemark([59.8918, 30.3173], {
+        const placemark = new window.ymaps.Placemark([59.891652, 30.315590], {
           balloonContent: `
             <div style="padding: 10px;">
               <h3 style="margin: 0 0 10px 0; color: #2563eb;">Медицинский центр</h3>
-              <p style="margin: 0; color: #374151;">г. Санкт-Петербург, ул. Заставская, 33л</p>
+              <p style="margin: 0; color: #374151;">г. Санкт-Петербург, ул. Ташкентская, 2</p>
               <p style="margin: 5px 0 0 0; color: #6b7280;">Круглосуточно</p>
             </div>
           `
@@ -93,18 +93,23 @@ export default function YandexMap() {
 
         // Пытаемся найти точные координаты по адресу
         try {
-          window.ymaps.geocode('г. Санкт-Петербург, ул. Заставская, 33л').then((res) => {
+          window.ymaps.geocode('г. Санкт-Петербург, ул. Ташкентская, 2').then((res) => {
             if (res.geoObjects.getLength() > 0) {
               const firstGeoObject = res.geoObjects.get(0);
               const coords = firstGeoObject.geometry.getCoordinates();
+              console.log('Найденные координаты для ул. Ташкентская, 2:', coords);
               map.setCenter(coords);
               placemark.geometry.setCoordinates(coords);
+            } else {
+              console.log('Адрес не найден');
             }
-          }).catch(() => {
+          }).catch((error) => {
             // Если геокодирование не удалось, оставляем карту с примерными координатами
+            console.log('Ошибка геокодирования:', error);
             console.log('Геокодирование недоступно, используется примерное расположение');
           });
-        } catch {
+        } catch (error) {
+          console.log('Ошибка геокодирования:', error);
           console.log('Геокодирование недоступно, используется примерное расположение');
         }
       });

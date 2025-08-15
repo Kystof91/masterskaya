@@ -263,6 +263,7 @@ export default function Home() {
               <MapPin className="w-12 h-12 text-blue-600 mx-auto mb-4" />
               <h3 className="text-xl font-semibold mb-2">Адрес</h3>
               <p className="text-gray-600">г. Санкт-Петербург, ул. Заставская, 33л</p>
+              <p className="text-gray-600">(ул. Ташкентская, 2)</p>
               <p className="text-sm text-gray-500">Конфиденциально</p>
             </div>
           </div>
