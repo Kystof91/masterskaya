@@ -1,5 +1,8 @@
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import Breadcrumbs from '@/components/Breadcrumbs';
+import StructuredData from '@/components/StructuredData';
+import FAQ from '@/components/FAQ';
 import { 
   Heart, 
   Shield, 
@@ -110,12 +113,71 @@ export default function Home() {
     }
   ];
 
+  const faqItems = [
+    {
+      question: "Как проходит лечение зависимостей в вашем центре?",
+      answer: "Лечение начинается с бесплатной консультации, где врач оценивает состояние пациента и составляет индивидуальный план. Далее следует детоксикация (при необходимости), реабилитация и психотерапия. Весь процесс проходит анонимно и конфиденциально."
+    },
+    {
+      question: "Сколько времени занимает полный курс лечения?",
+      answer: "Длительность лечения зависит от тяжести зависимости и индивидуальных особенностей пациента. Обычно курс занимает от 1 до 6 месяцев. Врач определяет оптимальную продолжительность на основе диагностики."
+    },
+    {
+      question: "Гарантирована ли анонимность лечения?",
+      answer: "Да, мы гарантируем 100% анонимность. Все данные пациента защищены врачебной тайной. Мы не передаем информацию третьим лицам без письменного согласия пациента."
+    },
+    {
+      question: "Какие методы лечения вы используете?",
+      answer: "Мы применяем современные, научно обоснованные методы: медикаментозную терапию, психотерапию (индивидуальную и групповую), семейную терапию, когнитивно-поведенческую терапию и другие эффективные подходы."
+    },
+    {
+      question: "Работаете ли вы с родственниками зависимых?",
+      answer: "Да, мы обязательно работаем с семьей пациента. Семейная терапия помогает родственникам понять природу зависимости, научиться правильно поддерживать близкого человека и восстановить здоровые отношения в семье."
+    },
+    {
+      question: "Есть ли у вас лицензия на медицинскую деятельность?",
+      answer: "Да, у нас есть действующая медицинская лицензия №Л041-01148-78/02897906. Мы работаем в строгом соответствии с российским законодательством и медицинскими стандартами."
+    }
+  ];
+
+  // Структурированные данные для главной страницы
+  const mainPageStructuredData = {
+    "@context": "https://schema.org",
+    "@type": "MedicalClinic",
+    "name": "Мастерская - Лечение зависимостей",
+    "description": "Профессиональная помощь в лечении алкогольной и наркотической зависимости в Санкт-Петербурге",
+    "url": "https://masterskaya.clinic",
+    "telephone": ["8-812-407-3-407", "+7-911-750-07-00"],
+    "email": "masterskaya.clinic@yandex.ru",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "ул. Заставская, 33л",
+      "addressLocality": "Санкт-Петербург",
+      "addressCountry": "RU"
+    },
+    "openingHours": "Mo-Su 00:00-23:59",
+    "medicalSpecialty": ["Addiction Medicine", "Psychiatry", "Psychology"],
+    "availableService": services.map(service => ({
+      "@type": "MedicalService",
+      "name": service.title,
+      "description": service.description
+    }))
+  };
+
   return (
     <div className="min-h-screen">
       <Header />
       
+      {/* Breadcrumbs */}
+      <div className="container-custom pt-6">
+        <Breadcrumbs items={[]} />
+      </div>
+      
+      {/* Structured Data */}
+      <StructuredData type="medical-clinic" data={mainPageStructuredData} />
+      
       {/* Hero Section */}
-      <section className="gradient-bg text-white">
+      <section className="gradient-bg text-white" role="banner" aria-label="Главная информация о центре">
         <div className="container-custom section-padding">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
@@ -129,13 +191,13 @@ export default function Home() {
                 Медицинская лицензия №Л041-01148-78/02897906
               </p>
               <div className="flex flex-col gap-4">
-                <Link href="/contacts" className="btn-primary text-center">
+                <Link href="/contacts" className="btn-primary text-center w-full sm:w-auto">
                   Получить консультацию
                 </Link>
-                <a href="tel:88124073407" className="btn-secondary text-center">
+                <a href="tel:88124073407" className="btn-secondary text-center w-full sm:w-auto">
                   8-812-407-3-407
                 </a>
-                <a href="tel:+79117500700" className="btn-secondary text-center">
+                <a href="tel:+79117500700" className="btn-secondary text-center w-full sm:w-auto">
                   +7-911-750-07-00
                 </a>
               </div>
@@ -148,10 +210,10 @@ export default function Home() {
       </section>
 
       {/* Services Section */}
-      <section className="section-padding bg-gray-50">
+      <section className="section-padding bg-gray-50" role="region" aria-labelledby="services-heading">
         <div className="container-custom">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            <h2 id="services-heading" className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
               Наши услуги
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
@@ -161,24 +223,24 @@ export default function Home() {
           
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {services.map((service, index) => (
-              <div key={index} className="bg-white rounded-lg p-6 shadow-lg card-hover">
+              <article key={index} className="bg-white rounded-lg p-6 shadow-lg card-hover">
                 <div className={`w-12 h-12 rounded-lg flex items-center justify-center mb-4 ${service.color}`}>
                   <service.icon className="w-6 h-6" />
                 </div>
                 <h3 className="text-xl font-semibold mb-3">{service.title}</h3>
                 <p className="text-gray-600">{service.description}</p>
-              </div>
+              </article>
             ))}
           </div>
         </div>
       </section>
 
       {/* About Section */}
-      <section className="section-padding">
+      <section className="section-padding" role="region" aria-labelledby="about-heading">
         <div className="container-custom">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+              <h2 id="about-heading" className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
                 О медицинском центре
               </h2>
               <p className="text-lg text-gray-600 mb-6">
@@ -209,9 +271,9 @@ export default function Home() {
               <div className="grid grid-cols-2 gap-6">
                 {advantages.map((advantage, index) => (
                   <div key={index} className="text-center">
-                                    <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mx-auto mb-3">
-                  <advantage.icon className="w-6 h-6 text-blue-600" />
-                </div>
+                    <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mx-auto mb-3">
+                      <advantage.icon className="w-6 h-6 text-blue-600" />
+                    </div>
                     <h4 className="font-semibold mb-2">{advantage.title}</h4>
                     <p className="text-sm text-gray-600">{advantage.description}</p>
                   </div>
@@ -223,10 +285,10 @@ export default function Home() {
       </section>
 
       {/* Promotions Section */}
-      <section className="section-padding bg-gradient-to-r from-blue-50 to-indigo-50">
+      <section className="section-padding bg-gradient-to-r from-blue-50 to-indigo-50" role="region" aria-labelledby="promotions-heading">
         <div className="container-custom">
           <div className="text-center mb-12">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+            <h2 id="promotions-heading" className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
               Специальные предложения
             </h2>
             <p className="text-2xl text-gray-600">
@@ -235,7 +297,7 @@ export default function Home() {
           </div>
           
           <div className="grid md:grid-cols-3 gap-6">
-            <div className="bg-white rounded-lg p-6 shadow-lg border-l-4 border-green-500 hover:shadow-xl transition-shadow">
+            <article className="bg-white rounded-lg p-6 shadow-lg border-l-4 border-green-500 hover:shadow-xl transition-shadow">
               <div className="flex items-center mb-4">
                 <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mr-4">
                   <Gift className="w-6 h-6 text-green-600" />
@@ -248,9 +310,9 @@ export default function Home() {
               <div className="text-base text-green-600 font-medium">
                 Экономия: до 3000₽
               </div>
-            </div>
+            </article>
 
-            <div className="bg-white rounded-lg p-6 shadow-lg border-l-4 border-blue-500 hover:shadow-xl transition-shadow">
+            <article className="bg-white rounded-lg p-6 shadow-lg border-l-4 border-blue-500 hover:shadow-xl transition-shadow">
               <div className="flex items-center mb-4">
                 <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mr-4">
                   <Gift className="w-6 h-6 text-blue-600" />
@@ -263,9 +325,9 @@ export default function Home() {
               <div className="text-base text-blue-600 font-medium">
                 Скидка: 20%
               </div>
-            </div>
+            </article>
 
-            <div className="bg-white rounded-lg p-6 shadow-lg border-l-4 border-purple-500 hover:shadow-xl transition-shadow">
+            <article className="bg-white rounded-lg p-6 shadow-lg border-l-4 border-purple-500 hover:shadow-xl transition-shadow">
               <div className="flex items-center mb-4">
                 <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mr-4">
                   <Gift className="w-6 h-6 text-purple-600" />
@@ -278,16 +340,16 @@ export default function Home() {
               <div className="text-base text-purple-600 font-medium">
                 Цена: от 1900₽
               </div>
-            </div>
+            </article>
           </div>
         </div>
       </section>
 
       {/* Testimonials Section */}
-      <section className="section-padding bg-gray-50">
+      <section className="section-padding bg-gray-50" role="region" aria-labelledby="testimonials-heading">
         <div className="container-custom">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            <h2 id="testimonials-heading" className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
               Отзывы наших пациентов
             </h2>
             <p className="text-xl text-gray-600">
@@ -297,37 +359,44 @@ export default function Home() {
           
           <div className="grid md:grid-cols-3 gap-6">
             {testimonials.map((testimonial, index) => (
-              <div key={index} className="bg-white rounded-lg p-6 shadow-lg">
+              <blockquote key={index} className="bg-white rounded-lg p-6 shadow-lg">
                 <div className="flex items-center mb-4">
                   {[...Array(testimonial.rating)].map((_, i) => (
                     <Star key={i} className="w-5 h-5 text-yellow-400 fill-current" />
                   ))}
                 </div>
                 <p className="text-gray-600 mb-4 italic">&ldquo;{testimonial.text}&rdquo;</p>
-                <p className="font-semibold text-gray-900">{testimonial.name}</p>
-              </div>
+                <cite className="font-semibold text-gray-900 not-italic">{testimonial.name}</cite>
+              </blockquote>
             ))}
           </div>
         </div>
       </section>
 
+      {/* FAQ Section */}
+      <FAQ 
+        items={faqItems}
+        title="Часто задаваемые вопросы"
+        description="Ответы на самые популярные вопросы о лечении зависимостей"
+      />
+
       {/* CTA Section */}
-      <section className="section-padding gradient-bg text-white">
+      <section className="section-padding gradient-bg text-white" role="region" aria-labelledby="cta-heading">
         <div className="container-custom text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">
+          <h2 id="cta-heading" className="text-3xl md:text-4xl font-bold mb-6">
             Готовы начать путь к выздоровлению?
           </h2>
           <p className="text-xl mb-8 text-blue-100">
             Оставьте заявку прямо сейчас и получите бесплатную консультацию
           </p>
           <div className="flex flex-col gap-4 justify-center items-center">
-            <Link href="/contacts" className="btn-primary text-center w-1/2">
+            <Link href="/contacts" className="btn-primary text-center w-full sm:w-1/2">
               Получить консультацию
             </Link>
-            <a href="tel:88124073407" className="btn-secondary text-center w-1/2">
+            <a href="tel:88124073407" className="btn-secondary text-center w-full sm:w-1/2">
               Позвонить сейчас
             </a>
-            <a href="tel:+79117500700" className="btn-secondary text-center w-1/2">
+            <a href="tel:+79117500700" className="btn-secondary text-center w-full sm:w-1/2">
               +7-911-750-07-00
             </a>
           </div>
@@ -335,31 +404,32 @@ export default function Home() {
       </section>
 
       {/* Contact Info */}
-      <section className="section-padding">
+      <section className="section-padding" role="region" aria-labelledby="contact-heading">
         <div className="container-custom">
+          <h2 id="contact-heading" className="sr-only">Контактная информация</h2>
           <div className="grid md:grid-cols-3 gap-8">
-            <div className="text-center">
+            <address className="text-center not-italic">
               <Phone className="w-12 h-12 text-blue-600 mx-auto mb-4" />
               <h3 className="text-xl font-semibold mb-2">Телефон</h3>
               <p className="text-gray-600">8-812-407-3-407</p>
               <p className="text-gray-600">+7-911-750-07-00</p>
               <p className="text-sm text-gray-500">Круглосуточно</p>
-            </div>
-            <div className="text-center">
+            </address>
+            <address className="text-center not-italic">
               <Mail className="w-12 h-12 text-blue-600 mx-auto mb-4" />
               <h3 className="text-xl font-semibold mb-2">Email</h3>
-                                  <a href="mailto:masterskaya.clinic@yandex.ru" className="text-gray-600 hover:text-blue-600 transition-colors">
+              <a href="mailto:masterskaya.clinic@yandex.ru" className="text-gray-600 hover:text-blue-600 transition-colors">
                 masterskaya.clinic@yandex.ru
               </a>
               <p className="text-sm text-gray-500">Ответим в течение часа</p>
-            </div>
-            <div className="text-center">
+            </address>
+            <address className="text-center not-italic">
               <MapPin className="w-12 h-12 text-blue-600 mx-auto mb-4" />
               <h3 className="text-xl font-semibold mb-2">Адрес</h3>
               <p className="text-gray-600">г. Санкт-Петербург, ул. Заставская, 33л</p>
               <p className="text-gray-600">(ул. Ташкентская, 2)</p>
               <p className="text-sm text-gray-500">Конфиденциально</p>
-            </div>
+            </address>
           </div>
         </div>
       </section>

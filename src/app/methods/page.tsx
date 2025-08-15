@@ -156,9 +156,9 @@ export default function MethodsPage() {
       {/* Methods Grid */}
       <section className="section-padding">
         <div className="container-custom">
-          <div className="grid lg:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
             {methods.map((method, index) => (
-              <div key={index} className="bg-white rounded-lg shadow-lg p-8 card-hover">
+              <div key={index} className="bg-white rounded-lg shadow-lg p-4 sm:p-6 lg:p-8 card-hover">
                 <div className="flex items-start space-x-4 mb-6">
                   <div className={`w-12 h-12 rounded-lg flex items-center justify-center ${method.color}`}>
                     <method.icon className="w-6 h-6" />

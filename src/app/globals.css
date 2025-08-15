@@ -257,4 +257,55 @@
   select::placeholder {
     color: #6b7280 !important;
   }
+  
+  /* Мобильные стили для улучшения адаптивности */
+  @media (max-width: 640px) {
+    .section-padding {
+      @apply py-8 px-4;
+    }
+    
+    .container-custom {
+      @apply px-4;
+    }
+    
+    /* Улучшение читаемости на мобильных */
+    h1 {
+      @apply text-2xl sm:text-3xl;
+    }
+    
+    h2 {
+      @apply text-xl sm:text-2xl;
+    }
+    
+    h3 {
+      @apply text-lg sm:text-xl;
+    }
+    
+    /* Оптимизация кнопок для мобильных */
+    .btn-primary,
+    .btn-secondary {
+      @apply py-2 px-4 text-sm;
+    }
+    
+    /* Улучшение отступов для мобильных */
+    .card-hover {
+      @apply p-4;
+    }
+  }
+  
+  /* Стили для очень маленьких экранов */
+  @media (max-width: 480px) {
+    .section-padding {
+      @apply py-6 px-3;
+    }
+    
+    .container-custom {
+      @apply px-3;
+    }
+    
+    /* Оптимизация сеток для очень маленьких экранов */
+    .grid {
+      @apply gap-3;
+    }
+  }
 }

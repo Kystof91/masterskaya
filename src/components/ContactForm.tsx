@@ -1,15 +1,31 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 
-
 const contactSchema = z.object({
-  name: z.string().min(2, 'Имя должно содержать минимум 2 символа'),
-  phone: z.string().min(10, 'Введите корректный номер телефона'),
-  message: z.string().min(10, 'Сообщение должно содержать минимум 10 символов').max(200, 'Сообщение не должно превышать 200 символов'),
+  name: z.string()
+    .min(2, 'Имя должно содержать минимум 2 символа')
+    .max(50, 'Имя не должно превышать 50 символов')
+    .regex(/^[а-яёА-ЯЁa-zA-Z\s\-']+$/, 'Имя содержит недопустимые символы'),
+  phone: z.string()
+    .min(10, 'Введите корректный номер телефона')
+    .max(20, 'Номер телефона слишком длинный')
+    .regex(/^[\d\s\-\+\(\)]+$/, 'Номер телефона содержит недопустимые символы'),
+  message: z.string()
+    .min(10, 'Сообщение должно содержать минимум 10 символов')
+    .max(200, 'Сообщение не должно превышать 200 символов')
+    .refine((val) => {
+      // Проверяем на повторяющиеся символы
+      if (/(.)\1{5,}/.test(val)) return false;
+      // Проверяем на однотипные символы
+      const uniqueChars = new Set(val.replace(/\s/g, '')).size;
+      if (val.length > 20 && uniqueChars < 5) return false;
+      return true;
+    }, 'Сообщение содержит слишком много повторяющихся символов'),
+  csrfToken: z.string().min(1, 'Токен безопасности отсутствует'),
 });
 
 type ContactFormData = z.infer<typeof contactSchema>;
@@ -18,46 +34,97 @@ const ContactForm = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [csrfToken, setCsrfToken] = useState<string>('');
+
+  // Генерируем CSRF токен при загрузке компонента
+  useEffect(() => {
+    const generateToken = () => {
+      const token = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+      setCsrfToken(token);
+    };
+    generateToken();
+  }, []);
 
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
+    setValue,
   } = useForm<ContactFormData>({
     resolver: zodResolver(contactSchema),
   });
 
+  // Устанавливаем CSRF токен в форму
+  useEffect(() => {
+    if (csrfToken) {
+      setValue('csrfToken', csrfToken);
+    }
+  }, [csrfToken, setValue]);
+
   const onSubmit = async (data: ContactFormData) => {
     setIsSubmitting(true);
+    setError(null);
     
     try {
+      // Дополнительная проверка на клиенте
+      if (data.message.length < 10 || data.message.length > 200) {
+        throw new Error('Некорректная длина сообщения');
+      }
+
+      // Проверяем на подозрительные паттерны
+      const suspiciousPatterns = [
+        /(?:viagra|cialis|casino|poker|loan|credit|debt|make money|earn money|work from home)/i,
+        /(?:http|https|www\.|\.com|\.ru|\.org)/i,
+        /(?:[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})/g,
+      ];
+
+      for (const pattern of suspiciousPatterns) {
+        if (pattern.test(data.message)) {
+          throw new Error('Сообщение содержит недопустимое содержимое');
+        }
+      }
+
       // Отправляем данные в наш API endpoint
       const response = await fetch('/api/telegram', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'X-CSRF-Token': csrfToken,
         },
         body: JSON.stringify(data),
       });
 
       if (!response.ok) {
         const errorData = await response.json();
-        throw new Error(errorData.error || 'Ошибка отправки');
+        
+        // Обрабатываем различные типы ошибок
+        if (response.status === 429) {
+          throw new Error('Слишком много запросов. Попробуйте позже.');
+        } else if (response.status === 400) {
+          throw new Error(errorData.details?.join(', ') || errorData.error || 'Ошибка валидации');
+        } else {
+          throw new Error(errorData.error || 'Ошибка отправки');
+        }
       }
 
       console.log('Form data sent successfully:', data);
       setIsSubmitted(true);
-      setError(null); // Сбрасываем ошибку при успехе
+      setError(null);
       reset();
+      
+      // Генерируем новый CSRF токен после успешной отправки
+      const newToken = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+      setCsrfToken(newToken);
       
       // Сброс состояния через 5 секунд
       setTimeout(() => setIsSubmitted(false), 5000);
     } catch (error) {
       console.error('Error submitting form:', error);
-      setError('Произошла ошибка при отправке. Попробуйте еще раз или позвоните нам.');
-      // Скрываем ошибку через 5 секунд
-      setTimeout(() => setError(null), 5000);
+      setError(error instanceof Error ? error.message : 'Произошла ошибка при отправке. Попробуйте еще раз или позвоните нам.');
+      
+      // Скрываем ошибку через 8 секунд для ошибок безопасности
+      setTimeout(() => setError(null), 8000);
     } finally {
       setIsSubmitting(false);
     }
@@ -78,19 +145,22 @@ const ContactForm = () => {
   }
 
   return (
-    <div className="bg-white rounded-lg shadow-lg p-6">
-      <div className="mb-6">
-        <h3 className="text-xl font-semibold text-gray-900">
+    <div className="bg-white rounded-lg shadow-lg p-4 sm:p-6">
+      <div className="mb-4 sm:mb-6">
+        <h3 className="text-lg sm:text-xl font-semibold text-gray-900">
           Получить консультацию
         </h3>
       </div>
       
-      <p className="text-gray-600 mb-6">
+      <p className="text-sm sm:text-base text-gray-600 mb-4 sm:mb-6">
         Оставьте заявку, и наш специалист свяжется с вами для бесплатной консультации. 
         Все данные строго конфиденциальны.
       </p>
 
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-3 sm:space-y-4">
+        {/* Скрытое поле для CSRF токена */}
+        <input type="hidden" {...register('csrfToken')} />
+        
         <div>
           <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
             Имя *
@@ -100,9 +170,11 @@ const ContactForm = () => {
               {...register('name')}
               type="text"
               id="name"
-              className="w-full px-3 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-black placeholder-gray-500"
+              className="w-full px-3 py-2 sm:py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-black placeholder-gray-500 text-sm sm:text-base"
               placeholder="Введите ваше полное имя"
               style={{ color: '#000000' }}
+              autoComplete="name"
+              maxLength={50}
             />
           </div>
           {errors.name && (
@@ -119,9 +191,11 @@ const ContactForm = () => {
               {...register('phone')}
               type="tel"
               id="phone"
-              className="w-full px-3 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-black placeholder-gray-500"
-                                placeholder="8-812-407-3-407"
+              className="w-full px-3 py-2 sm:py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-black placeholder-gray-500 text-sm sm:text-base"
+              placeholder="8-812-407-3-407"
               style={{ color: '#000000' }}
+              autoComplete="tel"
+              maxLength={20}
             />
           </div>
           {errors.phone && (
@@ -137,9 +211,9 @@ const ContactForm = () => {
             <textarea
               {...register('message')}
               id="message"
-              rows={4}
+              rows={3}
               maxLength={200}
-              className="w-full px-3 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-black placeholder-gray-500"
+              className="w-full px-3 py-2 sm:py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-black placeholder-gray-500 text-sm sm:text-base"
               placeholder="Расскажите о вашей проблеме или задайте вопрос..."
               style={{ color: '#000000' }}
             />
@@ -151,8 +225,8 @@ const ContactForm = () => {
 
         <button
           type="submit"
-          disabled={isSubmitting}
-          className="w-full btn-primary disabled:opacity-50 disabled:cursor-not-allowed"
+          disabled={isSubmitting || !csrfToken}
+          className="w-full btn-primary disabled:opacity-50 disabled:cursor-not-allowed text-sm sm:text-base py-2 sm:py-3"
         >
           {isSubmitting ? 'Отправка...' : 'Получить консультацию'}
         </button>
@@ -160,21 +234,28 @@ const ContactForm = () => {
 
       {/* Отображение ошибки */}
       {error && (
-        <div className="mt-4 p-4 bg-red-50 border border-red-200 rounded-lg">
+        <div className="mt-4 p-3 sm:p-4 bg-red-50 border border-red-200 rounded-lg">
           <p className="text-red-700 text-sm">{error}</p>
         </div>
       )}
 
       <div className="mt-4 text-center">
-        <p className="text-sm text-gray-500">
+        <p className="text-xs sm:text-sm text-gray-500">
           Или позвоните нам прямо сейчас:
         </p>
         <a
-          href="tel:88005550123"
-          className="text-lg font-semibold text-blue-600 hover:text-blue-700"
+          href="tel:88124073407"
+          className="text-base sm:text-lg font-semibold text-blue-600 hover:text-blue-700"
         >
-                          8-812-407-3-407
+          8-812-407-3-407
         </a>
+      </div>
+
+      {/* Информация о безопасности */}
+      <div className="mt-4 p-3 bg-blue-50 border border-blue-200 rounded-lg">
+        <p className="text-blue-700 text-xs">
+          🔒 Ваши данные защищены. Форма проверяется на спам и вредоносное содержимое.
+        </p>
       </div>
     </div>
   );

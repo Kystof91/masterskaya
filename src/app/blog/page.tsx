@@ -179,17 +179,17 @@ export default function BlogPage() {
       {!loading && (
         <section className="section-padding bg-gray-50">
           <div className="container-custom">
-            <div className="grid lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8">
               {/* Main Content */}
               <div className="lg:col-span-2">
-                <div className="flex items-center justify-between mb-8">
-                  <h2 className="text-2xl font-bold text-gray-900">Все статьи</h2>
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-6 sm:mb-8">
+                  <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-2 sm:mb-0">Все статьи</h2>
                   <div className="text-sm text-gray-500">
                     Всего: {processedArticles.length} | Загружено: {articles.length}
                   </div>
                 </div>
                 
-                <div className="grid md:grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                   {processedArticles.filter(article => !article.featured).map((article, index) => (
                     <div key={index} className="bg-white rounded-lg shadow-lg overflow-hidden card-hover">
                       <div className="relative h-48">

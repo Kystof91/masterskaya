@@ -2,6 +2,7 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import ContactForm from '@/components/ContactForm';
 import YandexMap from '@/components/YandexMap';
+import SecurityInfo from '@/components/SecurityInfo';
 import { 
   Phone, 
   Mail, 
@@ -88,9 +89,9 @@ export default function ContactsPage() {
       {/* Contact Info Grid */}
       <section className="section-padding">
         <div className="container-custom">
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-8 sm:mb-12">
             {contactInfo.map((contact, index) => (
-              <div key={index} className="bg-white rounded-lg p-6 shadow-lg text-center card-hover">
+              <div key={index} className="bg-white rounded-lg p-4 sm:p-6 shadow-lg text-center card-hover">
                                 <div className="w-12 h-12 bg-primary-light rounded-lg flex items-center justify-center mx-auto mb-4">
                   <contact.icon className="w-6 h-6 text-primary" />
                 </div>
@@ -300,6 +301,7 @@ export default function ContactsPage() {
             </p>
           </div>
           <div className="max-w-2xl mx-auto">
+            <SecurityInfo />
             <ContactForm />
           </div>
         </div>

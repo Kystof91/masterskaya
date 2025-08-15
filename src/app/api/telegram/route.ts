@@ -1,31 +1,85 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { validateAndSanitizeContactForm, logSuspiciousActivity, isBusinessHours } from '@/lib/security';
 
 export async function POST(request: NextRequest) {
   try {
-    const body = await request.json();
-    const { name, phone, message } = body;
-
-    // Валидация данных
-    if (!name || !phone || !message) {
+    // Проверяем метод запроса
+    if (request.method !== 'POST') {
       return NextResponse.json(
-        { error: 'Не все обязательные поля заполнены' },
+        { error: 'Метод не разрешен' },
+        { status: 405 }
+      );
+    }
+
+    // Проверяем Content-Type
+    const contentType = request.headers.get('content-type');
+    if (!contentType || !contentType.includes('application/json')) {
+      return NextResponse.json(
+        { error: 'Неверный Content-Type' },
         { status: 400 }
       );
     }
 
-    const botToken = '8427033239:AAHph4NRb6z-Ozjtlblnuq5b6tFigG17CBs';
-    
+    // Получаем и валидируем данные
+    const body = await request.json();
+    const validationResult = validateAndSanitizeContactForm(body, request);
 
-    const chatId = '7991415381';
-    
-    // Формируем сообщение для Telegram
+    if (!validationResult.isValid) {
+      // Логируем подозрительную активность
+      logSuspiciousActivity(request, 'Validation failed', { errors: validationResult.errors, data: body });
+      
+      return NextResponse.json(
+        { 
+          error: 'Данные не прошли валидацию',
+          details: validationResult.errors 
+        },
+        { status: 400 }
+      );
+    }
+
+    const { sanitizedData } = validationResult;
+    if (!sanitizedData) {
+      return NextResponse.json(
+        { error: 'Ошибка валидации данных' },
+        { status: 400 }
+      );
+    }
+
+    // Проверяем рабочее время (опционально)
+    if (!isBusinessHours()) {
+      console.log('Form submitted outside business hours');
+      // Можно добавить логику для сохранения в очередь или отправки в нерабочее время
+    }
+
+    // Получаем токен бота из переменных окружения
+    const botToken = process.env.TELEGRAM_BOT_TOKEN;
+    if (!botToken) {
+      console.error('TELEGRAM_BOT_TOKEN not configured');
+      return NextResponse.json(
+        { error: 'Конфигурация бота не настроена' },
+        { status: 500 }
+      );
+    }
+
+    const chatId = process.env.TELEGRAM_CHAT_ID;
+    if (!chatId) {
+      console.error('TELEGRAM_CHAT_ID not configured');
+      return NextResponse.json(
+        { error: 'ID чата не настроен' },
+        { status: 500 }
+      );
+    }
+
+    // Формируем сообщение для Telegram с дополнительной информацией
     const telegramMessage = `🔔 Новая заявка с сайта!
 
-👤 Имя: ${name}
-📱 Телефон: ${phone}
-💬 Сообщение: ${message}
+👤 Имя: ${sanitizedData.name}
+📱 Телефон: ${sanitizedData.phone}
+💬 Сообщение: ${sanitizedData.message}
 
-⏰ Время: ${new Date().toLocaleString('ru-RU')}`;
+⏰ Время: ${new Date().toLocaleString('ru-RU')}
+🌐 IP: ${request.headers.get('x-forwarded-for') || request.headers.get('x-real-ip') || 'unknown'}
+🕐 Рабочее время: ${isBusinessHours() ? 'Да' : 'Нет'}`;
 
     // Отправляем сообщение в Telegram
     const response = await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
@@ -43,11 +97,26 @@ export async function POST(request: NextRequest) {
     if (!response.ok) {
       const errorData = await response.json();
       console.error('Telegram API error:', errorData);
+      
+      // Логируем ошибку Telegram API
+      logSuspiciousActivity(request, 'Telegram API error', { 
+        telegramError: errorData, 
+        data: sanitizedData 
+      });
+      
       throw new Error(`Ошибка отправки в Telegram: ${errorData.description || 'Неизвестная ошибка'}`);
     }
 
     const result = await response.json();
     console.log('Message sent to Telegram successfully:', result);
+
+    // Логируем успешную отправку
+    console.log('Form submitted successfully:', {
+      timestamp: new Date().toISOString(),
+      ip: request.headers.get('x-forwarded-for') || request.headers.get('x-real-ip') || 'unknown',
+      userAgent: request.headers.get('user-agent') || 'unknown',
+      data: sanitizedData
+    });
 
     return NextResponse.json({ 
       success: true, 
@@ -56,6 +125,12 @@ export async function POST(request: NextRequest) {
 
   } catch (error) {
     console.error('Error in Telegram API route:', error);
+    
+    // Логируем ошибку
+    logSuspiciousActivity(request, 'Unexpected error', { 
+      error: error instanceof Error ? error.message : 'Unknown error' 
+    });
+    
     return NextResponse.json(
       { 
         error: 'Произошла ошибка при отправке сообщения',

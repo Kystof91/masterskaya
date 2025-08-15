@@ -46,14 +46,14 @@ export default function AboutPage() {
       name: 'Абалян Олег Александрович',
       position: 'Психолог-эксперт по зависимостям',
       experience: '10 лет опыта',
-      description: 'Специалист по работе с зависимым и созависимымм',
+      description: 'Специалист по работе с зависимым и созависимыми',
       photo: '/abalan.jpg'
     },
     {
       name: 'Карин Роман Александрович',
       position: 'Психолог',
       experience: '17 лет опыта',
-      description: 'Специалист по работе с зависимым и созависимымм'
+      description: 'Специалист по работе с зависимым и созависимыми'
     },
     {
       name: 'Пенежина  Вера Сергеевна',
@@ -145,36 +145,36 @@ export default function AboutPage() {
       {/* Mission Section */}
       <section className="section-padding">
         <div className="container-custom">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
             <div>
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-4 sm:mb-6">
                 Наша миссия
               </h2>
-              <p className="text-lg text-gray-600 mb-6">
+              <p className="text-base sm:text-lg text-gray-600 mb-4 sm:mb-6">
                 Мы стремимся помочь каждому человеку, страдающему от алкогольной или наркотической зависимости, 
                 вернуться к полноценной жизни. Наша цель — не просто избавить от зависимости, 
                 а восстановить физическое и психическое здоровье, вернуть человека в общество.
               </p>
-              <div className="space-y-4">
+              <div className="space-y-3 sm:space-y-4">
                 <div className="flex items-center space-x-3">
-                  <CheckCircle className="w-5 h-5 text-green-600" />
-                  <span>Индивидуальный подход к каждому пациенту</span>
+                  <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0" />
+                  <span className="text-sm sm:text-base">Индивидуальный подход к каждому пациенту</span>
                 </div>
                 <div className="flex items-center space-x-3">
-                  <CheckCircle className="w-5 h-5 text-green-600" />
-                  <span>Использование современных методик лечения</span>
+                  <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0" />
+                  <span className="text-sm sm:text-base">Использование современных методик лечения</span>
                 </div>
                 <div className="flex items-center space-x-3">
-                  <CheckCircle className="w-5 h-5 text-green-600" />
-                  <span>Полная анонимность и конфиденциальность</span>
+                  <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0" />
+                  <span className="text-sm sm:text-base">Полная анонимность и конфиденциальность</span>
                 </div>
                 <div className="flex items-center space-x-3">
-                  <CheckCircle className="w-5 h-5 text-green-600" />
-                  <span>Постоянная поддержка после лечения</span>
+                  <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0" />
+                  <span className="text-sm sm:text-base">Постоянная поддержка после лечения</span>
                 </div>
               </div>
             </div>
-            <div className="bg-gray-100 rounded-lg p-8">
+            <div className="bg-gray-100 rounded-lg p-4 sm:p-6 lg:p-8">
               <h3 className="text-2xl font-semibold mb-6">Наши ценности</h3>
               <div className="grid grid-cols-2 gap-6">
                 {values.map((value, index) => (
@@ -204,7 +204,7 @@ export default function AboutPage() {
             </p>
           </div>
           
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
             {achievements.map((achievement, index) => (
               <div key={index} className="text-center">
                 <div className="text-4xl md:text-5xl font-bold text-primary mb-2">

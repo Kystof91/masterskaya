@@ -1,0 +1,25 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://masterskaya.clinic/sitemap.xml
+
+# Disallow admin panel
+Disallow: /admin
+
+# Disallow API routes
+Disallow: /api/
+
+# Allow important pages
+Allow: /
+Allow: /about
+Allow: /services
+Allow: /health
+Allow: /methods
+Allow: /prices
+Allow: /reviews
+Allow: /blog
+Allow: /contacts
+
+# Crawl delay (optional)
+Crawl-delay: 1

@@ -167,9 +167,9 @@ export default function ReviewsPage() {
             </p>
           </div>
           
-          <div className="grid lg:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
             {testimonials.map((testimonial, index) => (
-              <div key={index} className="bg-white rounded-lg shadow-lg p-8 card-hover">
+              <div key={index} className="bg-white rounded-lg shadow-lg p-4 sm:p-6 lg:p-8 card-hover">
                 <div className="flex items-start justify-between mb-4">
                   <div>
                     <h3 className="text-xl font-semibold mb-1">{testimonial.name}</h3>
@@ -223,7 +223,7 @@ export default function ReviewsPage() {
             </p>
           </div>
           
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
             {[1, 2, 3].map((item, index) => (
               <div key={index} className="bg-white rounded-lg shadow-lg overflow-hidden">
                 <div className="bg-gray-200 h-48 flex items-center justify-center">
