@@ -8,7 +8,7 @@ import {
 } from 'lucide-react';
 import Link from 'next/link';
 import { articlesData, Article } from './data';
-import { getAllArticles, syncWithServer } from '@/lib/storage';
+import { syncWithServer } from '@/lib/storage';
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
 

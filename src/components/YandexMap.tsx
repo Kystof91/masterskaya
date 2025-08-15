@@ -2,9 +2,49 @@
 
 import { useEffect, useRef } from 'react';
 
+interface YMapOptions {
+  center: [number, number];
+  zoom: number;
+  controls: string[];
+}
+
+interface YPlacemarkOptions {
+  preset: string;
+  iconColor: string;
+}
+
+interface YPlacemark {
+  geometry: {
+    setCoordinates: (coords: [number, number]) => void;
+  };
+}
+
+interface YMap {
+  geoObjects: {
+    add: (placemark: YPlacemark) => void;
+  };
+  setCenter: (coords: [number, number]) => void;
+}
+
+interface YMaps {
+  ready: (callback: () => void) => void;
+  Map: new (element: HTMLElement, options: YMapOptions) => YMap;
+  Placemark: new (coords: [number, number], properties: Record<string, unknown>, options: YPlacemarkOptions) => YPlacemark;
+  geocode: (query: string) => Promise<{
+    geoObjects: {
+      getLength: () => number;
+      get: (index: number) => {
+        geometry: {
+          getCoordinates: () => [number, number];
+        };
+      };
+    };
+  }>;
+}
+
 declare global {
   interface Window {
-    ymaps: any;
+    ymaps: YMaps;
   }
 }
 
@@ -29,7 +69,7 @@ export default function YandexMap() {
 
       window.ymaps.ready(() => {
         // Создаем карту
-        const map = new window.ymaps.Map(mapRef.current, {
+        const map = new window.ymaps.Map(mapRef.current!, {
           center: [59.8918, 30.3173], // Примерные координаты ул. Заставская, 33л
           zoom: 16,
           controls: ['zoomControl', 'fullscreenControl']
@@ -53,7 +93,7 @@ export default function YandexMap() {
 
         // Пытаемся найти точные координаты по адресу
         try {
-          window.ymaps.geocode('г. Санкт-Петербург, ул. Заставская, 33л').then((res: any) => {
+          window.ymaps.geocode('г. Санкт-Петербург, ул. Заставская, 33л').then((res) => {
             if (res.geoObjects.getLength() > 0) {
               const firstGeoObject = res.geoObjects.get(0);
               const coords = firstGeoObject.geometry.getCoordinates();
@@ -64,7 +104,7 @@ export default function YandexMap() {
             // Если геокодирование не удалось, оставляем карту с примерными координатами
             console.log('Геокодирование недоступно, используется примерное расположение');
           });
-        } catch (error) {
+        } catch {
           console.log('Геокодирование недоступно, используется примерное расположение');
         }
       });
@@ -72,8 +112,9 @@ export default function YandexMap() {
 
     return () => {
       // Очистка при размонтировании компонента
-      if (mapRef.current) {
-        mapRef.current.innerHTML = '';
+      const currentMapRef = mapRef.current;
+      if (currentMapRef) {
+        currentMapRef.innerHTML = '';
       }
     };
   }, []);

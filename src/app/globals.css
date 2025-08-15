@@ -16,13 +16,13 @@
     --color-primary-light: 221 83% 90%; /* blue-100 */
     --color-primary-text: 221 83% 53%; /* blue-600 */
     
-    --color-secondary: 262 83% 58%; /* purple-600 - фиолетовый */
-    --color-secondary-light: 262 83% 90%; /* purple-100 */
-    --color-secondary-text: 262 83% 58%; /* purple-600 */
+    --color-secondary: 160 84% 39%; /* emerald-600 - изумрудный */
+    --color-secondary-light: 160 84% 90%; /* emerald-100 */
+    --color-secondary-text: 160 84% 39%; /* emerald-600 */
     
     /* Градиентные цвета */
     --gradient-start: 221 83% 53%; /* blue-600 */
-    --gradient-end: 262 83% 58%; /* purple-600 */
+    --gradient-end: 160 84% 39%; /* emerald-600 */
     
     /* Фокус и интерактивные элементы */
     --color-focus: 221 83% 53%; /* blue-600 */
@@ -131,7 +131,7 @@
   }
   
   .gradient-bg {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, hsl(var(--gradient-start)) 0%, hsl(var(--gradient-end)) 100%);
   }
   
   .card-hover {

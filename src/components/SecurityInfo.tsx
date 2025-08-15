@@ -51,7 +51,7 @@ export default function SecurityInfo() {
                 </h4>
                 <ul className="space-y-1 text-yellow-700">
                   <li>✅ Учетные данные скрыты в коде</li>
-                  <li>✅ Placeholder'ы вместо реальных данных</li>
+                  <li>✅ Placeholder&apos;ы вместо реальных данных</li>
                   <li>✅ Проверка на пустые значения</li>
                   <li>⚠️ localStorage для состояния аутентификации</li>
                 </ul>

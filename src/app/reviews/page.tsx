@@ -8,7 +8,6 @@ import {
   Users, 
   Award, 
   Calendar,
-  MessageSquare,
   ThumbsUp
 } from 'lucide-react';
 

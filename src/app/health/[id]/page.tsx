@@ -1,6 +1,6 @@
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import { ArrowLeft, ArrowRight, Clock, CheckCircle, Star, Phone, MapPin } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Clock, CheckCircle, Phone, MapPin } from 'lucide-react';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 

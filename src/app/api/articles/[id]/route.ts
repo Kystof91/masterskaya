@@ -1,15 +1,16 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { Article } from '../../../../blog/data';
-import { getArticleById, updateArticle, deleteArticle } from '@/lib/serverStorage';
+
+import { getArticleById, updateArticle, deleteArticle } from '../../../../lib/serverStorage';
 
 // GET - получение статьи по ID
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const id = parseInt(params.id);
-    const article = getArticleById(id);
+    const { id } = await params;
+    const articleId = parseInt(id);
+    const article = getArticleById(articleId);
     
     if (!article) {
       return NextResponse.json(
@@ -31,10 +32,11 @@ export async function GET(
 // PUT - обновление статьи
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const id = parseInt(params.id);
+    const { id } = await params;
+    const articleId = parseInt(id);
     const body = await request.json();
     
     // Валидация данных
@@ -45,7 +47,7 @@ export async function PUT(
       );
     }
 
-    const updatedArticle = updateArticle(id, {
+    const updatedArticle = updateArticle(articleId, {
       title: body.title,
       excerpt: body.excerpt,
       content: body.content,
@@ -74,12 +76,13 @@ export async function PUT(
 // DELETE - удаление статьи
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const id = parseInt(params.id);
+    const { id } = await params;
+    const articleId = parseInt(id);
     
-    const success = deleteArticle(id);
+    const success = deleteArticle(articleId);
     
     if (!success) {
       return NextResponse.json(

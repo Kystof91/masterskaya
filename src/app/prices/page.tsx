@@ -6,12 +6,10 @@ import ContactForm from '@/components/ContactForm';
 import { 
   Heart, 
   Award, 
-  DollarSign,
   Target,
   Activity,
   ChevronDown,
-  ChevronRight,
-  Calendar
+  ChevronRight
 } from 'lucide-react';
 import Link from 'next/link';
 
@@ -248,70 +246,6 @@ export default function PricesPage() {
         { name: 'Палата VIP Размещение в одноместной палате 4-разовое питание Усиленная инфузионная терапия Таблетированная терапия Круглосуточное наблюдение врача ЭКГ Телевизор Индивидуальная психотерапия Индивидуальная ванная комната  ', price: '20 000 ₽' },
         
       ]
-    }
-  ];
-
-  
-
-  const additionalServices = [
-    {
-      title: 'Консультация специалиста',
-      price: '1 500 ₽',
-      duration: '1 час',
-      description: 'Первичная консультация с врачом-наркологом'
-    },
-    {
-      title: 'Детоксикация',
-      price: '15 000 ₽',
-      duration: '3-7 дней',
-      description: 'Безопасное выведение токсинов из организма'
-    },
-    {
-      title: 'Психотерапия',
-      price: '3 000 ₽',
-      duration: '1 сеанс',
-      description: 'Индивидуальная психотерапия'
-    },
-    {
-      title: 'Семейная терапия',
-      price: '2 500 ₽',
-      duration: '1 сеанс',
-      description: 'Работа с семьей пациента'
-    },
-    {
-      title: 'Вызов врача на дом',
-      price: '5 000 ₽',
-      duration: 'В день обращения',
-      description: 'Экстренная помощь на дому'
-    },
-    {
-      title: 'Постреабилитационная поддержка',
-      price: '5 000 ₽',
-      duration: '6 месяцев',
-      description: 'Долгосрочное сопровождение'
-    }
-  ];
-
-  const paymentOptions = [
-    {
-      title: 'Наличные',
-      description: 'Оплата наличными при поступлении',
-      icon: DollarSign
-    },
-    {
-      title: 'Банковская карта',
-      description: 'Оплата картой через терминал',
-      icon: DollarSign
-    },
-    {
-      title: 'Безналичный расчет',
-      description: 'Для юридических лиц',
-      icon: DollarSign
-    },
-    {
-      title: 'Рассрочка',
-      description: 'Возможность оплаты частями',
-      icon: Calendar
     }
   ];
 

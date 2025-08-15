@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { Article } from '../../../blog/data';
+
 import { getArticles, addArticle } from '@/lib/serverStorage';
 
 // GET - получение всех статей

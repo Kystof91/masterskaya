@@ -3,7 +3,7 @@ import { Phone, Mail, MapPin, Clock, Shield, Heart } from 'lucide-react';
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-900 text-white">
+    <footer className="bg-gradient-to-bl from-emerald-600 to-emerald-500 text-white" style={{background: 'linear-gradient(315deg, hsl(var(--gradient-start)) 0%, hsl(var(--gradient-end)) 100%)'}}>
       <div className="container-custom section-padding">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* О центре */}
@@ -112,7 +112,7 @@ const Footer = () => {
         </div>
 
         {/* Нижняя часть футера */}
-        <div className="border-t border-gray-800 mt-8 pt-8">
+        <div className="border-t border-emerald-400/40 mt-8 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="flex items-center space-x-2 mb-4 md:mb-0">
               <Heart className="w-5 h-5 text-red-500" />
