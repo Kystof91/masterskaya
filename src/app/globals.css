@@ -259,9 +259,10 @@
   select::placeholder {
     color: #6b7280 !important;
   }
-  
-  /* Мобильные стили для улучшения адаптивности */
-  @media (max-width: 640px) {
+}
+
+/* Мобильные стили для улучшения адаптивности */
+@media (max-width: 640px) {
     .section-padding {
       @apply py-8 px-4;
     }
