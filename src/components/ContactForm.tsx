@@ -132,12 +132,12 @@ const ContactForm = () => {
 
   if (isSubmitted) {
     return (
-      <div className="bg-green-50 border border-green-200 rounded-lg p-6 text-center">
-        <div className="text-secondary text-6xl mb-4">✓</div>
-        <h3 className="text-xl font-semibold text-green-800 mb-2">
+      <div className="bg-green-50 border border-green-200 rounded-lg p-4 sm:p-6 text-center">
+        <div className="text-secondary text-4xl sm:text-6xl mb-3 sm:mb-4">✓</div>
+        <h3 className="text-lg sm:text-xl font-semibold text-green-800 mb-2">
           Спасибо за обращение!
         </h3>
-        <p className="text-green-700">
+        <p className="text-sm sm:text-base text-green-700">
           Мы свяжемся с вами в ближайшее время для консультации.
         </p>
       </div>
@@ -145,23 +145,23 @@ const ContactForm = () => {
   }
 
   return (
-    <div className="bg-white rounded-lg shadow-lg p-4 sm:p-6">
-      <div className="mb-4 sm:mb-6">
-        <h3 className="text-lg sm:text-xl font-semibold text-gray-900">
+    <div className="bg-white rounded-lg shadow-lg p-3 sm:p-4 md:p-6">
+      <div className="mb-3 sm:mb-4 md:mb-6">
+        <h3 className="text-base sm:text-lg md:text-xl font-semibold text-gray-900">
           Получить консультацию
         </h3>
       </div>
       
-      <p className="text-sm sm:text-base text-gray-600 mb-4 sm:mb-6">
+      <p className="text-xs sm:text-sm md:text-base text-gray-600 mb-3 sm:mb-4 md:mb-6">
         Оставьте заявку, и наш специалист свяжется с вами для бесплатной консультации.
       </p>
 
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-3 sm:space-y-4">
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-2.5 sm:space-y-3 md:space-y-4">
         {/* Скрытое поле для CSRF токена */}
         <input type="hidden" {...register('csrfToken')} />
         
         <div>
-          <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
+          <label htmlFor="name" className="block text-xs sm:text-sm font-medium text-gray-700 mb-1">
             Имя *
           </label>
           <div>
@@ -169,7 +169,7 @@ const ContactForm = () => {
               {...register('name')}
               type="text"
               id="name"
-              className="w-full px-3 py-2 sm:py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-black placeholder-gray-500 text-sm sm:text-base"
+              className="w-full px-2.5 sm:px-3 py-2 sm:py-2.5 md:py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-black placeholder-gray-500 text-xs sm:text-sm md:text-base"
               placeholder="Введите ваше полное имя"
               style={{ color: '#000000' }}
               autoComplete="name"
@@ -177,12 +177,12 @@ const ContactForm = () => {
             />
           </div>
           {errors.name && (
-            <p className="text-red-600 text-sm mt-1">{errors.name.message}</p>
+            <p className="text-red-600 text-xs sm:text-sm mt-1">{errors.name.message}</p>
           )}
         </div>
 
         <div>
-          <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">
+          <label htmlFor="phone" className="block text-xs sm:text-sm font-medium text-gray-700 mb-1">
             Телефон *
           </label>
           <div>
@@ -190,7 +190,7 @@ const ContactForm = () => {
               {...register('phone')}
               type="tel"
               id="phone"
-              className="w-full px-3 py-2 sm:py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-black placeholder-gray-500 text-sm sm:text-base"
+              className="w-full px-2.5 sm:px-3 py-2 sm:py-2.5 md:py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-black placeholder-gray-500 text-xs sm:text-sm md:text-base"
               placeholder="8-812-407-3-407"
               style={{ color: '#000000' }}
               autoComplete="tel"
@@ -198,12 +198,12 @@ const ContactForm = () => {
             />
           </div>
           {errors.phone && (
-            <p className="text-red-600 text-sm mt-1">{errors.phone.message}</p>
+            <p className="text-red-600 text-xs sm:text-sm mt-1">{errors.phone.message}</p>
           )}
         </div>
 
         <div>
-          <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">
+          <label htmlFor="message" className="block text-xs sm:text-sm font-medium text-gray-700 mb-1">
             Сообщение * (максимум 200 символов)
           </label>
           <div>
@@ -212,20 +212,20 @@ const ContactForm = () => {
               id="message"
               rows={3}
               maxLength={200}
-              className="w-full px-3 py-2 sm:py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-black placeholder-gray-500 text-sm sm:text-base"
+              className="w-full px-2.5 sm:px-3 py-2 sm:py-2.5 md:py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-black placeholder-gray-500 text-xs sm:text-sm md:text-base"
               placeholder="Расскажите о вашей проблеме или задайте вопрос..."
               style={{ color: '#000000' }}
             />
           </div>
           {errors.message && (
-            <p className="text-red-600 text-sm mt-1">{errors.message.message}</p>
+            <p className="text-red-600 text-xs sm:text-sm mt-1">{errors.message.message}</p>
           )}
         </div>
 
         <button
           type="submit"
           disabled={isSubmitting || !csrfToken}
-          className="w-full btn-primary disabled:opacity-50 disabled:cursor-not-allowed text-sm sm:text-base py-2 sm:py-3"
+          className="w-full btn-primary disabled:opacity-50 disabled:cursor-not-allowed text-xs sm:text-sm md:text-base py-2 sm:py-2.5 md:py-3"
         >
           {isSubmitting ? 'Отправка...' : 'Получить консультацию'}
         </button>
@@ -233,23 +233,22 @@ const ContactForm = () => {
 
       {/* Отображение ошибки */}
       {error && (
-        <div className="mt-4 p-3 sm:p-4 bg-red-50 border border-red-200 rounded-lg">
-          <p className="text-red-700 text-sm">{error}</p>
+        <div className="mt-3 sm:mt-4 p-2.5 sm:p-3 md:p-4 bg-red-50 border border-red-200 rounded-lg">
+          <p className="text-red-700 text-xs sm:text-sm">{error}</p>
         </div>
       )}
 
-      <div className="mt-4 text-center">
+      <div className="mt-3 sm:mt-4 text-center">
         <p className="text-xs sm:text-sm text-gray-500">
           Или позвоните нам прямо сейчас:
         </p>
         <a
           href="tel:88124073407"
-          className="text-base sm:text-lg font-semibold text-blue-600 hover:text-blue-700"
+          className="text-sm sm:text-base md:text-lg font-semibold text-blue-600 hover:text-blue-700"
         >
           8-812-407-3-407
         </a>
       </div>
-
 
     </div>
   );

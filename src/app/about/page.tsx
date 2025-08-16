@@ -138,10 +138,10 @@ export default function AboutPage() {
       <section className="gradient-bg text-white">
         <div className="container-custom section-padding">
           <div className="text-center">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6">
               О медицинском центре
             </h1>
-            <p className="text-xl mb-8 text-secondary-light max-w-3xl mx-auto">
+            <p className="text-lg sm:text-xl mb-6 sm:mb-8 text-secondary-light max-w-3xl mx-auto px-2">
               Мы помогаем людям вернуться к здоровой жизни уже более 15 лет. 
               Наша миссия — профессиональная помощь в преодолении зависимостей.
             </p>
@@ -152,8 +152,8 @@ export default function AboutPage() {
       {/* Mission Section */}
       <section className="section-padding">
         <div className="container-custom">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-            <div>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 items-center">
+            <div className="px-2 sm:px-0">
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-4 sm:mb-6">
                 Наша миссия
               </h2>
@@ -163,34 +163,34 @@ export default function AboutPage() {
                 а восстановить физическое и психическое здоровье, вернуть человека в общество.
               </p>
               <div className="space-y-3 sm:space-y-4">
-                <div className="flex items-center space-x-3">
-                  <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0" />
+                <div className="flex items-start space-x-3">
+                  <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
                   <span className="text-sm sm:text-base">Индивидуальный подход к каждому пациенту</span>
                 </div>
-                <div className="flex items-center space-x-3">
-                  <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0" />
+                <div className="flex items-start space-x-3">
+                  <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
                   <span className="text-sm sm:text-base">Использование современных методик лечения</span>
                 </div>
-                <div className="flex items-center space-x-3">
-                  <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0" />
+                <div className="flex items-start space-x-3">
+                  <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
                   <span className="text-sm sm:text-base">Полная анонимность и конфиденциальность</span>
                 </div>
-                <div className="flex items-center space-x-3">
-                  <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0" />
+                <div className="flex items-start space-x-3">
+                  <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
                   <span className="text-sm sm:text-base">Постоянная поддержка после лечения</span>
                 </div>
               </div>
             </div>
-            <div className="bg-gray-100 rounded-lg p-4 sm:p-6 lg:p-8">
-              <h3 className="text-2xl font-semibold mb-6">Наши ценности</h3>
-              <div className="grid grid-cols-2 gap-6">
+            <div className="bg-gray-100 rounded-lg p-4 sm:p-6 lg:p-8 mx-2 sm:mx-0">
+              <h3 className="text-xl sm:text-2xl font-semibold mb-4 sm:mb-6">Наши ценности</h3>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                 {values.map((value, index) => (
                   <div key={index} className="text-center">
-                                    <div className="w-12 h-12 bg-primary-light rounded-lg flex items-center justify-center mx-auto mb-3">
-                  <value.icon className="w-6 h-6 text-primary" />
-                </div>
-                    <h4 className="font-semibold mb-2">{value.title}</h4>
-                    <p className="text-sm text-gray-600">{value.description}</p>
+                    <div className="w-10 h-10 sm:w-12 sm:h-12 bg-primary-light rounded-lg flex items-center justify-center mx-auto mb-2 sm:mb-3">
+                      <value.icon className="w-5 h-5 sm:w-6 sm:h-6 text-primary" />
+                    </div>
+                    <h4 className="font-semibold mb-1 sm:mb-2 text-sm sm:text-base">{value.title}</h4>
+                    <p className="text-xs sm:text-sm text-gray-600">{value.description}</p>
                   </div>
                 ))}
               </div>
@@ -202,23 +202,23 @@ export default function AboutPage() {
       {/* Achievements Section */}
       <section className="section-padding bg-gray-50">
         <div className="container-custom">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+          <div className="text-center mb-8 sm:mb-12 px-2 sm:px-0">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-3 sm:mb-4">
               Наши достижения
             </h2>
-            <p className="text-xl text-gray-600">
+            <p className="text-lg sm:text-xl text-gray-600">
               Цифры, которые говорят о качестве нашей работы
             </p>
           </div>
           
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 sm:gap-8 px-2 sm:px-0">
             {achievements.map((achievement, index) => (
               <div key={index} className="text-center">
-                <div className="text-4xl md:text-5xl font-bold text-primary mb-2">
+                <div className="text-3xl sm:text-4xl md:text-5xl font-bold text-primary mb-1 sm:mb-2">
                   {achievement.number}
                 </div>
-                <h3 className="text-xl font-semibold mb-2">{achievement.title}</h3>
-                <p className="text-gray-600">{achievement.description}</p>
+                <h3 className="text-lg sm:text-xl font-semibold mb-1 sm:mb-2">{achievement.title}</h3>
+                <p className="text-sm sm:text-base text-gray-600">{achievement.description}</p>
               </div>
             ))}
           </div>
@@ -228,17 +228,17 @@ export default function AboutPage() {
       {/* Team Section */}
       <section className="section-padding">
         <div className="container-custom">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+          <div className="text-center mb-8 sm:mb-12 px-2 sm:px-0">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-3 sm:mb-4">
               Наша команда
             </h2>
-            <p className="text-xl text-gray-600">
+            <p className="text-lg sm:text-xl text-gray-600">
               Опытные специалисты, которые помогут вам на пути к выздоровлению
             </p>
           </div>
           
           {/* Carousel Container */}
-          <div className="relative max-w-4xl mx-auto">
+          <div className="relative max-w-4xl mx-auto px-4 sm:px-0">
             {/* Carousel Track */}
             <div className="overflow-hidden">
               <div 
@@ -247,10 +247,10 @@ export default function AboutPage() {
               >
                 {Array.from({ length: totalSlides }, (_, slideIndex) => (
                   <div key={slideIndex} className="w-full flex-shrink-0">
-                    <div className="grid md:grid-cols-2 gap-6">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
                       {team.slice(slideIndex * 2, slideIndex * 2 + 2).map((member, index) => (
-                        <div key={slideIndex * 2 + index} className="bg-white rounded-lg p-6 shadow-lg card-hover">
-                          <div className="w-48 h-60 mx-auto mb-4">
+                        <div key={slideIndex * 2 + index} className="bg-white rounded-lg p-4 sm:p-6 shadow-lg card-hover">
+                          <div className="w-32 h-40 sm:w-48 sm:h-60 mx-auto mb-3 sm:mb-4">
                             {member.photo ? (
                               <img
                                 src={member.photo}
@@ -259,14 +259,14 @@ export default function AboutPage() {
                               />
                             ) : (
                               <div className="w-full h-full bg-primary-light rounded-lg flex items-center justify-center">
-                                <Users className="w-16 h-16 text-primary" />
+                                <Users className="w-12 h-12 sm:w-16 sm:h-16 text-primary" />
                               </div>
                             )}
                           </div>
-                          <h3 className="text-lg font-semibold text-center mb-2">{member.name}</h3>
-                          <p className="text-primary text-center mb-2">{member.position}</p>
-                          <p className="text-sm text-gray-500 text-center mb-3">{member.experience}</p>
-                          <p className="text-gray-600 text-sm text-center">{member.description}</p>
+                          <h3 className="text-base sm:text-lg font-semibold text-center mb-1 sm:mb-2">{member.name}</h3>
+                          <p className="text-primary text-center mb-1 sm:mb-2 text-sm sm:text-base">{member.position}</p>
+                          <p className="text-xs sm:text-sm text-gray-500 text-center mb-2 sm:mb-3">{member.experience}</p>
+                          <p className="text-gray-600 text-xs sm:text-sm text-center">{member.description}</p>
                         </div>
                       ))}
                     </div>
@@ -275,10 +275,10 @@ export default function AboutPage() {
               </div>
             </div>
 
-            {/* Navigation Buttons */}
+            {/* Navigation Buttons - Hidden on mobile, visible on larger screens */}
             <button
               onClick={prevSlide}
-              className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-12 bg-white rounded-full p-3 shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-110"
+              className="hidden sm:block absolute left-0 top-1/2 -translate-y-1/2 -translate-x-12 bg-white rounded-full p-3 shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-110"
               aria-label="Предыдущий слайд"
             >
               <ChevronLeft className="w-6 h-6 text-primary" />
@@ -286,19 +286,38 @@ export default function AboutPage() {
             
             <button
               onClick={nextSlide}
-              className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-12 bg-white rounded-full p-3 shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-110"
+              className="hidden sm:block absolute right-0 top-1/2 -translate-y-1/2 translate-x-12 bg-white rounded-full p-3 shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-110"
               aria-label="Следующий слайд"
             >
               <ChevronRight className="w-6 h-6 text-primary" />
             </button>
 
+            {/* Mobile Navigation Buttons */}
+            <div className="sm:hidden flex justify-center space-x-4 mt-6">
+              <button
+                onClick={prevSlide}
+                className="bg-primary text-white rounded-full p-3 shadow-lg hover:shadow-xl transition-all duration-200"
+                aria-label="Предыдущий слайд"
+              >
+                <ChevronLeft className="w-5 h-5" />
+              </button>
+              
+              <button
+                onClick={nextSlide}
+                className="bg-primary text-white rounded-full p-3 shadow-lg hover:shadow-xl transition-all duration-200"
+                aria-label="Следующий слайд"
+              >
+                <ChevronRight className="w-5 h-5" />
+              </button>
+            </div>
+
             {/* Dots Indicator */}
-            <div className="flex justify-center mt-8 space-x-2">
+            <div className="flex justify-center mt-6 sm:mt-8 space-x-2">
               {Array.from({ length: totalSlides }, (_, index) => (
                 <button
                   key={index}
                   onClick={() => goToSlide(index)}
-                  className={`w-3 h-3 rounded-full transition-all duration-200 ${
+                  className={`w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full transition-all duration-200 ${
                     index === currentSlide 
                       ? 'bg-primary scale-125' 
                       : 'bg-gray-300 hover:bg-gray-400'
@@ -317,15 +336,15 @@ export default function AboutPage() {
       {/* Contact Form Section */}
       <section className="section-padding bg-white">
         <div className="container-custom">
-          <div className="text-center mb-8">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+          <div className="text-center mb-6 sm:mb-8 px-2 sm:px-0">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-3 sm:mb-4">
               Получить консультацию
             </h2>
-            <p className="text-xl text-gray-600">
+            <p className="text-lg sm:text-xl text-gray-600">
               Оставьте заявку, и наш специалист свяжется с вами для бесплатной консультации
             </p>
           </div>
-          <div className="max-w-2xl mx-auto">
+          <div className="max-w-2xl mx-auto px-2 sm:px-0">
             <ContactForm />
           </div>
         </div>
