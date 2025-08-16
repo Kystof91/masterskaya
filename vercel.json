@@ -6,14 +6,22 @@
       "use": "@vercel/next"
     }
   ],
-  "routes": [
+  "rewrites": [
     {
-      "src": "/api/(.*)",
-      "dest": "/api/$1"
+      "source": "/api/(.*)",
+      "destination": "/api/$1"
     },
     {
-      "src": "/(.*)",
-      "dest": "/$1"
+      "source": "/(.*)",
+      "destination": "/$1"
+    },
+    {
+      "source": "/home",
+      "destination": "/"
+    },
+    {
+      "source": "/index.html",
+      "destination": "/"
     }
   ],
   "headers": [
@@ -55,16 +63,6 @@
           "value": "public, max-age=3600, s-maxage=86400"
         }
       ]
-    }
-  ],
-  "rewrites": [
-    {
-      "source": "/home",
-      "destination": "/"
-    },
-    {
-      "source": "/index.html",
-      "destination": "/"
     }
   ]
 }
