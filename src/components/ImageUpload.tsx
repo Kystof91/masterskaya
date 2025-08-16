@@ -1,7 +1,8 @@
 'use client';
 
-import { useState, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import { Upload, X } from 'lucide-react';
+import Image from 'next/image';
 
 interface ImageUploadProps {
   value?: string;
@@ -120,9 +121,11 @@ export default function ImageUpload({ value, onChange, className = '' }: ImageUp
           <div className="border border-gray-200 rounded-lg p-3 bg-gray-50">
             <div className="flex items-center space-x-3">
               <div className="relative w-16 h-16 bg-gray-200 rounded overflow-hidden">
-                <img
+                <Image
                   src={preview}
                   alt="Предварительный просмотр"
+                  width={64}
+                  height={64}
                   className="w-full h-full object-cover"
                   onError={() => setPreview(null)}
                 />

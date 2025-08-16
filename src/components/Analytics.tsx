@@ -1,6 +1,7 @@
 'use client';
 
 import Script from 'next/script';
+import Image from 'next/image';
 
 interface AnalyticsProps {
   gaId?: string;
@@ -51,7 +52,13 @@ export default function Analytics({ gaId, yandexId }: AnalyticsProps) {
           </Script>
           <noscript>
             <div>
-              <img src={`https://mc.yandex.ru/watch/${yandexId}`} style={{ position: 'absolute', left: '-9999px' }} alt="" />
+              <Image 
+                src={`https://mc.yandex.ru/watch/${yandexId}`} 
+                width={1} 
+                height={1} 
+                style={{ position: 'absolute', left: '-9999px' }} 
+                alt="" 
+              />
             </div>
           </noscript>
         </>

@@ -1,7 +1,8 @@
 'use client';
 
-import { useState } from 'react';
-import { Users, Camera, X } from 'lucide-react';
+import React, { useState } from 'react';
+import { Camera, Users, X } from 'lucide-react';
+import Image from 'next/image';
 import ImageUpload from './ImageUpload';
 
 interface TeamMember {
@@ -137,9 +138,11 @@ export default function TeamMemberCard({
       <div className="w-24 h-24 mx-auto mb-4">
         {editedMember.photo ? (
           <div className="relative w-full h-full">
-            <img
+            <Image
               src={editedMember.photo}
               alt={editedMember.name}
+              width={96}
+              height={96}
               className="w-full h-full object-cover rounded-full"
               onError={(e) => {
                 // Если изображение не загрузилось, показываем иконку

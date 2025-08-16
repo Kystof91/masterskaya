@@ -52,6 +52,9 @@ export default function YandexMap() {
   const mapRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    // Копируем значение ref в переменную для использования в cleanup
+    const currentMapRef = mapRef.current;
+    
     // Проверяем, загружены ли уже Яндекс.Карты
     if (window.ymaps) {
       initMap();
@@ -65,11 +68,11 @@ export default function YandexMap() {
     }
 
     function initMap() {
-      if (!mapRef.current || !window.ymaps) return;
+      if (!currentMapRef || !window.ymaps) return;
 
       window.ymaps.ready(() => {
         // Создаем карту
-        const map = new window.ymaps.Map(mapRef.current!, {
+        const map = new window.ymaps.Map(currentMapRef!, {
           center: [59.891652, 30.315590], // Точные координаты ул. Ташкентская, 2
           zoom: 16,
           controls: ['zoomControl', 'fullscreenControl']
@@ -117,7 +120,6 @@ export default function YandexMap() {
 
     return () => {
       // Очистка при размонтировании компонента
-      const currentMapRef = mapRef.current;
       if (currentMapRef) {
         currentMapRef.innerHTML = '';
       }

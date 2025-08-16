@@ -15,6 +15,7 @@ import {
   ChevronRight
 } from 'lucide-react';
 import { useState } from 'react';
+import Image from 'next/image';
 
 interface TeamMember {
   name: string;
@@ -252,9 +253,11 @@ export default function AboutPage() {
                         <div key={slideIndex * 2 + index} className="bg-white rounded-lg p-4 sm:p-6 shadow-lg card-hover">
                           <div className="w-32 h-40 sm:w-48 sm:h-60 mx-auto mb-3 sm:mb-4">
                             {member.photo ? (
-                              <img
+                              <Image
                                 src={member.photo}
                                 alt={member.name}
+                                width={192}
+                                height={240}
                                 className="w-full h-full object-cover rounded-lg"
                               />
                             ) : (

@@ -1,51 +1,143 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Медицинский центр "Мастерская" - Лечение зависимостей
 
-## Getting Started
+Современный веб-сайт медицинского центра, специализирующегося на лечении зависимостей.
 
-First, run the development server:
+## ✨ Особенности
 
+- **Современный дизайн** с использованием Tailwind CSS
+- **Адаптивная верстка** для всех устройств
+- **Улучшенное мобильное меню** с плавными анимациями
+- **SEO оптимизация** с мета-тегами и структурированными данными
+- **Быстрая загрузка** благодаря оптимизации Next.js
+- **Безопасность** с настроенными заголовками безопасности
+
+## 🚀 Быстрый старт
+
+### Установка зависимостей
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Разработка
+```bash
+npm run dev
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Сборка для продакшена
+```bash
+npm run build
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Запуск продакшн версии
+```bash
+npm start
+```
 
-## Learn More
+## 📱 Мобильное меню
 
-To learn more about Next.js, take a look at the following resources:
+Мобильное меню было значительно улучшено:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **Больший размер** - теперь открывается на всю ширину экрана
+- **Плавные анимации** - добавлены transition эффекты
+- **Лучшая навигация** - увеличены touch targets для удобства
+- **Улучшенный дизайн** - добавлены тени, градиенты и hover эффекты
+- **Контактная информация** - выделена в отдельную секцию с иконками
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🔧 Исправления для Vercel
 
-## Deploy on Vercel
+Проект готов к деплою на Vercel:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- ✅ Убрана опция `output: 'standalone'` из `next.config.ts`
+- ✅ Создан `vercel.json` с правильной конфигурацией
+- ✅ Заменены все `<img>` на `<Image>` из Next.js
+- ✅ Исправлены все ESLint предупреждения
+- ✅ Оптимизированы изображения
+- ✅ Создан `.vercelignore` для исключения ненужных файлов
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 📁 Структура проекта
 
-## Telegram Bot Integration
+```
+src/
+├── app/                 # App Router страницы
+├── components/          # React компоненты
+├── lib/                 # Утилиты и конфигурация
+└── middleware.ts        # Next.js middleware
+```
 
-This project includes a ContactForm that sends data to a Telegram bot. To set it up:
+## 🎨 Дизайн система
 
-1. Create a bot with @BotFather and get the token
-2. Get your chat ID (personal chat, group, or channel)
-3. Create a `.env.local` file with:
-   ```env
-   TELEGRAM_BOT_TOKEN=8427033239:AAHph4NRb6z-Ozjtlblnuq5b6tFigG17CBs
-TELEGRAM_CHAT_ID=7991415381
-   ```
-4. Restart the development server
+Проект использует Tailwind CSS с кастомными цветами:
 
-See `TELEGRAM_SETUP.md` for detailed instructions.
+- **Primary:** Синий (#2563eb)
+- **Secondary:** Изумрудный (#059669)
+- **Accent:** Золотистый (#B39A7C)
+
+## 📱 Адаптивность
+
+- **Mobile First** подход
+- **Breakpoints:** sm (640px), md (768px), lg (1024px), xl (1280px)
+- **Touch friendly** интерфейс
+- **Оптимизированные изображения** для всех устройств
+
+## 🚀 Деплой
+
+### На Vercel (рекомендуется)
+```bash
+npm i -g vercel
+vercel login
+vercel --prod
+```
+
+### На GitHub Pages
+```bash
+npm run build
+npm run export
+```
+
+Подробные инструкции по деплою смотрите в [VERCEL_DEPLOY.md](./VERCEL_DEPLOY.md)
+
+## 🔍 SEO и производительность
+
+- **Meta теги** для всех страниц
+- **Структурированные данные** (Schema.org)
+- **Sitemap.xml** автоматическая генерация
+- **Robots.txt** для поисковых роботов
+- **Lighthouse** оптимизация
+
+## 🛠️ Технологии
+
+- **Next.js 15** - React фреймворк
+- **TypeScript** - типизированный JavaScript
+- **Tailwind CSS** - utility-first CSS фреймворк
+- **Framer Motion** - анимации
+- **Lucide React** - иконки
+- **React Hook Form** - формы
+
+## 📊 Мониторинг
+
+- **Google Analytics** интеграция
+- **Yandex Metrika** поддержка
+- **Health check** эндпоинты
+- **Performance** метрики
+
+## 🤝 Вклад в проект
+
+1. Форкните репозиторий
+2. Создайте feature ветку
+3. Внесите изменения
+4. Создайте Pull Request
+
+## 📄 Лицензия
+
+MIT License
+
+## 📞 Контакты
+
+- **Телефон:** 8-812-407-3-407
+- **Мобильный:** +7-911-750-07-00
+- **Адрес:** г. Санкт-Петербург, ул. Ташкентская, 2
+- **Режим работы:** Круглосуточно
+
+---
+
+**Медицинский центр "Мастерская"** - профессиональное лечение зависимостей в Санкт-Петербурге

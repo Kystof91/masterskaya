@@ -30,7 +30,7 @@ export default function FAQ({ items, title = "Часто задаваемые в
   const faqStructuredData = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    "mainEntity": items.map((item, index) => ({
+    "mainEntity": items.map((item, _index) => ({ // eslint-disable-line @typescript-eslint/no-unused-vars
       "@type": "Question",
       "name": item.question,
       "acceptedAnswer": {
@@ -57,18 +57,18 @@ export default function FAQ({ items, title = "Часто задаваемые в
         </div>
 
         <div className="max-w-4xl mx-auto space-y-4">
-          {items.map((item) => (
+          {items.map((item, _index) => (
             <div key={item.question} className="bg-white rounded-lg shadow-sm border border-gray-200">
               <button
-                onClick={() => toggleItem(items.indexOf(item))}
+                onClick={() => toggleItem(_index)}
                 className="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-gray-50 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-inset"
-                aria-expanded={openItems.includes(items.indexOf(item))}
-                aria-controls={`faq-answer-${items.indexOf(item)}`}
+                aria-expanded={openItems.includes(_index)}
+                aria-controls={`faq-answer-${_index}`}
               >
                 <span className="text-lg font-medium text-gray-900 pr-4">
                   {item.question}
                 </span>
-                {openItems.includes(items.indexOf(item)) ? (
+                {openItems.includes(_index) ? (
                   <ChevronUp className="w-5 h-5 text-gray-500 flex-shrink-0" />
                 ) : (
                   <ChevronDown className="w-5 h-5 text-gray-500 flex-shrink-0" />
@@ -76,13 +76,13 @@ export default function FAQ({ items, title = "Часто задаваемые в
               </button>
               
               <div
-                id={`faq-answer-${items.indexOf(item)}`}
+                id={`faq-answer-${_index}`}
                 className={`px-6 pb-4 transition-all duration-300 ease-in-out ${
-                  openItems.includes(items.indexOf(item)) 
+                  openItems.includes(_index) 
                     ? 'max-h-96 opacity-100' 
                     : 'max-h-0 opacity-0 overflow-hidden'
                 }`}
-                aria-hidden={!openItems.includes(items.indexOf(item))}
+                aria-hidden={!openItems.includes(_index)}
               >
                 <div className="pt-2 border-t border-gray-200">
                   <p className="text-gray-600 leading-relaxed">

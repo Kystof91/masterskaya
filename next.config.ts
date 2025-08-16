@@ -2,7 +2,6 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   // Оптимизации для продакшена
-  output: 'standalone',
   poweredByHeader: false,
   compress: true,
   generateEtags: false,
