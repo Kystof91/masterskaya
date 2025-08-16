@@ -27,8 +27,8 @@ npm run start
    - Подключите GitHub репозиторий
    - Настройте переменные окружения:
      ```
-     TELEGRAM_BOT_TOKEN=your_bot_token
-     TELEGRAM_CHAT_ID=your_chat_id
+     TELEGRAM_BOT_TOKEN=8427033239:AAHph4NRb6z-Ozjtlblnuq5b6tFigG17CBs
+TELEGRAM_CHAT_ID=7991415381
      ```
    - Нажмите "Deploy"
 
@@ -70,8 +70,8 @@ pm2 startup
 
 Создайте `.env.production`:
 ```env
-TELEGRAM_BOT_TOKEN=your_bot_token
-TELEGRAM_CHAT_ID=your_chat_id
+TELEGRAM_BOT_TOKEN=8427033239:AAHph4NRb6z-Ozjtlblnuq5b6tFigG17CBs
+TELEGRAM_CHAT_ID=7991415381
 NEXT_PUBLIC_API_URL=https://your-domain.com
 ```
 

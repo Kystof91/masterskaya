@@ -7,7 +7,6 @@ import {
   Users, 
   Award, 
   Clock, 
-  Phone,
   CheckCircle,
   Target,
   Brain,
@@ -199,7 +198,7 @@ export default function ServicesPage() {
                 <p className="text-gray-600 mb-6">{service.details}</p>
                 
                 <a href="/contacts" className="btn-primary inline-flex items-center">
-                  Получить консультацию <Phone className="w-4 h-4 mx-auto" />
+                  Получить консультацию
                 </a>
               </div>
             ))}

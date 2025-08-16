@@ -99,6 +99,7 @@ export default function RootLayout({
   return (
     <html lang="ru">
       <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
         <link rel="icon" href="/favicon.ico" />
         <link rel="apple-touch-icon" sizes="180x180" href="/logotip.png" />
         <link rel="icon" type="image/png" sizes="32x32" href="/logotip.png" />

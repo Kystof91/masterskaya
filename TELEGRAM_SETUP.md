@@ -1,7 +1,7 @@
 # Настройка Telegram бота для формы контактов
 
 ## Что уже настроено:
-✅ Токен бота: `8401717371:AAHyHqkRd4bczZfJKoF4329S8koiq4Ng4Qk`
+✅ Токен бота: `8427033239:AAHph4NRb6z-Ozjtlblnuq5b6tFigG17CBs`
 ✅ API endpoint: `/api/telegram`
 ✅ Логика отправки данных из формы
 
@@ -14,7 +14,7 @@
 2. **Напишите боту любое сообщение** (например, "Привет")
 3. **Откройте в браузере:**
    ```
-   https://api.telegram.org/bot8401717371:AAHyHqkRd4bczZfJKoF4329S8koiq4Ng4Qk/getUpdates
+   https://api.telegram.org/bot8427033239:AAHph4NRb6z-Ozjtlblnuq5b6tFigG17CBs/getUpdates
    ```
 4. **Найдите в ответе:**
    ```json
@@ -36,7 +36,7 @@ const chatId = 'YOUR_CHAT_ID'; // Замените на ваш chat_id
 На:
 
 ```typescript
-const chatId = '123456789'; // Ваш chat_id
+const chatId = '7991415381'; // Ваш chat_id
 ```
 
 ### 3. Протестировать

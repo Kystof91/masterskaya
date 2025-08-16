@@ -1,6 +1,6 @@
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import { ArrowRight, Droplets, Heart, Shield, Zap, Star, Clock, CheckCircle, Phone } from 'lucide-react';
+import { Droplets, Heart, Shield, Zap, Star, Clock, CheckCircle } from 'lucide-react';
 import Link from 'next/link';
 
 export default function HealthPage() {
@@ -145,7 +145,6 @@ export default function HealthPage() {
                 </div>
                 <div className="flex items-center text-blue-600 font-medium group-hover:text-blue-700 transition-colors">
                   Подробнее
-                  <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
                 </div>
               </Link>
             ))}
@@ -210,17 +209,15 @@ export default function HealthPage() {
           <p className="text-xl mb-8 text-blue-100">
             Запишитесь на консультацию и получите персональные рекомендации
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex flex-col gap-4 justify-center max-w-md mx-auto">
             <Link href="/contacts" className="btn-primary">
-              Записаться на консультацию <ArrowRight className="w-5 h-5 mx-auto" />
+              Записаться на консультацию
             </Link>
             <a href="tel:88124073407" className="btn-secondary">
-              Позвонить сейчас<br />
-              <span className="text-black">8-812-407-3-407</span>
+              Позвонить сейчас
             </a>
             <a href="tel:+79117500700" className="btn-secondary">
-              <Phone className="w-5 h-5 mr-2" />
-              +7-911-750-07-00
+              Позвонить по телефону
             </a>
           </div>
         </div>

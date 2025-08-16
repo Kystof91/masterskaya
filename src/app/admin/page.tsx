@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { Article } from '../blog/data';
 import { getAllArticles, addArticle, updateArticle, deleteArticle, syncWithServer } from '@/lib/storage';
 import ImageUpload from '@/components/ImageUpload';
-import SecurityInfo from '@/components/SecurityInfo';
+
 import { validateCredentials, getAuthPlaceholders } from '@/lib/auth';
 
 interface AdminArticle extends Omit<Article, 'id'> {
@@ -227,7 +227,7 @@ export default function AdminPage() {
               Войти
             </button>
           </div>
-          <SecurityInfo />
+
         </div>
       </div>
     );

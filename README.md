@@ -43,8 +43,8 @@ This project includes a ContactForm that sends data to a Telegram bot. To set it
 2. Get your chat ID (personal chat, group, or channel)
 3. Create a `.env.local` file with:
    ```env
-   TELEGRAM_BOT_TOKEN=your_bot_token_here
-   TELEGRAM_CHAT_ID=your_chat_id_here
+   TELEGRAM_BOT_TOKEN=8427033239:AAHph4NRb6z-Ozjtlblnuq5b6tFigG17CBs
+TELEGRAM_CHAT_ID=7991415381
    ```
 4. Restart the development server
 

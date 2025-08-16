@@ -1,6 +1,6 @@
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import { ArrowLeft, ArrowRight, Clock, CheckCircle, Phone, MapPin } from 'lucide-react';
+import { ArrowLeft, Clock, CheckCircle } from 'lucide-react';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
@@ -284,7 +284,6 @@ export default async function ProcedurePage({ params }: { params: Promise<{ id: 
                     href="tel:88124073407" 
                     className="w-full bg-gray-100 text-gray-800 py-3 px-4 rounded-lg text-center block hover:bg-gray-200 transition-colors"
                   >
-                    <Phone className="w-4 h-4 inline mr-2" />
                     Позвонить
                   </a>
                 </div>
@@ -294,15 +293,12 @@ export default async function ProcedurePage({ params }: { params: Promise<{ id: 
                 <h3 className="text-lg font-semibold text-gray-900 mb-4">Контакты</h3>
                 <div className="space-y-3 text-sm">
                   <div className="flex items-center">
-                    <Phone className="w-4 h-4 text-gray-400 mr-2" />
                     <span className="text-gray-600">8-812-407-3-407</span>
                   </div>
                   <div className="flex items-center">
-                    <Phone className="w-4 h-4 text-gray-400 mr-2" />
                     <a href="tel:+79117500700" className="text-gray-600 hover:text-blue-600 transition-colors">+7-911-750-07-00</a>
                   </div>
                   <div className="flex items-center">
-                    <MapPin className="w-4 h-4 text-gray-400 mr-2" />
                     <span className="text-gray-600">г. Санкт-Петербург</span>
                   </div>
                 </div>
@@ -321,18 +317,15 @@ export default async function ProcedurePage({ params }: { params: Promise<{ id: 
           <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
             Запишитесь на консультацию и получите персональные рекомендации по подбору процедуры
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex flex-col gap-4 justify-center max-w-md mx-auto">
             <Link href="/contacts" className="btn-primary">
-              Получить консультацию <ArrowRight className="w-5 h-5 mx-auto" />
+              Получить консультацию
             </Link>
             <a href="tel:88124073407" className="btn-secondary">
-              <Phone className="w-5 h-5 mr-2" />
-              Позвонить сейчас<br />
-              <span className="text-black">8-812-407-3-407</span>
+              Позвонить сейчас
             </a>
             <a href="tel:+79117500700" className="btn-secondary">
-              <Phone className="w-5 h-5 mr-2" />
-              +7-911-750-07-00
+              Позвонить по телефону
             </a>
           </div>
         </div>

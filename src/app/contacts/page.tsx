@@ -2,7 +2,7 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import ContactForm from '@/components/ContactForm';
 import YandexMap from '@/components/YandexMap';
-import SecurityInfo from '@/components/SecurityInfo';
+
 import { 
   Phone, 
   Mail, 
@@ -301,7 +301,6 @@ export default function ContactsPage() {
             </p>
           </div>
           <div className="max-w-2xl mx-auto">
-            <SecurityInfo />
             <ContactForm />
           </div>
         </div>

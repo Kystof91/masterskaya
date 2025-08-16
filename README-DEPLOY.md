@@ -19,8 +19,8 @@
 3. Vercel автоматически определит Next.js проект
 4. Настройте переменные окружения в Vercel Dashboard:
    ```
-   TELEGRAM_BOT_TOKEN=your_bot_token
-   TELEGRAM_CHAT_ID=your_chat_id
+   TELEGRAM_BOT_TOKEN=8427033239:AAHph4NRb6z-Ozjtlblnuq5b6tFigG17CBs
+TELEGRAM_CHAT_ID=7991415381
    ```
 5. Нажмите "Deploy"
 
@@ -127,8 +127,8 @@ docker-compose -f docker-compose.yml up -d --build
 
 ```env
 # Telegram Bot
-TELEGRAM_BOT_TOKEN=your_bot_token_here
-TELEGRAM_CHAT_ID=your_chat_id_here
+TELEGRAM_BOT_TOKEN=8427033239:AAHph4NRb6z-Ozjtlblnuq5b6tFigG17CBs
+TELEGRAM_CHAT_ID=7991415381
 
 # API URL
 NEXT_PUBLIC_API_URL=https://your-domain.com
