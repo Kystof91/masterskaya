@@ -396,10 +396,6 @@ export default function PricesPage() {
             </div>
             <div className="space-y-6">
               <div className="bg-white rounded-lg p-6 shadow-lg">
-                <h3 className="font-semibold mb-3">Работаете ли вы со страховыми компаниями?</h3>
-                <p className="text-gray-600">Да, мы сотрудничаем с ведущими страховыми компаниями. Уточните детали у наших специалистов.</p>
-              </div>
-              <div className="bg-white rounded-lg p-6 shadow-lg">
                 <h3 className="font-semibold mb-3">Можно ли получить налоговый вычет?</h3>
                 <p className="text-gray-600">Да, при лечении в нашем центре можно получить налоговый вычет в размере 13% от стоимости лечения.</p>
               </div>

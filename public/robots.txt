@@ -2,24 +2,36 @@ User-agent: *
 Allow: /
 
 # Sitemap
-Sitemap: https://masterskaya.clinic/sitemap.xml
+Sitemap: https://mstrclinic.ru/sitemap.xml
 
-# Disallow admin panel
+# Disallow admin panel and API
 Disallow: /admin
-
-# Disallow API routes
 Disallow: /api/
+Disallow: /_next/
+Disallow: /static/
 
-# Allow important pages
-Allow: /
+# Allow important pages and directories
+Allow: /services/*
+Allow: /blog/*
+Allow: /reviews/*
+Allow: /health/*
+Allow: /methods/*
+Allow: /prices/*
 Allow: /about
-Allow: /services
-Allow: /health
-Allow: /methods
-Allow: /prices
-Allow: /reviews
-Allow: /blog
 Allow: /contacts
 
-# Crawl delay (optional)
+# Crawl delay for better server performance
+Crawl-delay: 1
+
+# Additional rules for specific bots
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Yandex
+Allow: /
+Crawl-delay: 1
+
+User-agent: Bingbot
+Allow: /
 Crawl-delay: 1

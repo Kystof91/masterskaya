@@ -12,7 +12,14 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const botToken = '8427033239:AAHph4NRb6z-Ozjtlblnuq5b6tFigG17CBs';
+    const botToken = process.env.TELEGRAM_BOT_TOKEN;
+    
+    if (!botToken) {
+      return NextResponse.json(
+        { error: 'Токен бота не настроен' },
+        { status: 500 }
+      );
+    }
     
     // Отправляем тестовое сообщение на указанный номер
     const testMessage = `🔍 Тестовое сообщение для получения Chat ID

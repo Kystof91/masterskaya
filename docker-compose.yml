@@ -8,6 +8,8 @@ services:
     environment:
       - NODE_ENV=production
       - PORT=3000
+      - TELEGRAM_BOT_TOKEN=8427033239:AAHph4NRb6z-Ozjtlblnuq5b6tFigG17CBs
+      - TELEGRAM_CHAT_ID=7991415381
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:3000/api/health"]

@@ -14,7 +14,9 @@ module.exports = {
       env_production: {
         NODE_ENV: 'production',
         PORT: 3000,
-        HOSTNAME: '0.0.0.0'
+        HOSTNAME: '0.0.0.0',
+        TELEGRAM_BOT_TOKEN: '8427033239:AAHph4NRb6z-Ozjtlblnuq5b6tFigG17CBs',
+        TELEGRAM_CHAT_ID: '7991415381'
       },
       // Отключаем watch для продакшена
       watch: false,

@@ -154,25 +154,25 @@ export default function Home() {
       {/* Hero Section */}
       <section className="gradient-bg text-white" role="banner" aria-label="Главная информация о центре">
         <div className="container-custom section-padding">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center max-w-5xl mx-auto">
             <div>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
+              <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 md:mb-6">
                 Профессиональная помощь в лечении зависимостей
               </h1>
-              <p className="text-xl mb-8 text-blue-100">
+              <p className="text-lg md:text-xl mb-6 md:mb-8 text-blue-100">
                 Анонимно, конфиденциально, эффективно. Мы поможем вам вернуться к здоровой жизни.
               </p>
-              <p className="text-sm mb-6 text-blue-200">
+              <p className="text-xs md:text-sm mb-4 md:mb-6 text-blue-200">
                 Медицинская лицензия №Л041-01148-78/02897906
               </p>
-              <div className="flex flex-col gap-4">
-                <Link href="/contacts" className="btn-primary text-center w-full sm:w-auto">
+              <div className="flex flex-col gap-3 sm:gap-4">
+                <Link href="/contacts" className="btn-primary-mobile">
                   Получить консультацию
                 </Link>
-                <a href="tel:88124073407" className="btn-secondary text-center w-full sm:w-auto">
+                <a href="tel:88124073407" className="btn-secondary-mobile">
                   8-812-407-3-407
                 </a>
-                <a href="tel:+79117500700" className="btn-secondary text-center w-full sm:w-auto">
+                <a href="tel:+79117500700" className="btn-secondary-mobile">
                   +7-911-750-07-00
                 </a>
               </div>
@@ -180,6 +180,11 @@ export default function Home() {
             <div className="hidden lg:block">
               <ContactForm />
             </div>
+          </div>
+          
+          {/* ContactForm для мобильных устройств */}
+          <div className="lg:hidden mt-8">
+            <ContactForm />
           </div>
         </div>
       </section>
@@ -243,7 +248,7 @@ export default function Home() {
             </div>
             <div className="bg-gray-100 rounded-lg p-8">
               <h3 className="text-2xl font-semibold mb-6">Почему выбирают нас</h3>
-              <div className="grid grid-cols-2 gap-6">
+              <div className="space-y-6">
                 {advantages.map((advantage, index) => (
                   <div key={index} className="text-center">
                     <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mx-auto mb-3">
@@ -358,22 +363,24 @@ export default function Home() {
       {/* CTA Section */}
       <section className="section-padding gradient-bg text-white" role="region" aria-labelledby="cta-heading">
         <div className="container-custom text-center">
-          <h2 id="cta-heading" className="text-3xl md:text-4xl font-bold mb-6">
-            Готовы начать путь к выздоровлению?
-          </h2>
-          <p className="text-xl mb-8 text-blue-100">
-            Оставьте заявку прямо сейчас и получите бесплатную консультацию
-          </p>
-          <div className="flex flex-col gap-4 justify-center items-center">
-            <Link href="/contacts" className="btn-primary text-center w-full sm:w-1/2">
-              Получить консультацию
-            </Link>
-            <a href="tel:88124073407" className="btn-secondary text-center w-full sm:w-1/2">
-              Позвонить сейчас
-            </a>
-            <a href="tel:+79117500700" className="btn-secondary text-center w-full sm:w-1/2">
-              +7-911-750-07-00
-            </a>
+          <div className="max-w-4xl mx-auto">
+            <h2 id="cta-heading" className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4 md:mb-6">
+              Готовы начать путь к выздоровлению?
+            </h2>
+            <p className="text-lg md:text-xl mb-6 md:mb-8 text-blue-100">
+              Оставьте заявку прямо сейчас и получите бесплатную консультацию
+            </p>
+            <div className="flex flex-col gap-3 sm:gap-4 justify-center items-center">
+              <Link href="/contacts" className="btn-primary-mobile">
+                Получить консультацию
+              </Link>
+              <a href="tel:88124073407" className="btn-secondary-mobile">
+                Позвонить сейчас
+              </a>
+              <a href="tel:+79117500700" className="btn-secondary-mobile">
+                +7-911-750-07-00
+              </a>
+            </div>
           </div>
         </div>
       </section>

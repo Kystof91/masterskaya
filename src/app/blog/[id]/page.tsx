@@ -57,20 +57,20 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
               <article className="bg-white rounded-lg shadow-lg overflow-hidden">
                 {/* Article Header */}
                 <div className="p-8 border-b border-gray-200">
-                  <div className="flex items-center space-x-2 mb-4">
+                  <div className="flex items-center space-x-2 mb-6">
                     <span className="bg-primary-light text-primary px-3 py-1 rounded-full text-sm font-medium">
                       {article.category}
                     </span>
                   </div>
-                  <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                  <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
                     {article.title}
                   </h1>
-                  <p className="text-xl text-gray-600 mb-6">
+                  <p className="text-xl text-gray-600 mb-8">
                     {article.excerpt}
                   </p>
                   
                   {/* Article Meta */}
-                  <div className="flex flex-wrap items-center gap-6 text-sm text-gray-500">
+                  <div className="flex flex-wrap items-center gap-6 text-sm text-gray-500 pt-4 border-t border-gray-100">
                     <div className="flex items-center">
                       <Calendar className="w-4 h-4 mr-2" />
                       <span>Опубликовано {new Date().toLocaleDateString('ru-RU')}</span>
@@ -88,12 +88,12 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
                 {/* Article Image */}
                 {article.image && (
-                  <div className="relative h-64 md:h-96">
+                  <div className="relative h-64 md:h-96 mx-8 my-8">
                     <Image
                       src={article.image}
                       alt={article.title}
                       fill
-                      className="object-cover"
+                      className="object-cover rounded-lg"
                       priority
                     />
                   </div>
@@ -102,22 +102,22 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                 {/* Article Body */}
                 <div className="p-8">
                   <div 
-                    className="prose prose-lg max-w-none"
+                    className="blog-content prose prose-lg max-w-none prose-headings:mt-8 prose-headings:mb-4 prose-p:mb-6 prose-ul:mb-6 prose-ol:mb-6 prose-h2:text-2xl prose-h2:font-bold prose-h2:text-gray-900 prose-h3:text-xl prose-h3:font-semibold prose-h3:text-gray-800 prose-p:text-gray-700 prose-p:leading-relaxed prose-li:text-gray-700 prose-strong:text-gray-900 prose-strong:font-semibold"
                     dangerouslySetInnerHTML={{ __html: article.content }}
                   />
                   
                   {/* Tags */}
                   {article.tags && article.tags.length > 0 && (
-                    <div className="mt-8 pt-6 border-t border-gray-200">
-                      <h3 className="text-lg font-semibold mb-4 flex items-center">
-                        <BookOpen className="w-5 h-5 mr-2" />
+                    <div className="mt-12 pt-8 border-t border-gray-200">
+                      <h3 className="text-lg font-semibold mb-6 flex items-center text-gray-900">
+                        <BookOpen className="w-5 h-5 mr-3 text-primary" />
                         Теги
                       </h3>
-                      <div className="flex flex-wrap gap-2">
+                      <div className="flex flex-wrap gap-3">
                         {article.tags.map((tag, index) => (
                           <span
                             key={index}
-                            className="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm"
+                            className="bg-gray-100 text-gray-700 px-4 py-2 rounded-full text-sm font-medium hover:bg-gray-200 transition-colors"
                           >
                             #{tag}
                           </span>

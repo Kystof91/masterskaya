@@ -1,43 +1,61 @@
 import { NextRequest, NextResponse } from 'next/server';
 
-export async function GET() {
+export async function GET(request: NextRequest) {
   try {
-    const botToken = '8427033239:AAHph4NRb6z-Ozjtlblnuq5b6tFigG17CBs';
-    
+    const botToken = process.env.TELEGRAM_BOT_TOKEN;
+    const chatId = process.env.TELEGRAM_CHAT_ID;
+
+    if (!botToken || !chatId) {
+      return NextResponse.json({
+        error: 'Bot configuration incomplete',
+        botToken: botToken ? 'Configured' : 'Missing',
+        chatId: chatId ? 'Configured' : 'Missing'
+      }, { status: 500 });
+    }
+
     // Получаем информацию о боте
     const botInfoResponse = await fetch(`https://api.telegram.org/bot${botToken}/getMe`);
+    
+    if (!botInfoResponse.ok) {
+      const errorData = await botInfoResponse.json();
+      return NextResponse.json({
+        error: 'Failed to get bot info',
+        telegramError: errorData
+      }, { status: 500 });
+    }
+
     const botInfo = await botInfoResponse.json();
+
+    // Проверяем доступ к чату
+    const chatInfoResponse = await fetch(`https://api.telegram.org/bot${botToken}/getChat?chat_id=${chatId}`);
     
-    // Получаем последние обновления (сообщения, которые получил бот)
-    const updatesResponse = await fetch(`https://api.telegram.org/bot${botToken}/getUpdates`);
-    const updates = await updatesResponse.json();
-    
-    // Получаем webhook информацию
-    const webhookResponse = await fetch(`https://api.telegram.org/bot${botToken}/getWebhookInfo`);
-    const webhookInfo = await webhookResponse.json();
-    
+    if (!chatInfoResponse.ok) {
+      const errorData = await chatInfoResponse.json();
+      return NextResponse.json({
+        error: 'Failed to get chat info',
+        telegramError: errorData,
+        botInfo: botInfo.result
+      }, { status: 500 });
+    }
+
+    const chatInfo = await chatInfoResponse.json();
+
     return NextResponse.json({
       success: true,
-      botInfo: botInfo.ok ? botInfo.result : null,
-      updates: updates.ok ? updates.result : null,
-      webhookInfo: webhookInfo.ok ? webhookInfo.result : null,
-      instructions: [
-        'Для получения Chat ID:',
-        '1. Напишите боту в Telegram',
-        '2. Проверьте обновления выше',
-        '3. Найдите chat.id в обновлениях'
-      ]
+      botInfo: botInfo.result,
+      chatInfo: chatInfo.result,
+      configuration: {
+        botToken: botToken.substring(0, 10) + '...',
+        chatId: chatId
+      }
     });
 
   } catch (error) {
-    console.error('Error in bot-info route:', error);
-    return NextResponse.json(
-      { 
-        error: 'Произошла ошибка при получении информации о боте',
-        details: error instanceof Error ? error.message : 'Неизвестная ошибка'
-      },
-      { status: 500 }
-    );
+    console.error('Error in bot-info endpoint:', error);
+    return NextResponse.json({
+      error: 'Internal server error',
+      details: error instanceof Error ? error.message : 'Unknown error'
+    }, { status: 500 });
   }
 }
 
@@ -47,7 +65,13 @@ export async function POST(request: NextRequest) {
     const body = await request.json();
     const { action } = body;
     
-    const botToken = '8427033239:AAHph4NRb6z-Ozjtlblnuq5b6tFigG17CBs';
+    const botToken = process.env.TELEGRAM_BOT_TOKEN;
+    
+    if (!botToken) {
+      return NextResponse.json({
+        error: 'Токен бота не настроен'
+      }, { status: 500 });
+    }
     
     if (action === 'clear_updates') {
       // Очищаем все обновления

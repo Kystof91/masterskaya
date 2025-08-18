@@ -32,6 +32,9 @@ RUN adduser --system --uid 1001 nextjs
 # Копируем собранное приложение
 COPY --from=builder /app/public ./public
 
+# Копируем файл переменных окружения
+COPY --from=builder /app/.env.production ./.env.production
+
 # Автоматически используем standalone output
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static

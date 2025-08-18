@@ -57,7 +57,7 @@ export default function AboutPage() {
       description: 'Специалист по работе с зависимыми и созависимыми'
     },
     {
-      name: 'Пенежина  Вера Сергеевна',
+      name: 'Панежина  Вера Сергеевна',
       position: 'Врач - терапевт',
       experience: '10 лет опыта',
       description: 'Врач - терапевт, врач - гериатр'

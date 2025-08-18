@@ -31,7 +31,7 @@ export default function ContactsPage() {
     {
       title: 'Адрес',
       value: 'г. Санкт-Петербург, ул. Заставская, 33л',
-      description: '(ул. Ташкентская, 2) • Конфиденциально',
+      description: '(ул. Ташкентская, 2)',
       icon: MapPin,
       link: '#'
     },
@@ -110,11 +110,11 @@ export default function ContactsPage() {
       </section>
 
       {/* Main Content */}
-      <section className="section-padding bg-gray-50 text-center min-h-screen flex items-center justify-center">
+      <section className="section-padding bg-gray-50 min-h-screen flex items-center justify-center">
         <div className="container-custom">
-          <div className="flex justify-center">
+          <div className="grid lg:grid-cols-2 gap-12 items-start">
             {/* Contact Details */}
-            <div className="mb-12 text-center max-w-2xl">
+            <div className="text-center lg:text-left">
               <h2 className="text-3xl font-bold text-gray-900 mb-6">
                 Связаться с нами
               </h2>
@@ -142,31 +142,44 @@ export default function ContactsPage() {
                   </div>
                   <div className="space-y-6">
                     {emergencyInfo.map((service, index) => (
-                                      <div key={index} className="border-l-4 border-primary pl-6">
-                  <h4 className="text-lg font-semibold mb-2">{service.title}</h4>
-                  <p className="text-base text-gray-600 mb-3">{service.description}</p>
-                  <div className="text-center">
-                    <a 
-                      href={`tel:${service.phone.replace(/\s/g, '')}`}
-                      className="text-primary hover:text-primary-hover font-semibold text-lg flex items-center justify-center space-x-2 mb-2"
-                    >
-                      <Phone className="w-5 h-5" />
-                      <span>{service.phone}</span>
-                    </a>
-                    <a 
-                      href={`tel:${service.phone2.replace(/\s/g, '')}`}
-                      className="text-primary hover:text-primary-hover font-semibold text-lg flex items-center justify-center space-x-2 mb-2"
-                    >
-                      <Phone className="w-5 h-5" />
-                      <span>{service.phone2}</span>
-                    </a>
-                    <span className="text-base text-gray-500 block">{service.available}</span>
-                  </div>
+                      <div key={index} className="border-l-4 border-primary pl-6">
+                        <h4 className="text-lg font-semibold mb-2">{service.title}</h4>
+                        <p className="text-base text-gray-600 mb-3">{service.description}</p>
+                        <div className="text-center">
+                          <a 
+                            href={`tel:${service.phone.replace(/\s/g, '')}`}
+                            className="text-primary hover:text-primary-hover font-semibold text-lg flex items-center justify-center space-x-2 mb-2"
+                          >
+                            <Phone className="w-5 h-5" />
+                            <span>{service.phone}</span>
+                          </a>
+                          <a 
+                            href={`tel:${service.phone2.replace(/\s/g, '')}`}
+                            className="text-primary hover:text-primary-hover font-semibold text-lg flex items-center justify-center space-x-2 mb-2"
+                          >
+                            <Phone className="w-5 h-5" />
+                            <span>{service.phone2}</span>
+                          </a>
+                          <span className="text-base text-gray-500 block">{service.available}</span>
+                        </div>
                       </div>
                     ))}
                   </div>
                 </div>
               </div>
+            </div>
+
+            {/* Contact Form */}
+            <div className="bg-white rounded-lg shadow-lg p-8">
+              <div className="text-center mb-6">
+                <h3 className="text-2xl font-bold text-gray-900 mb-2">
+                  Получить консультацию
+                </h3>
+                <p className="text-gray-600">
+                  Оставьте заявку, и наш специалист свяжется с вами для бесплатной консультации
+                </p>
+              </div>
+              <ContactForm />
             </div>
           </div>
         </div>
@@ -289,22 +302,7 @@ export default function ContactsPage() {
         </div>
       </section>
 
-      {/* Contact Form Section */}
-      <section className="section-padding bg-white">
-        <div className="container-custom">
-          <div className="text-center mb-8">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Получить консультацию
-            </h2>
-            <p className="text-xl text-gray-600">
-              Оставьте заявку, и наш специалист свяжется с вами для бесплатной консультации
-            </p>
-          </div>
-          <div className="max-w-2xl mx-auto">
-            <ContactForm />
-          </div>
-        </div>
-      </section>
+
 
       <Footer />
     </div>

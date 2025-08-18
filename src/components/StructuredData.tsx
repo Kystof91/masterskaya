@@ -1,5 +1,5 @@
 interface StructuredDataProps {
-  type: 'organization' | 'medical-clinic' | 'service' | 'article' | 'breadcrumb';
+  type: 'organization' | 'medical-clinic' | 'service' | 'article' | 'breadcrumb' | 'faq' | 'review' | 'local-business' | 'medical-procedure';
   data: Record<string, unknown>;
 }
 
@@ -13,9 +13,9 @@ export default function StructuredData({ type, data }: StructuredDataProps) {
           "name": "Мастерская - Лечение зависимостей",
           "alternateName": "Мастерская",
           "description": "Медицинский центр специализирующийся на лечении алкогольной и наркотической зависимости",
-          "url": "https://masterskaya.clinic",
-          "logo": "https://masterskaya.clinic/logotip.png",
-          "image": "https://masterskaya.clinic/logotip.png",
+          "url": "https://mstrclinic.ru",
+          "logo": "https://mstrclinic.ru/logotip.png",
+          "image": "https://mstrclinic.ru/logotip.png",
           "telephone": ["8-812-407-3-407", "+7-911-750-07-00"],
           "email": "masterskaya.clinic@yandex.ru",
           "address": {
@@ -36,7 +36,7 @@ export default function StructuredData({ type, data }: StructuredDataProps) {
             {
               "@type": "MedicalService",
               "name": "Детоксикация",
-              "description": "Безопасное выведение токинов из организма"
+              "description": "Безопасное выведение токсинов из организма"
             },
             {
               "@type": "MedicalService", 
@@ -71,7 +71,7 @@ export default function StructuredData({ type, data }: StructuredDataProps) {
           "@type": "MedicalClinic",
           "name": "Мастерская - Лечение зависимостей",
           "description": data.description || "Профессиональная помощь в лечении зависимостей",
-          "url": data.url || "https://masterskaya.clinic",
+          "url": data.url || "https://mstrclinic.ru",
           "telephone": data.telephone || "8-812-407-3-407",
           "address": {
             "@type": "PostalAddress",
@@ -99,6 +99,19 @@ export default function StructuredData({ type, data }: StructuredDataProps) {
           }
         };
 
+      case 'medical-procedure':
+        return {
+          "@context": "https://schema.org",
+          "@type": "MedicalProcedure",
+          "name": data.name,
+          "description": data.description,
+          "bodyLocation": data.bodyLocation || "Brain",
+          "preparation": data.preparation || "Консультация врача",
+          "procedureType": data.procedureType || "Therapeutic",
+          "howPerformed": data.howPerformed || "Под наблюдением врача",
+          "followup": data.followup || "Регулярные консультации"
+        };
+
       case 'article':
         return {
           "@context": "https://schema.org",
@@ -115,7 +128,7 @@ export default function StructuredData({ type, data }: StructuredDataProps) {
             "name": "Мастерская - Лечение зависимостей",
             "logo": {
               "@type": "ImageObject",
-              "url": "https://masterskaya.clinic/logotip.png"
+              "url": "https://mstrclinic.ru/logotip.png"
             }
           },
           "datePublished": data.publishedAt,
@@ -124,6 +137,68 @@ export default function StructuredData({ type, data }: StructuredDataProps) {
             "@type": "WebPage",
             "@id": data.url
           }
+        };
+
+      case 'faq':
+        return {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "mainEntity": (data.questions as Array<{question: string; answer: string}>).map(q => ({
+            "@type": "Question",
+            "name": q.question,
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": q.answer
+            }
+          }))
+        };
+
+      case 'review':
+        return {
+          "@context": "https://schema.org",
+          "@type": "Review",
+          "itemReviewed": {
+            "@type": "MedicalOrganization",
+            "name": "Мастерская - Лечение зависимостей"
+          },
+          "reviewRating": {
+            "@type": "Rating",
+            "ratingValue": data.rating || 5,
+            "bestRating": 5
+          },
+          "author": {
+            "@type": "Person",
+            "name": data.authorName || "Пациент"
+          },
+          "reviewBody": data.reviewText || "",
+          "datePublished": data.datePublished || new Date().toISOString()
+        };
+
+      case 'local-business':
+        return {
+          "@context": "https://schema.org",
+          "@type": "LocalBusiness",
+          "name": "Мастерская - Лечение зависимостей",
+          "description": "Медицинский центр по лечению зависимостей",
+          "url": "https://mstrclinic.ru",
+          "telephone": "8-812-407-3-407",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "ул. Заставская, 33л",
+            "addressLocality": "Санкт-Петербург",
+            "addressRegion": "Санкт-Петербург",
+            "addressCountry": "RU",
+            "postalCode": "196084"
+          },
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": 59.9311,
+            "longitude": 30.3609
+          },
+          "openingHours": "Mo-Su 00:00-23:59",
+          "priceRange": "$$",
+          "paymentAccepted": ["Cash", "Credit Card", "Insurance"],
+          "currenciesAccepted": "RUB"
         };
 
       case 'breadcrumb':

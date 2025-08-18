@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import StructuredData from "@/components/StructuredData";
 import Analytics from "@/components/Analytics";
+import RubleReplacer from "@/components/RubleReplacer";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -19,9 +20,9 @@ export const metadata: Metadata = {
   formatDetection: {
     email: false,
     address: false,
-    telephone: false,
+    telephone: false
   },
-  metadataBase: new URL('https://masterskaya.clinic'),
+  metadataBase: new URL('https://mstrclinic.ru'),
   alternates: {
     canonical: '/',
   },
@@ -35,16 +36,16 @@ export const metadata: Metadata = {
         url: '/logotip.png',
         width: 1200,
         height: 630,
-        alt: 'Мастерская - Лечение зависимостей',
-      },
+        alt: 'Мастерская - Лечение зависимостей'
+      }
     ],
     locale: 'ru_RU',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: "Мастерская - Лечение зависимостей | Медицинский центр в Санкт-Петербурге",
-    description: "Профессиональная помощь в лечении алкогольной и наркотической зависимости в Санкт-Петербурге",
+    title: 'Мастерская - Лечение зависимостей',
+    description: 'Профессиональная помощь в лечении зависимостей в Санкт-Петербурге',
     images: ['/logotip.png'],
   },
   robots: {
@@ -59,70 +60,22 @@ export const metadata: Metadata = {
     },
   },
   verification: {
-    google: 'your-google-verification-code',
-    yandex: 'your-yandex-verification-code',
+    google: process.env.NEXT_PUBLIC_GOOGLE_VERIFICATION || 'your-google-verification-code',
+    yandex: process.env.NEXT_PUBLIC_YANDEX_VERIFICATION || 'your-yandex-verification-code',
   },
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
-  const organizationData = {
-    name: "Мастерская - Лечение зависимостей",
-    description: "Медицинский центр специализирующийся на лечении алкогольной и наркотической зависимости",
-    url: "https://masterskaya.clinic",
-    telephone: ["8-812-407-3-407", "+7-911-750-07-00"],
-    email: "masterskaya.clinic@yandex.ru",
-    address: {
-      streetAddress: "ул. Заставская, 33л",
-      addressLocality: "Санкт-Петербург",
-      addressCountry: "RU"
-    },
-    services: [
-      {
-        name: "Детоксикация",
-        description: "Безопасное выведение токинов из организма"
-      },
-      {
-        name: "Реабилитация", 
-        description: "Комплексная программа восстановления"
-      },
-      {
-        name: "Психотерапия",
-        description: "Индивидуальные и групповые сеансы"
-      }
-    ]
-  };
-
+}) {
   return (
-    <html lang="ru">
-      <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
-        <link rel="icon" href="/favicon.ico" />
-        <link rel="apple-touch-icon" sizes="180x180" href="/logotip.png" />
-        <link rel="icon" type="image/png" sizes="32x32" href="/logotip.png" />
-        <link rel="icon" type="image/png" sizes="16x16" href="/logotip.png" />
-        <link rel="manifest" href="/site.webmanifest" />
-        <meta name="theme-color" content="#B39A7C" />
-        <meta name="msapplication-TileColor" content="#B39A7C" />
-        
-        {/* Preload critical resources */}
-        <link rel="preload" href="/logotip.png" as="image" />
-        <link rel="preload" href="/fonts/inter-var.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
-        
-        {/* DNS prefetch */}
-        <link rel="dns-prefetch" href="//fonts.googleapis.com" />
-        <link rel="dns-prefetch" href="//fonts.gstatic.com" />
-      </head>
-      <body className={`${inter.variable} font-sans antialiased`}>
-        <StructuredData type="organization" data={organizationData} />
-        <Analytics 
-          gaId={process.env.NEXT_PUBLIC_GA_ID}
-          yandexId={process.env.NEXT_PUBLIC_YANDEX_ID}
-        />
+    <html lang="ru" className={inter.variable}>
+      <body className={inter.className}>
         {children}
+        <Analytics />
+        <RubleReplacer />
       </body>
     </html>
   );

@@ -10,88 +10,104 @@ interface FAQItem {
 }
 
 interface FAQProps {
-  items: FAQItem[];
   title?: string;
   description?: string;
+  items: FAQItem[];
+  className?: string;
 }
 
-export default function FAQ({ items, title = "Часто задаваемые вопросы", description }: FAQProps) {
-  const [openItems, setOpenItems] = useState<number[]>([]);
+export default function FAQ({ 
+  title = "Часто задаваемые вопросы", 
+  description = "Ответы на самые популярные вопросы о лечении зависимостей",
+  items, 
+  className = "" 
+}: FAQProps) {
+  const [openItems, setOpenItems] = useState<Set<number>>(new Set());
 
   const toggleItem = (index: number) => {
-    setOpenItems(prev => 
-      prev.includes(index) 
-        ? prev.filter(i => i !== index)
-        : [...prev, index]
-    );
+    const newOpenItems = new Set(openItems);
+    if (newOpenItems.has(index)) {
+      newOpenItems.delete(index);
+    } else {
+      newOpenItems.add(index);
+    }
+    setOpenItems(newOpenItems);
   };
 
   // Структурированные данные для FAQ
   const faqStructuredData = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": items.map((item, _index) => ({ // eslint-disable-line @typescript-eslint/no-unused-vars
-      "@type": "Question",
-      "name": item.question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": item.answer
-      }
-    }))
+    questions: items
   };
 
   return (
-    <section className="py-12 bg-gray-50">
-      <div className="container-custom">
-        <StructuredData type="article" data={faqStructuredData} />
+    <section className={`py-12 bg-gray-50 ${className}`}>
+      <div className="container mx-auto px-4">
+        {/* Структурированные данные */}
+        <StructuredData type="faq" data={faqStructuredData} />
         
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+          <h2 className="text-3xl font-bold text-gray-900 mb-4">
             {title}
           </h2>
-          {description && (
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              {description}
-            </p>
-          )}
+          <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+            {description}
+          </p>
         </div>
 
-        <div className="max-w-4xl mx-auto space-y-4">
-          {items.map((item, _index) => (
-            <div key={item.question} className="bg-white rounded-lg shadow-sm border border-gray-200">
-              <button
-                onClick={() => toggleItem(_index)}
-                className="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-gray-50 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-inset"
-                aria-expanded={openItems.includes(_index)}
-                aria-controls={`faq-answer-${_index}`}
-              >
-                <span className="text-lg font-medium text-gray-900 pr-4">
-                  {item.question}
-                </span>
-                {openItems.includes(_index) ? (
-                  <ChevronUp className="w-5 h-5 text-gray-500 flex-shrink-0" />
-                ) : (
-                  <ChevronDown className="w-5 h-5 text-gray-500 flex-shrink-0" />
-                )}
-              </button>
-              
+        <div className="max-w-4xl mx-auto">
+          <div className="space-y-4">
+            {items.map((item, index) => (
               <div
-                id={`faq-answer-${_index}`}
-                className={`px-6 pb-4 transition-all duration-300 ease-in-out ${
-                  openItems.includes(_index) 
-                    ? 'max-h-96 opacity-100' 
-                    : 'max-h-0 opacity-0 overflow-hidden'
-                }`}
-                aria-hidden={!openItems.includes(_index)}
+                key={index}
+                className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden"
               >
-                <div className="pt-2 border-t border-gray-200">
-                  <p className="text-gray-600 leading-relaxed">
-                    {item.answer}
-                  </p>
+                <button
+                  onClick={() => toggleItem(index)}
+                  className="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-gray-50 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-inset"
+                  aria-expanded={openItems.has(index)}
+                  aria-controls={`faq-answer-${index}`}
+                >
+                  <span className="text-lg font-medium text-gray-900 pr-4">
+                    {item.question}
+                  </span>
+                  {openItems.has(index) ? (
+                    <ChevronUp className="h-5 w-5 text-primary flex-shrink-0" />
+                  ) : (
+                    <ChevronDown className="h-5 w-5 text-primary flex-shrink-0" />
+                  )}
+                </button>
+                
+                <div
+                  id={`faq-answer-${index}`}
+                  className={`px-6 transition-all duration-300 ease-in-out ${
+                    openItems.has(index) 
+                      ? 'max-h-96 opacity-100 pb-4' 
+                      : 'max-h-0 opacity-0 overflow-hidden'
+                  }`}
+                  aria-hidden={!openItems.has(index)}
+                >
+                  <div className="border-t border-gray-200 pt-4">
+                    <p className="text-gray-700 leading-relaxed">
+                      {item.answer}
+                    </p>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
+        </div>
+
+        {/* Дополнительная информация */}
+        <div className="text-center mt-12">
+          <p className="text-gray-600 mb-4">
+            Не нашли ответ на свой вопрос?
+          </p>
+          <a
+            href="/contacts"
+            className="inline-flex items-center px-6 py-3 bg-primary text-white font-medium rounded-lg hover:bg-primary-dark transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+          >
+            Связаться с нами
+          </a>
         </div>
       </div>
     </section>

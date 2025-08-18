@@ -22,7 +22,7 @@ export default function SEOHead({
   noindex = false
 }: SEOHeadProps) {
   const fullTitle = `${title} | Мастерская - Лечение зависимостей`;
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://masterskaya.clinic';
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://mstrclinic.ru';
   const fullCanonical = canonical ? `${siteUrl}${canonical}` : siteUrl;
   const fullOgImage = ogImage.startsWith('http') ? ogImage : `${siteUrl}${ogImage}`;
 

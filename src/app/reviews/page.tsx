@@ -12,6 +12,33 @@ import {
 } from 'lucide-react';
 
 export default function ReviewsPage() {
+  // Функция для генерации случайной даты в промежутке с 01.08.2025 до 16.08.2025
+  const generateRandomDate = () => {
+    const startDate = new Date('2025-08-01');
+    const endDate = new Date('2025-08-16');
+    const randomTime = startDate.getTime() + Math.random() * (endDate.getTime() - startDate.getTime());
+    const randomDate = new Date(randomTime);
+    return randomDate.toISOString().split('T')[0]; // Возвращаем только дату в формате YYYY-MM-DD
+  };
+
+  // Для генерации новых случайных дат можно использовать:
+  // date: generateRandomDate()
+  // Или задать конкретные даты как показано ниже
+
+  // Распределение врачей по отзывам:
+  // - Карин Р.А. (психолог) - 3 отзыва
+  // - Абалян О.А. (психолог-эксперт по зависимостям) - 3 отзыва
+
+  // Функция для красивого форматирования даты
+  const formatDate = (dateString: string) => {
+    const date = new Date(dateString);
+    return date.toLocaleDateString('ru-RU', {
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric'
+    });
+  };
+
   const testimonials = [
     {
       name: 'Александр М.',
@@ -19,11 +46,11 @@ export default function ReviewsPage() {
       treatment: 'Алкогольная зависимость',
       duration: '30 дней',
       rating: 5,
-      date: '2024-01-15',
+      date: '2025-08-03',
       text: 'Благодаря центру я смог избавиться от зависимости и вернуться к нормальной жизни. Спасибо всему персоналу за профессионализм и поддержку!',
       before: 'Пил каждый день, потерял работу и семью',
       after: 'Полностью трезв 2 года, восстановил отношения с семьей',
-      doctor: 'Доктор Иванов А.П.'
+      doctor: 'Карин Р.А.'
     },
     {
       name: 'Елена В.',
@@ -31,11 +58,11 @@ export default function ReviewsPage() {
       treatment: 'Наркотическая зависимость',
       duration: '45 дней',
       rating: 5,
-      date: '2024-02-20',
+      date: '2025-08-07',
       text: 'Профессиональный подход и внимательное отношение к каждому пациенту. Рекомендую всем, кто столкнулся с проблемой.',
       before: 'Зависимость от наркотиков, проблемы с законом',
       after: 'Трезва 1.5 года, работает, планирует семью',
-      doctor: 'Петрова Е.В.'
+      doctor: 'Абалян О.А.'
     },
     {
       name: 'Дмитрий К.',
@@ -43,11 +70,11 @@ export default function ReviewsPage() {
       treatment: 'Алкогольная зависимость',
       duration: '21 день',
       rating: 5,
-      date: '2024-03-10',
+      date: '2025-08-11',
       text: 'Долго не решался обратиться за помощью, но здесь меня поняли и поддержали. Теперь я на пути к выздоровлению.',
       before: 'Запои по 2-3 недели, проблемы со здоровьем',
       after: 'Контролирует употребление, здоровье улучшилось',
-      doctor: 'Сидоров М.К.'
+      doctor: 'Карин Р.А.'
     },
     {
       name: 'Марина С.',
@@ -55,11 +82,11 @@ export default function ReviewsPage() {
       treatment: 'Семейная терапия',
       duration: '12 сеансов',
       rating: 5,
-      date: '2024-01-30',
+      date: '2025-08-05',
       text: 'Семейная терапия помогла нам восстановить отношения. Теперь мы поддерживаем мужа в его выздоровлении.',
       before: 'Конфликты в семье, непонимание проблемы',
       after: 'Здоровые отношения, взаимная поддержка',
-      doctor: 'Петрова Е.В.'
+      doctor: 'Абалян О.А.'
     },
     {
       name: 'Сергей Л.',
@@ -67,11 +94,11 @@ export default function ReviewsPage() {
       treatment: 'Комплексная реабилитация',
       duration: '60 дней',
       rating: 5,
-      date: '2024-02-15',
+      date: '2025-08-14',
       text: 'Долгий путь к выздоровлению, но результат того стоит. Спасибо команде за профессионализм и терпение.',
       before: 'Многолетняя зависимость, потеря всего',
       after: 'Трезв 3 года, открыл свой бизнес',
-      doctor: 'Доктор Иванов А.П.'
+      doctor: 'Карин Р.А.'
     },
     {
       name: 'Анна Р.',
@@ -79,11 +106,11 @@ export default function ReviewsPage() {
       treatment: 'Психотерапия',
       duration: '20 сеансов',
       rating: 5,
-      date: '2024-03-05',
+      date: '2025-08-09',
       text: 'Психотерапия помогла мне понять корни проблемы и научиться справляться со стрессом без алкоголя.',
       before: 'Проблемы с самоконтролем, депрессия',
       after: 'Стабильное психическое состояние, новые увлечения',
-      doctor: 'Петрова Е.В.'
+      doctor: 'Абалян О.А.'
     }
   ];
 
@@ -186,7 +213,7 @@ export default function ReviewsPage() {
                   <p className="text-gray-600 italic mb-4">&ldquo;{testimonial.text}&rdquo;</p>
                   <div className="flex items-center space-x-2 text-sm text-gray-500">
                     <Calendar className="w-4 h-4" />
-                    <span>{new Date(testimonial.date).toLocaleDateString('ru-RU')}</span>
+                    <span>{formatDate(testimonial.date)}</span>
                   </div>
                 </div>
                 
