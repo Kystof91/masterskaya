@@ -68,22 +68,6 @@ const nextConfig: NextConfig = {
       }
     ];
   },
-  
-  // Перенаправления
-  async redirects() {
-    return [
-      {
-        source: '/home',
-        destination: '/',
-        permanent: true,
-      },
-      {
-        source: '/index.html',
-        destination: '/',
-        permanent: true,
-      }
-    ];
-  },
 
   // Экспериментальные функции для SEO
   experimental: {

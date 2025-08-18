@@ -6,10 +6,6 @@
       "destination": "/api/$1"
     },
     {
-      "source": "/(.*)",
-      "destination": "/$1"
-    },
-    {
       "source": "/home",
       "destination": "/"
     },
@@ -55,6 +51,32 @@
         {
           "key": "Cache-Control",
           "value": "public, max-age=3600, s-maxage=86400"
+        }
+      ]
+    },
+    {
+      "source": "/yandex_66ce443c9e6aa964.html",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "text/plain; charset=utf-8"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "no-cache, no-store, must-revalidate"
+        }
+      ]
+    },
+    {
+      "source": "/googlef295c1b7371fdbfb.html",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "text/plain; charset=utf-8"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "no-cache, no-store, must-revalidate"
         }
       ]
     }
