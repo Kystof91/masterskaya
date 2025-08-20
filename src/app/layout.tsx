@@ -18,6 +18,16 @@ export const metadata: Metadata = {
   authors: [{ name: "Мастерская - Лечение зависимостей" }],
   creator: "Мастерская - Лечение зависимостей",
   publisher: "Мастерская - Лечение зависимостей",
+  icons: {
+    icon: [
+      { url: '/favicon.ico' },
+      { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
+      { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
+    ],
+    apple: [
+      { url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
+    ],
+  },
   formatDetection: {
     email: false,
     address: false,
@@ -73,6 +83,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ru" className={inter.variable}>
+      <head>
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="icon" href="/favicon-16x16.png" type="image/png" sizes="16x16" />
+        <link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+      </head>
       <body className={inter.className}>
         {children}
         <SEOSchema type="medical-organization" />
