@@ -3,6 +3,7 @@ Allow: /
 
 # Sitemap
 Sitemap: https://mstrclinic.ru/sitemap.xml
+Sitemap: https://mstrclinic.ru/sitemap-index.xml
 
 # Disallow admin panel and API
 Disallow: /admin

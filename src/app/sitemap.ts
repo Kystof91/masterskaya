@@ -96,6 +96,34 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   ]
 
+  // Дополнительные страницы для лучшего покрытия
+  const additionalPages = [
+    {
+      url: `${baseUrl}/health/detox`,
+      lastModified: currentDate,
+      changeFrequency: 'monthly' as const,
+      priority: 0.7,
+    },
+    {
+      url: `${baseUrl}/health/rehabilitation`,
+      lastModified: currentDate,
+      changeFrequency: 'monthly' as const,
+      priority: 0.7,
+    },
+    {
+      url: `${baseUrl}/methods/psychotherapy`,
+      lastModified: currentDate,
+      changeFrequency: 'monthly' as const,
+      priority: 0.6,
+    },
+    {
+      url: `${baseUrl}/methods/detox-therapy`,
+      lastModified: currentDate,
+      changeFrequency: 'monthly' as const,
+      priority: 0.6,
+    },
+  ]
+
   // Здесь можно добавить динамические страницы блога
   // const blogPosts = await getBlogPosts()
   // const blogPages = blogPosts.map(post => ({
@@ -105,5 +133,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
   //   priority: 0.6,
   // }))
 
-  return [...mainPages, ...servicePages]
+  return [...mainPages, ...servicePages, ...additionalPages]
 }
