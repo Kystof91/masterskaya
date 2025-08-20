@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import StructuredData from "@/components/StructuredData";
+import SEOSchema from "@/components/SEOSchema";
 import Analytics from "@/components/Analytics";
 import RubleReplacer from "@/components/RubleReplacer";
 
@@ -29,7 +30,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Мастерская - Лечение зависимостей | Медицинский центр в Санкт-Петербурге",
     description: "Профессиональная помощь в лечении алкогольной и наркотической зависимости в Санкт-Петербурге. Анонимно, конфиденциально, эффективно.",
-    url: 'https://masterskaya.clinic',
+    url: 'https://mstrclinic.ru',
     siteName: 'Мастерская - Лечение зависимостей',
     images: [
       {
@@ -74,6 +75,7 @@ export default function RootLayout({
     <html lang="ru" className={inter.variable}>
       <body className={inter.className}>
         {children}
+        <SEOSchema type="medical-organization" />
         <Analytics />
         <RubleReplacer />
       </body>

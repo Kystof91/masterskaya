@@ -1,5 +1,6 @@
 'use client';
 
+import { Metadata } from 'next';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import ContactForm from '@/components/ContactForm';
@@ -24,6 +25,21 @@ interface TeamMember {
   description: string;
   photo?: string;
 }
+
+export const metadata: Metadata = {
+  title: 'О нас | Мастерская - Лечение зависимостей',
+  description: 'Узнайте о команде специалистов центра "Мастерская" в Санкт-Петербурге. Опытные врачи, современные методики лечения зависимостей, лицензии и сертификаты.',
+  keywords: 'врачи наркологи, специалисты по зависимостям, команда врачей, опыт лечения, лицензии, сертификаты, Санкт-Петербург',
+  openGraph: {
+    title: 'О нас | Мастерская - Лечение зависимостей',
+    description: 'Команда специалистов центра "Мастерская" - опытные врачи с многолетним стажем в лечении зависимостей.',
+    url: 'https://mstrclinic.ru/about',
+    images: ['/logotip.png'],
+  },
+  alternates: {
+    canonical: '/about',
+  },
+};
 
 export default function AboutPage() {
   const [currentSlide, setCurrentSlide] = useState(0);

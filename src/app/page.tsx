@@ -1,3 +1,4 @@
+import { Metadata } from 'next';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import Breadcrumbs from '@/components/Breadcrumbs';
@@ -18,6 +19,21 @@ import {
 } from 'lucide-react';
 import Link from 'next/link';
 import ContactForm from '@/components/ContactForm';
+
+export const metadata: Metadata = {
+  title: 'Мастерская - Лечение зависимостей | Главная',
+  description: 'Профессиональная помощь в лечении алкогольной и наркотической зависимости в Санкт-Петербурге. Анонимно, конфиденциально, эффективно. Детоксикация, реабилитация, психотерапия.',
+  keywords: 'лечение зависимостей, наркология, алкоголизм, наркомания, детоксикация, реабилитация, психотерапия, Санкт-Петербург, анонимно, круглосуточно',
+  openGraph: {
+    title: 'Мастерская - Лечение зависимостей | Главная',
+    description: 'Профессиональная помощь в лечении зависимостей в Санкт-Петербурге. Анонимно, конфиденциально, эффективно.',
+    url: 'https://mstrclinic.ru',
+    images: ['/logotip.png'],
+  },
+  alternates: {
+    canonical: '/',
+  },
+};
 
 export default function Home() {
   const services = [
@@ -121,7 +137,7 @@ export default function Home() {
     "@type": "MedicalClinic",
     "name": "Мастерская - Лечение зависимостей",
     "description": "Профессиональная помощь в лечении алкогольной и наркотической зависимости в Санкт-Петербурге",
-    "url": "https://masterskaya.clinic",
+            "url": "https://mstrclinic.ru",
     "telephone": ["8-812-407-3-407", "+7-911-750-07-00"],
     "email": "masterskaya.clinic@yandex.ru",
     "address": {
