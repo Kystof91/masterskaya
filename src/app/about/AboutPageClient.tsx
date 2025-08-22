@@ -90,7 +90,7 @@ export default function AboutPageClient() {
     },
     {
       number: '24/7',
-      title: 'Поддержка',
+      title: 'Время работы - круглосуточно',
       description: 'Круглосуточная помощь'
     }
   ];

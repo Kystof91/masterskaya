@@ -70,7 +70,7 @@ export default function Home() {
       icon: Shield
     },
     {
-      title: 'Круглосуточно',
+      title: 'Время работы - круглосуточно',
       description: 'Помощь доступна 24/7 без выходных',
       icon: Clock
     },

@@ -29,7 +29,7 @@ export default function ServicesPageClient() {
       color: 'bg-red-100 text-red-600',
       features: [
         'Медикаментозная поддержка',
-        'Круглосуточное наблюдение',
+        'Время работы - круглосуточно',
         'Индивидуальная программа',
         'Безопасные препараты'
       ],
@@ -276,6 +276,15 @@ export default function ServicesPageClient() {
                   <div>
                     <h3 className="font-semibold mb-2">Современные методики</h3>
                     <p className="text-gray-600">Использование проверенных и инновационных подходов</p>
+                  </div>
+                </div>
+                <div className="flex items-start space-x-4">
+                  <div className="w-12 h-12 bg-primary-light rounded-lg flex items-center justify-center flex-shrink-0">
+                    <Clock className="w-6 h-6 text-primary" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold mb-2">Время работы - круглосуточно</h3>
+                    <p className="text-gray-600">Помощь доступна 24/7 без выходных</p>
                   </div>
                 </div>
               </div>

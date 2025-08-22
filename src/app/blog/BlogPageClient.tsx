@@ -83,7 +83,8 @@ export default function BlogPageClient() {
     { name: 'Методики', count: processedArticles.filter(a => a.category === 'Методики').length },
     { name: 'Семейная терапия', count: processedArticles.filter(a => a.category === 'Семейная терапия').length },
     { name: 'Профилактика', count: processedArticles.filter(a => a.category === 'Профилактика').length },
-    { name: 'Психология', count: processedArticles.filter(a => a.category === 'Психология').length }
+    { name: 'Психология', count: processedArticles.filter(a => a.category === 'Психология').length },
+    { name: 'Клиника', count: processedArticles.filter(a => a.category === 'Клиника').length }
   ];
 
   const popularArticles = [
@@ -115,6 +116,9 @@ export default function BlogPageClient() {
             <p className="text-xl mb-8 text-secondary-light max-w-3xl mx-auto">
               Экспертные статьи о лечении зависимостей, советы специалистов 
               и полезная информация для пациентов и их родственников.
+            </p>
+            <p className="text-lg text-white/80 max-w-2xl mx-auto">
+              Время работы - круглосуточно. Помощь доступна 24/7 без выходных.
             </p>
           </div>
         </div>
@@ -238,10 +242,12 @@ export default function BlogPageClient() {
                       <Link 
                         key={index} 
                         href={`/blog?category=${category.name}`}
-                        className="text-gray-700 hover:text-primary transition-colors"
+                        className="text-gray-700 hover:text-primary transition-colors block"
                       >
-                        <span className="text-gray-700">{category.name}</span>
-                        <span className="text-gray-500 text-sm ml-2">({category.count})</span>
+                        <div className="flex items-center justify-between">
+                          <span className="text-gray-700 text-sm break-words flex-1">{category.name}</span>
+                          <span className="text-gray-500 text-sm ml-2 flex-shrink-0">({category.count})</span>
+                        </div>
                       </Link>
                     ))}
                   </div>

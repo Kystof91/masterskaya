@@ -37,7 +37,7 @@ export default function ContactsPageClient() {
       link: '#'
     },
     {
-      title: 'Режим работы',
+      title: 'Время работы - круглосуточно',
       value: '24/7',
       description: 'Без выходных',
       icon: Clock,
@@ -228,7 +228,9 @@ export default function ContactsPageClient() {
                     </div>
                     <div>
                       <h4 className="font-medium">На машине</h4>
-                      <p className="text-gray-600">В навигаторе укажите адрес: ул. Заставская, дом 33л (или ул. Ташкентская, дом 2). 
+                      <p className="text-gray-600">В навигаторе укажите адрес: ул. Заставская, дом 33л
+                        <br />
+                        (или ул. Ташкентская, дом 2). 
                         <br />
                         Обратите внимание, что на этой улице одностороннее движение, поэтому следуйте указаниям навигатора для оптимального маршрута</p>
                     </div>

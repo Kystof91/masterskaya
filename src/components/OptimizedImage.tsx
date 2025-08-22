@@ -8,8 +8,12 @@ interface OptimizedImageProps {
   height: number;
   className?: string;
   priority?: boolean;
+  sizes?: string;
+  fill?: boolean;
+  quality?: number;
   placeholder?: 'blur' | 'empty';
   blurDataURL?: string;
+  onClick?: () => void;
 }
 
 export default function OptimizedImage({
@@ -19,31 +23,73 @@ export default function OptimizedImage({
   height,
   className = '',
   priority = false,
+  sizes,
+  fill = false,
+  quality = 75,
   placeholder = 'empty',
-  blurDataURL
+  blurDataURL,
+  onClick
 }: OptimizedImageProps) {
   const [isLoading, setIsLoading] = useState(true);
+  const [hasError, setHasError] = useState(false);
+
+  // Автоматическое улучшение alt-текста для SEO
+  const enhancedAlt = alt.includes('Мастерская') || alt.includes('лечение') 
+    ? alt 
+    : `${alt} - Мастерская лечение зависимостей`;
+
+  // Обработка ошибок загрузки
+  const handleError = () => {
+    setHasError(true);
+    setIsLoading(false);
+  };
+
+  // Обработка успешной загрузки
+  const handleLoad = () => {
+    setIsLoading(false);
+  };
+
+  if (hasError) {
+    return (
+      <div 
+        className={`bg-gray-200 flex items-center justify-center ${className}`}
+        style={{ width: fill ? '100%' : width, height: fill ? '100%' : height }}
+      >
+        <span className="text-gray-500 text-sm">Ошибка загрузки изображения</span>
+      </div>
+    );
+  }
 
   return (
-    <div className={`relative overflow-hidden ${className}`}>
+    <div className={`relative ${className}`}>
+      {isLoading && (
+        <div className="absolute inset-0 bg-gray-200 animate-pulse rounded" />
+      )}
+      
       <Image
         src={src}
-        alt={alt}
-        width={width}
-        height={height}
-        className={`
-          transition-all duration-300 ease-in-out
-          ${isLoading ? 'scale-110 blur-sm' : 'scale-100 blur-0'}
-        `}
+        alt={enhancedAlt}
+        width={fill ? undefined : width}
+        height={fill ? undefined : height}
+        className={`transition-opacity duration-300 ${
+          isLoading ? 'opacity-0' : 'opacity-100'
+        }`}
         priority={priority}
+        sizes={sizes}
+        fill={fill}
+        quality={quality}
         placeholder={placeholder}
         blurDataURL={blurDataURL}
-        onLoad={() => setIsLoading(false)}
-        onError={() => setIsLoading(false)}
+        onLoad={handleLoad}
+        onError={handleError}
+        onClick={onClick}
+        style={{
+          objectFit: fill ? 'cover' : 'contain'
+        }}
       />
-      {isLoading && (
-        <div className="absolute inset-0 bg-gray-200 animate-pulse" />
-      )}
+      
+      {/* Скрытый текст для SEO */}
+      <span className="sr-only">{enhancedAlt}</span>
     </div>
   );
 }

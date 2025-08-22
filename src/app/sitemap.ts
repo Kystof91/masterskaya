@@ -1,4 +1,5 @@
 import { MetadataRoute } from 'next'
+import { articlesData } from './blog/data'
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://mstrclinic.ru'
@@ -124,14 +125,70 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   ]
 
-  // Здесь можно добавить динамические страницы блога
-  // const blogPosts = await getBlogPosts()
-  // const blogPages = blogPosts.map(post => ({
-  //   url: `${baseUrl}/blog/${post.slug}`,
-  //   lastModified: new Date(post.updatedAt),
-  //   changeFrequency: 'monthly' as const,
-  //   priority: 0.6,
-  // }))
+  // Динамические страницы блога
+  const blogPages = articlesData.map(article => ({
+    url: `${baseUrl}/blog/${article.id}`,
+    lastModified: currentDate,
+    changeFrequency: 'monthly' as const,
+    priority: 0.6,
+  }))
 
-  return [...mainPages, ...servicePages, ...additionalPages]
+  // Страницы по категориям
+  const categoryPages = [
+    {
+      url: `${baseUrl}/blog/category/detox`,
+      lastModified: currentDate,
+      changeFrequency: 'weekly' as const,
+      priority: 0.7,
+    },
+    {
+      url: `${baseUrl}/blog/category/psychotherapy`,
+      lastModified: currentDate,
+      changeFrequency: 'weekly' as const,
+      priority: 0.7,
+    },
+    {
+      url: `${baseUrl}/blog/category/rehabilitation`,
+      lastModified: currentDate,
+      changeFrequency: 'weekly' as const,
+      priority: 0.7,
+    },
+  ]
+
+  // Страницы по тегам (основные)
+  const tagPages = [
+    {
+      url: `${baseUrl}/blog/tag/detox`,
+      lastModified: currentDate,
+      changeFrequency: 'weekly' as const,
+      priority: 0.6,
+    },
+    {
+      url: `${baseUrl}/blog/tag/алкоголизм`,
+      lastModified: currentDate,
+      changeFrequency: 'weekly' as const,
+      priority: 0.6,
+    },
+    {
+      url: `${baseUrl}/blog/tag/наркомания`,
+      lastModified: currentDate,
+      changeFrequency: 'weekly' as const,
+      priority: 0.6,
+    },
+    {
+      url: `${baseUrl}/blog/tag/лечение`,
+      lastModified: currentDate,
+      changeFrequency: 'weekly' as const,
+      priority: 0.6,
+    },
+  ]
+
+  return [
+    ...mainPages, 
+    ...servicePages, 
+    ...additionalPages, 
+    ...blogPages,
+    ...categoryPages,
+    ...tagPages
+  ]
 }

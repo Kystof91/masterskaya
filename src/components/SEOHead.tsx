@@ -6,9 +6,15 @@ interface SEOHeadProps {
   keywords?: string;
   canonical?: string;
   ogImage?: string;
-  ogType?: string;
+  ogType?: 'website' | 'article';
+  articleData?: {
+    publishedTime?: string;
+    modifiedTime?: string;
+    author?: string;
+    section?: string;
+    tags?: string[];
+  };
   structuredData?: object;
-  noindex?: boolean;
 }
 
 export default function SEOHead({
@@ -18,46 +24,56 @@ export default function SEOHead({
   canonical,
   ogImage = '/logotip.png',
   ogType = 'website',
-  structuredData,
-  noindex = false
+  articleData,
+  structuredData
 }: SEOHeadProps) {
-  const fullTitle = `${title} | Мастерская - Лечение зависимостей`;
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://mstrclinic.ru';
-  const fullCanonical = canonical ? `${siteUrl}${canonical}` : siteUrl;
-  const fullOgImage = ogImage.startsWith('http') ? ogImage : `${siteUrl}${ogImage}`;
-
+  const fullTitle = title.includes('Мастерская') ? title : `${title} | Мастерская - Лечение зависимостей`;
+  const fullDescription = description.length > 160 ? description.substring(0, 157) + '...' : description;
+  const fullCanonical = canonical ? `https://mstrclinic.ru${canonical}` : 'https://mstrclinic.ru';
+  
   return (
     <Head>
       {/* Основные мета-теги */}
       <title>{fullTitle}</title>
-      <meta name="description" content={description} />
+      <meta name="description" content={fullDescription} />
       {keywords && <meta name="keywords" content={keywords} />}
-      <meta name="robots" content={noindex ? 'noindex, nofollow' : 'index, follow'} />
-      
-      {/* Canonical URL */}
       <link rel="canonical" href={fullCanonical} />
       
       {/* Open Graph */}
       <meta property="og:title" content={fullTitle} />
-      <meta property="og:description" content={description} />
-      <meta property="og:type" content={ogType} />
+      <meta property="og:description" content={fullDescription} />
       <meta property="og:url" content={fullCanonical} />
-      <meta property="og:image" content={fullOgImage} />
-      <meta property="og:image:width" content="1200" />
-      <meta property="og:image:height" content="630" />
+      <meta property="og:image" content={`https://mstrclinic.ru${ogImage}`} />
+      <meta property="og:type" content={ogType} />
       <meta property="og:site_name" content="Мастерская - Лечение зависимостей" />
       <meta property="og:locale" content="ru_RU" />
       
-      {/* Twitter Cards */}
+      {/* Twitter Card */}
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:title" content={fullTitle} />
-      <meta name="twitter:description" content={description} />
-      <meta name="twitter:image" content={fullOgImage} />
+      <meta name="twitter:description" content={fullDescription} />
+      <meta name="twitter:image" content={`https://mstrclinic.ru${ogImage}`} />
       
-      {/* Дополнительные мета-теги */}
-      <meta name="author" content="Мастерская - Лечение зависимостей" />
-      <meta name="viewport" content="width=device-width, initial-scale=1" />
-      <meta name="theme-color" content="#B39A7C" />
+      {/* Дополнительные мета-теги для статей */}
+      {articleData && (
+        <>
+          {articleData.publishedTime && (
+            <meta property="article:published_time" content={articleData.publishedTime} />
+          )}
+          {articleData.modifiedTime && (
+            <meta property="article:modified_time" content={articleData.modifiedTime} />
+          )}
+          {articleData.author && (
+            <meta property="article:author" content={articleData.author} />
+          )}
+          {articleData.section && (
+            <meta property="article:section" content={articleData.section} />
+          )}
+          {articleData.tags && articleData.tags.map((tag, index) => (
+            <meta key={index} property="article:tag" content={tag} />
+          ))}
+        </>
+      )}
       
       {/* Структурированные данные */}
       {structuredData && (
@@ -69,9 +85,22 @@ export default function SEOHead({
         />
       )}
       
-      {/* Preconnect для внешних ресурсов */}
-      <link rel="preconnect" href="https://fonts.googleapis.com" />
-      <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+      {/* Дополнительные SEO мета-теги */}
+      <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+      <meta name="googlebot" content="index, follow" />
+      <meta name="author" content="Мастерская - Лечение зависимостей" />
+      <meta name="copyright" content="Мастерская - Лечение зависимостей" />
+      
+      {/* Географические мета-теги */}
+      <meta name="geo.region" content="RU-SPB" />
+      <meta name="geo.placename" content="Санкт-Петербург" />
+      <meta name="geo.position" content="59.9311;30.3609" />
+      <meta name="ICBM" content="59.9311, 30.3609" />
+      
+      {/* Медицинские мета-теги */}
+      <meta name="medical:specialty" content="Addiction Medicine, Psychiatry, Psychology, Narcology" />
+      <meta name="medical:service" content="Detoxification, Rehabilitation, Psychotherapy, Family Therapy" />
+      <meta name="medical:location" content="Saint Petersburg, Russia" />
     </Head>
   );
 }

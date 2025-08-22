@@ -49,6 +49,18 @@ const SocialIcons = ({ className = '', iconSize = 20, variant = 'dark' }: Social
         />
       ),
     },
+    {
+      name: 'Яндекс Карты',
+      url: 'https://yandex.ru/maps/org/masterskaya/36527421497/?ll=30.315590%2C59.891652&utm_source=share&z=17',
+      icon: (
+        <div 
+          className="flex items-center justify-center w-full h-full font-bold text-center transition-transform hover:scale-110"
+          style={{ fontSize: `${iconSize * 0.8}px` }}
+        >
+          Я
+        </div>
+      ),
+    },
   ];
 
   const isLight = variant === 'light';

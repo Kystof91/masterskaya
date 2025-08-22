@@ -90,7 +90,7 @@ export default function MethodsPageClient() {
         'Снятие абстинентного синдрома',
         'Снижение тяги к веществам',
         'Стабилизация настроения',
-        'Поддержка психического здоровья'
+        'Время работы - круглосуточно'
       ],
       details: 'Медикаментозная терапия используется в сочетании с психотерапией для снятия симптомов абстиненции, снижения тяги к веществам и стабилизации психического состояния.'
     },
@@ -270,6 +270,15 @@ export default function MethodsPageClient() {
                   <div>
                     <h3 className="font-semibold mb-2">Долгосрочная поддержка</h3>
                     <p className="text-gray-600">Постоянное сопровождение помогает закрепить результаты лечения</p>
+                  </div>
+                </div>
+                <div className="flex items-start space-x-4">
+                  <div className="w-12 h-12 bg-primary-light rounded-lg flex items-center justify-center flex-shrink-0">
+                    <Clock className="w-6 h-6 text-primary" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold mb-2">Время работы - круглосуточно</h3>
+                    <p className="text-gray-600">Помощь доступна 24/7 без выходных</p>
                   </div>
                 </div>
               </div>

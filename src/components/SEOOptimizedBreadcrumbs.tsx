@@ -1,10 +1,10 @@
 import Link from 'next/link';
 import { ChevronRight, Home } from 'lucide-react';
-import StructuredData from './StructuredData';
 
 interface BreadcrumbItem {
-  name: string;
-  url: string;
+  label: string;
+  href: string;
+  isCurrent?: boolean;
 }
 
 interface SEOOptimizedBreadcrumbsProps {
@@ -12,53 +12,61 @@ interface SEOOptimizedBreadcrumbsProps {
   className?: string;
 }
 
-export default function SEOOptimizedBreadcrumbs({ 
-  items, 
-  className = '' 
-}: SEOOptimizedBreadcrumbsProps) {
-  const allItems = [
-    { name: 'Главная', url: '/' },
-    ...items
-  ];
+export default function SEOOptimizedBreadcrumbs({ items, className = '' }: SEOOptimizedBreadcrumbsProps) {
+  const generateStructuredData = () => {
+    const structuredData = {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": items.map((item, index) => ({
+        "@type": "ListItem",
+        "position": index + 1,
+        "name": item.label,
+        "item": `https://mstrclinic.ru${item.href}`
+      }))
+    };
 
-  const structuredData = {
-    items: allItems.map(item => ({
-      name: item.name,
-      url: `https://mstrclinic.ru${item.url}`
-    }))
+    return structuredData;
   };
 
   return (
     <>
-      <StructuredData type="breadcrumb" data={structuredData} />
+      {/* Структурированные данные для поисковых систем */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(generateStructuredData())
+        }}
+      />
+      
+      {/* Визуальные хлебные крошки */}
       <nav 
         className={`flex items-center space-x-2 text-sm text-gray-600 ${className}`}
         aria-label="Хлебные крошки"
       >
-        {allItems.map((item, index) => (
-          <div key={item.url} className="flex items-center">
-            {index > 0 && (
-              <ChevronRight className="w-4 h-4 mx-2 text-gray-400" />
-            )}
-            {index === 0 ? (
-              <Link 
-                href={item.url}
-                className="flex items-center hover:text-blue-600 transition-colors"
-                aria-label="Перейти на главную страницу"
+        <Link 
+          href="/" 
+          className="flex items-center hover:text-primary transition-colors"
+          aria-label="Главная страница"
+        >
+          <Home className="w-4 h-4" />
+        </Link>
+        
+        {items.map((item, index) => (
+          <div key={index} className="flex items-center space-x-2">
+            <ChevronRight className="w-4 h-4 text-gray-400" />
+            {item.isCurrent ? (
+              <span 
+                className="text-gray-900 font-medium"
+                aria-current="page"
               >
-                <Home className="w-4 h-4 mr-1" />
-                {item.name}
-              </Link>
-            ) : index === allItems.length - 1 ? (
-              <span className="text-gray-900 font-medium" aria-current="page">
-                {item.name}
+                {item.label}
               </span>
             ) : (
               <Link 
-                href={item.url}
-                className="hover:text-blue-600 transition-colors"
+                href={item.href}
+                className="hover:text-primary transition-colors"
               >
-                {item.name}
+                {item.label}
               </Link>
             )}
           </div>

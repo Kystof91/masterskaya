@@ -309,10 +309,6 @@ const Header = () => {
                 </a>
               </div>
             </div>
-            <div className="flex items-center space-x-2 text-sm text-gray-600">
-              <MapPin className="w-4 h-4" aria-hidden="true" />
-              <span>24/7</span>
-            </div>
             <SocialIcons className="ml-2" iconSize={18} variant="light" />
           </div>
 
@@ -430,10 +426,6 @@ const Header = () => {
                     <a href="tel:+79117500700" className="hover:text-blue-600 transition-colors font-medium">
                       +7-911-750-07-00
                     </a>
-                  </div>
-                  <div className="flex items-center space-x-3 text-base text-gray-700">
-                    <MapPin className="w-5 h-5 text-blue-600" aria-hidden="true" />
-                    <span className="font-medium">24/7</span>
                   </div>
                 </div>
                 

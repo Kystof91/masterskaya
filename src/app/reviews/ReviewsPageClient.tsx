@@ -285,6 +285,15 @@ export default function ReviewsPageClient() {
                     <p className="text-gray-600">Постоянное сопровождение и помощь</p>
                   </div>
                 </div>
+                <div className="flex items-start space-x-4">
+                  <div className="w-12 h-12 bg-primary-light rounded-lg flex items-center justify-center flex-shrink-0">
+                    <Calendar className="w-6 h-6 text-primary" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold mb-2">Время работы - круглосуточно</h3>
+                    <p className="text-gray-600">Помощь доступна 24/7 без выходных</p>
+                  </div>
+                </div>
               </div>
             </div>
             <div className="bg-white rounded-lg p-6 shadow-lg">
