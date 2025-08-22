@@ -373,7 +373,6 @@ export default function Home() {
       <FAQ 
         items={faqItems}
         title="Часто задаваемые вопросы"
-        description="Ответы на самые популярные вопросы о лечении зависимостей"
       />
 
       {/* CTA Section */}

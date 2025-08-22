@@ -217,8 +217,8 @@ export function optimizeMetaTags(metaTags: HTMLMetaElement[]): { optimized: numb
   const requiredTags = ['description', 'keywords', 'robots', 'viewport'];
   const foundTags = new Set<string>();
   
-  metaTags.forEach((meta, index) => {
-    const name = meta.name || meta.property;
+  metaTags.forEach((meta) => {
+    const name = meta.name || (meta as HTMLMetaElement & { property?: string }).property;
     if (name) {
       foundTags.add(name);
       
