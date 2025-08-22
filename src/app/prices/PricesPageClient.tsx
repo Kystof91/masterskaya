@@ -397,10 +397,6 @@ export default function PricesPageClient() {
             </div>
             <div className="space-y-6">
               <div className="bg-white rounded-lg p-6 shadow-lg">
-                <h3 className="font-semibold mb-3">Можно ли получить налоговый вычет?</h3>
-                <p className="text-gray-600">Да, при лечении в нашем центре можно получить налоговый вычет в размере 13% от стоимости лечения.</p>
-              </div>
-              <div className="bg-white rounded-lg p-6 shadow-lg">
                 <h3 className="font-semibold mb-3">Есть ли гарантия результата?</h3>
                 <p className="text-gray-600">Мы гарантируем результат при соблюдении всех рекомендаций врачей. Подробности уточняйте у специалистов.</p>
               </div>

@@ -38,7 +38,7 @@ export default function AboutPageClient() {
     },
     {
       name: 'Пискунова Антонина Сергеевна',
-      position: 'Врач - Психиатр',
+      position: 'Психиатр-нарколог',
       experience: '15 лет опыта',
       description: 'Врач - нарколог, психотерапевт',
       photo: '/piskunova.jpg'
@@ -52,7 +52,7 @@ export default function AboutPageClient() {
     },
     {
       name: 'Карин Роман Александрович',
-      position: 'Психолог',
+      position: 'Психолог, Коуч IFС',
       experience: '17 лет опыта',
       description: 'Специалист по работе с зависимыми и созависимыми'
     },
