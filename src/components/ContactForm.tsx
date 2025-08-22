@@ -85,6 +85,11 @@ const ContactForm = () => {
         }
       }
 
+      // Отслеживаем отправку формы в Яндекс.Метрике
+      if (typeof window !== 'undefined' && (window as any).yandexGoals) {
+        (window as any).yandexGoals.trackFormSubmission('contact_form');
+      }
+
       // Отправляем данные в наш API endpoint
       const response = await fetch('/api/telegram', {
         method: 'POST',

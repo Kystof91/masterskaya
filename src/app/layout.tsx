@@ -4,6 +4,7 @@ import "./globals.css";
 import StructuredData from "@/components/StructuredData";
 import SEOSchema from "@/components/SEOSchema";
 import Analytics from "@/components/Analytics";
+import YandexGoals from "@/components/YandexGoals";
 import RubleReplacer from "@/components/RubleReplacer";
 
 const inter = Inter({
@@ -72,7 +73,7 @@ export const metadata: Metadata = {
   },
   verification: {
     google: process.env.NEXT_PUBLIC_GOOGLE_VERIFICATION || 'your-google-verification-code',
-    yandex: '22b6d1b31f053b53',
+    yandex: process.env.NEXT_PUBLIC_YANDEX_VERIFICATION || '70d29db80d4b9a25',
   },
 };
 
@@ -92,7 +93,11 @@ export default function RootLayout({
       <body className={inter.className}>
         {children}
         <SEOSchema type="medical-organization" />
-        <Analytics />
+        <Analytics 
+          gaId={process.env.NEXT_PUBLIC_GA_ID}
+          yandexId={process.env.NEXT_PUBLIC_YANDEX_ID} 
+        />
+        <YandexGoals yandexId={process.env.NEXT_PUBLIC_YANDEX_ID} />
         <RubleReplacer />
       </body>
     </html>

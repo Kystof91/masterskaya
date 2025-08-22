@@ -80,6 +80,19 @@
       ]
     },
     {
+      "source": "/yandex_70d29db80d4b9a25.html",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "text/plain; charset=utf-8"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "no-cache, no-store, must-revalidate"
+        }
+      ]
+    },
+    {
       "source": "/googlef295c1b7371fdbfb.html",
       "headers": [
         {
