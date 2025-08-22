@@ -4,6 +4,9 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import ContactForm from '@/components/ContactForm';
 import YandexMap from '@/components/YandexMap';
+import FAQ from '@/components/FAQ';
+import LocalSEO from '@/components/LocalSEO';
+import InternalLinking from '@/components/InternalLinking';
 import { 
   Phone, 
   Mail, 
@@ -66,6 +69,50 @@ export default function ContactsPageClient() {
       phone: '88124073407',
       phone2: '+79117500700',
       available: 'С 10:00 до 20:00'
+    }
+  ];
+
+  // FAQ данные для страницы контактов
+  const faqItems = [
+    {
+      question: "Можно ли приехать без записи?",
+      answer: "Да, мы принимаем пациентов без предварительной записи. Однако рекомендуем позвонить заранее для уточнения времени приема и возможности оказания необходимой помощи.",
+      keywords: ["запись", "прием", "консультация", "помощь"]
+    },
+    {
+      question: "Работаете ли вы в выходные и праздники?",
+      answer: "Да, мы работаем 24/7 без выходных и праздников. Помощь доступна в любое время суток, включая ночные часы и выходные дни.",
+      keywords: ["выходные", "праздники", "круглосуточно", "24/7"]
+    },
+    {
+      question: "Можно ли вызвать врача на дом?",
+      answer: "Да, мы предоставляем услугу вызова специалиста на дом в экстренных случаях. Врач приедет в течение 1-2 часов после обращения.",
+      keywords: ["вызов врача", "на дом", "экстренная помощь", "выезд"]
+    },
+    {
+      question: "Какие документы нужны для обращения?",
+      answer: "Для первичной консультации достаточно паспорта. Мы не требуем направления от врача или других документов. Все лечение проводится на основе добровольного согласия пациента.",
+      keywords: ["документы", "паспорт", "направление", "консультация"]
+    },
+    {
+      question: "Есть ли бесплатная консультация?",
+      answer: "Да, первичная консультация проводится бесплатно. Специалист оценит ситуацию, проведет диагностику и предложит индивидуальный план лечения.",
+      keywords: ["бесплатная консультация", "первичный прием", "диагностика", "план лечения"]
+    },
+    {
+      question: "Можно ли обратиться анонимно?",
+      answer: "Да, мы гарантируем полную анонимность. Ваши данные не будут переданы третьим лицам и не регистрируются в государственных базах. Конфиденциальность - один из наших принципов.",
+      keywords: ["анонимность", "конфиденциальность", "защита данных", "приватность"]
+    },
+    {
+      question: "Как добраться до клиники?",
+      answer: "Клиника находится в 5 минутах ходьбы от станции метро Московские ворота. Также можно доехать на машине - у нас есть парковка для посетителей.",
+      keywords: ["как добраться", "метро", "Московские ворота", "парковка", "транспорт"]
+    },
+    {
+      question: "Есть ли парковка для посетителей?",
+      answer: "Да, у клиники есть бесплатная парковка для посетителей. Она расположена рядом со зданием и доступна в любое время суток.",
+      keywords: ["парковка", "бесплатно", "посетители", "автомобиль"]
     }
   ];
 
@@ -242,50 +289,24 @@ export default function ContactsPageClient() {
         </div>
       </section>
 
-      {/* FAQ Section */}
-      <section className="section-padding bg-gray-50">
-        <div className="container-custom">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">
-              Часто задаваемые вопросы
-            </h2>
-            <p className="text-xl text-gray-600">
-              Ответы на популярные вопросы о контактах
-            </p>
-          </div>
-          
-          <div className="grid lg:grid-cols-2 gap-8">
-            <div className="space-y-6">
-              <div className="bg-white rounded-lg p-6 shadow-lg">
-                <h3 className="font-semibold mb-3">Можно ли приехать без записи?</h3>
-                <p className="text-gray-600">Да, мы принимаем пациентов без предварительной записи. Однако рекомендуем позвонить заранее для уточнения времени приема.</p>
-              </div>
-              <div className="bg-white rounded-lg p-6 shadow-lg">
-                <h3 className="font-semibold mb-3">Работаете ли вы в выходные?</h3>
-                <p className="text-gray-600">Да, мы работаем 24/7 без выходных и праздников. Помощь доступна в любое время.</p>
-              </div>
-              <div className="bg-white rounded-lg p-6 shadow-lg">
-                <h3 className="font-semibold mb-3">Можно ли вызвать врача на дом?</h3>
-                <p className="text-gray-600">Да, мы предоставляем услугу вызова специалиста на дом в экстренных случаях.</p>
-              </div>
-            </div>
-            <div className="space-y-6">
-              <div className="bg-white rounded-lg p-6 shadow-lg">
-                <h3 className="font-semibold mb-3">Какие документы нужны для обращения?</h3>
-                <p className="text-gray-600">Для первичной консультации достаточно паспорта. Мы не требуем направления от врача.</p>
-              </div>
-              <div className="bg-white rounded-lg p-6 shadow-lg">
-                <h3 className="font-semibold mb-3">Есть ли бесплатная консультация?</h3>
-                <p className="text-gray-600">Да, первичная консультация проводится бесплатно. Специалист оценит ситуацию и предложит план лечения.</p>
-              </div>
-              <div className="bg-white rounded-lg p-6 shadow-lg">
-                <h3 className="font-semibold mb-3">Можно ли обратиться анонимно?</h3>
-                <p className="text-gray-600">Да, мы гарантируем полную анонимность. Ваши данные не будут переданы третьим лицам.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* Новый FAQ Component */}
+      <FAQ 
+        items={faqItems}
+        title="Часто задаваемые вопросы о контактах"
+        description="Ответы на популярные вопросы о том, как связаться с нами и получить помощь"
+        className="bg-gray-50"
+      />
+
+      {/* LocalSEO Component */}
+      <LocalSEO className="my-8" />
+
+      {/* InternalLinking Component */}
+      <InternalLinking 
+        keywords={["контакты", "адрес", "телефон", "запись", "консультация"]}
+        category="Контакты"
+        title="Полезные ссылки"
+        maxLinks={6}
+      />
 
       <Footer />
     </div>

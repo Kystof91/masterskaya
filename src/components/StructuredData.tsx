@@ -66,12 +66,13 @@ export default function StructuredData({ type, data }: StructuredDataProps) {
         };
 
       case 'medical-clinic':
+        const services = Array.isArray(data.services) ? data.services : [];
         return {
           "@context": "https://schema.org",
           "@type": "MedicalClinic",
           "name": "Мастерская - Лечение зависимостей",
-          "description": data.description || "Профессиональная помощь в лечении зависимостей",
-          "url": data.url || "https://mstrclinic.ru",
+          "description": typeof data.description === 'string' ? data.description : "Профессиональная помощь в лечении зависимостей",
+          "url": typeof data.url === 'string' ? data.url : "https://mstrclinic.ru",
           "telephone": data.telephone || "8-812-407-3-407",
           "address": {
             "@type": "PostalAddress",
@@ -80,15 +81,15 @@ export default function StructuredData({ type, data }: StructuredDataProps) {
             "addressCountry": "RU"
           },
           "medicalSpecialty": ["Addiction Medicine", "Psychiatry", "Psychology"],
-          "availableService": data.services || []
+          "availableService": services
         };
 
       case 'service':
         return {
           "@context": "https://schema.org",
           "@type": "MedicalService",
-          "name": data.name,
-          "description": data.description,
+          "name": typeof data.name === 'string' ? data.name : "",
+          "description": typeof data.description === 'string' ? data.description : "",
           "provider": {
             "@type": "MedicalOrganization",
             "name": "Мастерская - Лечение зависимостей"
@@ -103,22 +104,22 @@ export default function StructuredData({ type, data }: StructuredDataProps) {
         return {
           "@context": "https://schema.org",
           "@type": "MedicalProcedure",
-          "name": data.name,
-          "description": data.description,
-          "bodyLocation": data.bodyLocation || "Brain",
-          "preparation": data.preparation || "Консультация врача",
-          "procedureType": data.procedureType || "Therapeutic",
-          "howPerformed": data.howPerformed || "Под наблюдением врача",
-          "followup": data.followup || "Регулярные консультации"
+          "name": typeof data.name === 'string' ? data.name : "",
+          "description": typeof data.description === 'string' ? data.description : "",
+          "bodyLocation": typeof data.bodyLocation === 'string' ? data.bodyLocation : "Brain",
+          "preparation": typeof data.preparation === 'string' ? data.preparation : "Консультация врача",
+          "procedureType": typeof data.procedureType === 'string' ? data.procedureType : "Therapeutic",
+          "howPerformed": typeof data.howPerformed === 'string' ? data.howPerformed : "Под наблюдением врача",
+          "followup": typeof data.followup === 'string' ? data.followup : "Регулярные консультации"
         };
 
       case 'article':
         return {
           "@context": "https://schema.org",
           "@type": "Article",
-          "headline": data.title,
-          "description": data.description,
-          "image": data.image,
+          "headline": typeof data.title === 'string' ? data.title : "",
+          "description": typeof data.description === 'string' ? data.description : "",
+          "image": typeof data.image === 'string' ? data.image : "",
           "author": {
             "@type": "Organization",
             "name": "Мастерская - Лечение зависимостей"
@@ -131,24 +132,25 @@ export default function StructuredData({ type, data }: StructuredDataProps) {
               "url": "https://mstrclinic.ru/logotip.png"
             }
           },
-          "datePublished": data.publishedAt,
-          "dateModified": data.updatedAt,
+          "datePublished": typeof data.publishedAt === 'string' ? data.publishedAt : "",
+          "dateModified": typeof data.updatedAt === 'string' ? data.updatedAt : "",
           "mainEntityOfPage": {
             "@type": "WebPage",
-            "@id": data.url
+            "@id": typeof data.url === 'string' ? data.url : ""
           }
         };
 
       case 'faq':
+        const questions = Array.isArray(data.questions) ? data.questions : [];
         return {
           "@context": "https://schema.org",
           "@type": "FAQPage",
-          "mainEntity": (data.questions as Array<{question: string; answer: string}>).map(q => ({
+          "mainEntity": questions.map((q: any) => ({
             "@type": "Question",
-            "name": q.question,
+            "name": q.question || "",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": q.answer
+              "text": q.answer || ""
             }
           }))
         };
@@ -163,15 +165,15 @@ export default function StructuredData({ type, data }: StructuredDataProps) {
           },
           "reviewRating": {
             "@type": "Rating",
-            "ratingValue": data.rating || 5,
+            "ratingValue": typeof data.rating === 'number' ? data.rating : 5,
             "bestRating": 5
           },
           "author": {
             "@type": "Person",
-            "name": data.authorName || "Пациент"
+            "name": typeof data.authorName === 'string' ? data.authorName : "Пациент"
           },
-          "reviewBody": data.reviewText || "",
-          "datePublished": data.datePublished || new Date().toISOString()
+          "reviewBody": typeof data.reviewText === 'string' ? data.reviewText : "",
+          "datePublished": typeof data.datePublished === 'string' ? data.datePublished : new Date().toISOString()
         };
 
       case 'local-business':
@@ -202,14 +204,15 @@ export default function StructuredData({ type, data }: StructuredDataProps) {
         };
 
       case 'breadcrumb':
+        const items = Array.isArray(data.items) ? data.items : [];
         return {
           "@context": "https://schema.org",
           "@type": "BreadcrumbList",
-          "itemListElement": (data.items as Array<{name: string; url: string}>).map((item, index) => ({
+          "itemListElement": items.map((item: any, index) => ({
             "@type": "ListItem",
             "position": index + 1,
-            "name": item.name,
-            "item": item.url
+            "name": item.name || "",
+            "item": item.url || ""
           }))
         };
 
