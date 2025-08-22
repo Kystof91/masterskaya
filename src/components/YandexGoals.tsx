@@ -7,7 +7,7 @@
 
 declare global {
   interface Window {
-    ym: (id: string, action: string, goal: string, params?: any) => void;
+    ym: (id: string, action: string, goal: string, params?: Record<string, unknown>) => void;
   }
 }
 
@@ -19,7 +19,7 @@ export default function YandexGoals({ yandexId }: YandexGoalsProps) {
   if (!yandexId || typeof window === 'undefined') return null;
 
   // Функция для отправки целей
-  const trackGoal = (goal: string, params?: any) => {
+  const trackGoal = (goal: string, params?: Record<string, unknown>) => {
     if (window.ym && yandexId) {
       window.ym(yandexId, 'reachGoal', goal, params);
       console.log(`🎯 Яндекс.Метрика: цель "${goal}" отправлена`, params);
