@@ -145,7 +145,7 @@ export default function StructuredData({ type, data }: StructuredDataProps) {
         return {
           "@context": "https://schema.org",
           "@type": "FAQPage",
-          "mainEntity": questions.map((q: any) => ({
+          "mainEntity": questions.map((q: { question?: string; answer?: string }) => ({
             "@type": "Question",
             "name": q.question || "",
             "acceptedAnswer": {
@@ -208,7 +208,7 @@ export default function StructuredData({ type, data }: StructuredDataProps) {
         return {
           "@context": "https://schema.org",
           "@type": "BreadcrumbList",
-          "itemListElement": items.map((item: any, index) => ({
+          "itemListElement": items.map((item: { name?: string; url?: string }, index) => ({
             "@type": "ListItem",
             "position": index + 1,
             "name": item.name || "",

@@ -66,8 +66,11 @@ export default function PerformanceOptimizer({
       const clsObserver = new PerformanceObserver((list) => {
         let clsValue = 0;
         for (const entry of list.getEntries()) {
-          if (!entry.hadRecentInput) {
-            clsValue += (entry as any).value;
+          const layoutShiftEntry = entry as PerformanceEntry & { hadRecentInput?: boolean; value?: number };
+          if (!layoutShiftEntry.hadRecentInput) {
+            if (layoutShiftEntry.value !== undefined) {
+              clsValue += layoutShiftEntry.value;
+            }
           }
         }
         setMetrics(prev => ({ ...prev, cls: clsValue }));
@@ -82,9 +85,11 @@ export default function PerformanceOptimizer({
       // First Input Delay
       const fidObserver = new PerformanceObserver((list) => {
         const entries = list.getEntries();
-        const fidEntry = entries[0];
-        if (fidEntry) {
-          setMetrics(prev => ({ ...prev, fid: fidEntry.processingStart - fidEntry.startTime }));
+        const fidEntry = entries[0] as PerformanceEntry & { processingStart?: number; startTime?: number };
+        if (fidEntry && typeof fidEntry.processingStart === 'number' && typeof fidEntry.startTime === 'number') {
+          const processingStart = fidEntry.processingStart;
+          const startTime = fidEntry.startTime;
+          setMetrics(prev => ({ ...prev, fid: processingStart - startTime }));
         }
       });
       
