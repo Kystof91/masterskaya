@@ -178,6 +178,32 @@ const nextConfig: NextConfig = {
             value: 'image/svg+xml'
           }
         ]
+      },
+      {
+        source: '/android-chrome-192x192.png',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable'
+          },
+          {
+            key: 'Content-Type',
+            value: 'image/png'
+          }
+        ]
+      },
+      {
+        source: '/android-chrome-512x512.png',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable'
+          },
+          {
+            key: 'Content-Type',
+            value: 'image/png'
+          }
+        ]
       }
     ];
   },

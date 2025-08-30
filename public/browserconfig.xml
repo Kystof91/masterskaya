@@ -2,7 +2,9 @@
 <browserconfig>
     <msapplication>
         <tile>
+            <square70x70logo src="/favicon-32x32.png"/>
             <square150x150logo src="/apple-touch-icon.png"/>
+            <square310x310logo src="/android-chrome-512x512.png"/>
             <TileColor>#B39A7C</TileColor>
         </tile>
     </msapplication>
