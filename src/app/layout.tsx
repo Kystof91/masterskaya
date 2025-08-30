@@ -6,6 +6,7 @@ import SEOSchema from "@/components/SEOSchema";
 import Analytics from "@/components/Analytics";
 import YandexGoals from "@/components/YandexGoals";
 import RubleReplacer from "@/components/RubleReplacer";
+import Script from "next/script";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -21,13 +22,15 @@ export const metadata: Metadata = {
   publisher: "Мастерская - Лечение зависимостей",
   icons: {
     icon: [
-      { url: '/favicon.ico' },
+      { url: '/favicon.svg', type: 'image/svg+xml' },
+      { url: '/favicon.ico', sizes: 'any' },
       { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
       { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
     ],
     apple: [
       { url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
     ],
+    shortcut: '/favicon.ico',
   },
   formatDetection: {
     email: false,
@@ -75,6 +78,9 @@ export const metadata: Metadata = {
     google: process.env.NEXT_PUBLIC_GOOGLE_VERIFICATION || 'your-google-verification-code',
     yandex: process.env.NEXT_PUBLIC_YANDEX_VERIFICATION || '70d29db80d4b9a25',
   },
+  other: {
+    'msapplication-config': '/browserconfig.xml',
+  },
 };
 
 export default function RootLayout({
@@ -85,17 +91,31 @@ export default function RootLayout({
   return (
     <html lang="ru" className={inter.variable}>
       <head>
-        <link rel="icon" href="/favicon.ico" sizes="any" />
-        <link rel="icon" href="/favicon-16x16.png" type="image/png" sizes="16x16" />
-        <link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32" />
-        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        {/* Yandex.Metrika counter */}
+        <Script id="yandex-metrika-head" strategy="beforeInteractive">
+          {`
+            (function(m,e,t,r,i,k,a){
+                m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+                m[i].l=1*new Date();
+                for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+                k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+            })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=${process.env.NEXT_PUBLIC_YANDEX_ID || '103855878'}', 'ym');
+
+            ym(${process.env.NEXT_PUBLIC_YANDEX_ID || '103855878'}, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", accurateTrackBounce:true, trackLinks:true});
+          `}
+        </Script>
+        <noscript>
+          <div>
+            <img src={`https://mc.yandex.ru/watch/${process.env.NEXT_PUBLIC_YANDEX_ID || '103855878'}`} style={{position:'absolute', left:'-9999px'}} alt="" />
+          </div>
+        </noscript>
+        {/* /Yandex.Metrika counter */}
       </head>
       <body className={inter.className}>
         {children}
         <SEOSchema type="medical-organization" />
         <Analytics 
           gaId={process.env.NEXT_PUBLIC_GA_ID}
-          yandexId={process.env.NEXT_PUBLIC_YANDEX_ID} 
         />
         <YandexGoals yandexId={process.env.NEXT_PUBLIC_YANDEX_ID} />
         <RubleReplacer />

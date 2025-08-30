@@ -1,14 +1,13 @@
 'use client';
 
 import Script from 'next/script';
-import Image from 'next/image';
 
 interface AnalyticsProps {
   gaId?: string;
   yandexId?: string;
 }
 
-export default function Analytics({ gaId, yandexId }: AnalyticsProps) {
+export default function Analytics({ gaId }: AnalyticsProps) {
   return (
     <>
       {/* Google Analytics */}
@@ -29,38 +28,6 @@ export default function Analytics({ gaId, yandexId }: AnalyticsProps) {
               });
             `}
           </Script>
-        </>
-      )}
-
-      {/* Yandex Metrika */}
-      {yandexId && (
-        <>
-          <Script id="yandex-metrika" strategy="afterInteractive">
-            {`
-              (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-              m[i].l=1*new Date();
-              for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
-              k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
-              (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
-              ym(${yandexId}, "init", {
-                clickmap: true,
-                trackLinks: true,
-                accurateTrackBounce: true,
-                webvisor: true
-              });
-            `}
-          </Script>
-          <noscript>
-            <div>
-              <Image 
-                src={`https://mc.yandex.ru/watch/${yandexId}`} 
-                width={1} 
-                height={1} 
-                style={{ position: 'absolute', left: '-9999px' }} 
-                alt="" 
-              />
-            </div>
-          </noscript>
         </>
       )}
     </>
